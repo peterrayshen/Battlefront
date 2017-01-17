@@ -13,6 +13,7 @@ public class Battlefront extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+		//hi
 		img = new Texture("badlogic.jpg");
 	}
 
