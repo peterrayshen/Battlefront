@@ -14,6 +14,7 @@ public class Battlefront extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		//hi
+		//hello
 		img = new Texture("badlogic.jpg");
 	}
 
