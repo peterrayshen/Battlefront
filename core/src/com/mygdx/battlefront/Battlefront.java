@@ -4,6 +4,7 @@ package com.mygdx.battlefront;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.battlefront.screens.PlayScreen;
+import com.mygdx.battlefront.tools.AssetLoader;
 
 public class Battlefront extends Game {
 	
@@ -13,6 +14,7 @@ public class Battlefront extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+		AssetLoader.load();
 		playScreen = new PlayScreen(this);
 		setScreen(playScreen);
 		
@@ -26,6 +28,6 @@ public class Battlefront extends Game {
 	
 	@Override
 	public void dispose () {
-		
+		batch.dispose();
 	}
 }

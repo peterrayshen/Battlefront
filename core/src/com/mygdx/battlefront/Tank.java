@@ -1,8 +1,7 @@
 package com.mygdx.battlefront;
 
-import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.InputProcessor;
+
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -11,16 +10,18 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.physics.box2d.joints.RevoluteJoint;
-import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
+import com.mygdx.battlefront.tools.AssetLoader;
 
-public class Tank extends InputAdapter {
 
-	public Body chassis, cannon;
-	private RevoluteJoint joint;
-	private float acc = 5000, leftAcc, rightAcc;
+
+public class Tank extends Sprite{
+
+	public Body chassis;
 
 	public Tank(World world, float x, float y, float width, float height) {
+		
+		
+		
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set(x, y);
@@ -36,26 +37,25 @@ public class Tank extends InputAdapter {
 		chassis = world.createBody(bodyDef);
 		chassis.createFixture(fixDef);
 		chassis.setLinearDamping(15);
+		
+		setRegion(AssetLoader.playerChassis);
+		setBounds(chassis.getPosition().x - getWidth() / 2, chassis.getPosition().y - getHeight() /2 , 5.2f, 3.1f);
+		this.setOriginCenter();
 
-		shape.setAsBox(width / 2 / 5, height / 2 / 3);
+		
 
-		cannon = world.createBody(bodyDef);
-		cannon.createFixture(fixDef);
-
-		RevoluteJointDef jointDef = new RevoluteJointDef();
-		jointDef.bodyA = chassis;
-		jointDef.bodyB = cannon;
-		jointDef.localAnchorB.y = -height / 3;
-
-		joint = (RevoluteJoint) world.createJoint(jointDef);
+		
 
 	}
 	
-	Vector2 tmp = new Vector2(), tmp2 = new Vector2();
+	
 	
 	public void update() {
 		
-		cannon.setTransform(cannon.getWorldCenter(), 3);
+		this.setPosition(chassis.getPosition().x - getWidth() / 2, chassis.getPosition().y - getHeight() /2);
+		this.setRotation(chassis.getTransform().getRotation() * MathUtils.radiansToDegrees - 90);
+		
+
 	
 	}
 	
