@@ -28,12 +28,8 @@ public class Turret extends Sprite {
 		defineBody();
 
 		setRegion(AssetLoader.playerTurret);
-		this.setOrigin(0, 0);
-		this.setPosition(playScreen.tank.chassis.getWorldCenter().x - 4, playScreen.tank.chassis.getWorldCenter().y);
-
-		this.setBounds(playScreen.tank.chassis.getWorldCenter().x, playScreen.tank.chassis.getWorldCenter().y, 5.5f,
-				2.5f);
-
+		this.setBounds(joint.getAnchorA().x, joint.getAnchorA().y - getHeight() / 2, 5.5f, 2.5f);
+		this.setOrigin(4.4f, getHeight() / 2);
 	}
 
 	public void defineBody() {
@@ -45,34 +41,30 @@ public class Turret extends Sprite {
 
 		FixtureDef fixDef = new FixtureDef();
 		fixDef.shape = shape;
-		fixDef.density = .01f;
+		fixDef.density = 0.01f;
 
 		turret = world.createBody(bodyDef);
 		turret.createFixture(fixDef);
 		turret.setAngularDamping(90000);
+	
+		
 
 		RevoluteJointDef jointDef = new RevoluteJointDef();
 		jointDef.bodyA = playScreen.tank.chassis;
 		jointDef.bodyB = turret;
-		jointDef.localAnchorB.y = -1.5f;
+		jointDef.localAnchorB.y = -1.4f;
 
 		joint = (RevoluteJoint) world.createJoint(jointDef);
 
-		// turret.setTransform(turret.getPosition(), 1.5f);
+		// turret.setTransform(turret.getPosition(), (float) Math.PI);
 
 	}
 
 	public void update() {
-		this.setPosition(playScreen.tank.chassis.getWorldCenter().x - 4.5f,
-				playScreen.tank.chassis.getWorldCenter().y - 0.5f);
+		
+		this.setPosition(joint.getAnchorA().x - 4.4f, joint.getAnchorA().y - getHeight() / 2);
+		this.setRotation(turret.getTransform().getRotation() * MathUtils.radiansToDegrees - 90);
 
-		float rotation = MathUtils.atan2(playScreen.mouse.y - turret.getPosition().y - 1.4f,
-				playScreen.mouse.x - turret.getWorldCenter().x);
-
-		joint.enableMotor(true);
-		joint.setMaxMotorTorque(5000);
-		joint.setMotorSpeed(3);
-
+		
 	}
-
 }
