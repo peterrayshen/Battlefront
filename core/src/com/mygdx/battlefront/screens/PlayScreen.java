@@ -1,17 +1,23 @@
 package com.mygdx.battlefront.screens;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.mygdx.battlefront.Battlefront;
+import com.mygdx.battlefront.Bullet;
 import com.mygdx.battlefront.Tank;
 import com.mygdx.battlefront.Turret;
 import com.mygdx.battlefront.tools.AssetLoader;
@@ -20,6 +26,8 @@ public class PlayScreen implements Screen {
 	
 	private World world;
 	private Box2DDebugRenderer debugRenderer;
+	private ShapeRenderer sr;
+	
 	private OrthographicCamera camera;
 	public Battlefront game;
 	
@@ -27,6 +35,8 @@ public class PlayScreen implements Screen {
 	public Turret turret;
 	
 	public Vector3 mouse;
+	
+	public ArrayList<Bullet> bullets;
 	
 	public PlayScreen(Battlefront game) {
 		world = new World(new Vector2(), true);
@@ -37,9 +47,12 @@ public class PlayScreen implements Screen {
 		camera.translate(-15, -15);
 		
 		debugRenderer = new Box2DDebugRenderer();
+		sr = new ShapeRenderer();
 		
-		tank = new Tank(world, 0, 0, 3, 5);
+		tank = new Tank(world, 0, 0);
 		turret = new Turret(world, this);
+		
+		bullets = new ArrayList<Bullet>();
 	}
 
 	@Override
@@ -71,6 +84,11 @@ public class PlayScreen implements Screen {
 			turret.joint.setMotorSpeed(0);
 			turret.joint.enableMotor(false);
 		}
+		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+			turret.shoot();
+		}
+		if (Gdx.input.isButtonPressed(Buttons.LEFT))
+			System.out.println(mouse);
 		
 	}
 	
@@ -89,10 +107,17 @@ public class PlayScreen implements Screen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		camera.update();
 		
+		sr.setProjectionMatrix(camera.combined);
+		for (int i = 0; i < bullets.size(); i++) {
+			bullets.get(i).drawBullet(sr);
+		}
+	
+		
 		game.batch.setProjectionMatrix(camera.combined);
 		game.batch.begin();
 		tank.draw(game.batch);
 		turret.draw(game.batch);
+		turret.drawFlash(game.batch);
 		game.batch.end();
 		
 		debugRenderer.render(world, camera.combined);

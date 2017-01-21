@@ -1,6 +1,8 @@
 package com.mygdx.battlefront;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -16,10 +18,20 @@ import com.mygdx.battlefront.tools.AssetLoader;
 
 public class Turret extends Sprite {
 
+	private static final float TURRET_WIDTH = 0.4f;
+	private static final float TURRET_HEIGHT = 1.4f;
+	private static final float SPRITE_WIDTH = 3.3f;
+	private static final float SPRITE_HEIGHT = 1.5f;
+
+	public static float fpRadius = 2.2f;
+
 	private PlayScreen playScreen;
 	public RevoluteJoint joint;
 	public Body turret;
 	private World world;
+	private Vector2 firePoint;
+
+	public MuzzleFlash muzzleFlash;
 
 	public Turret(World world, PlayScreen playScreen) {
 		this.playScreen = playScreen;
@@ -28,8 +40,10 @@ public class Turret extends Sprite {
 		defineBody();
 
 		setRegion(AssetLoader.playerTurret);
-		this.setBounds(joint.getAnchorA().x, joint.getAnchorA().y - getHeight() / 2, 5.5f, 2.5f);
-		this.setOrigin(4.4f, getHeight() / 2);
+		this.setBounds(joint.getAnchorA().x, joint.getAnchorA().y - getHeight() / 2, SPRITE_WIDTH, SPRITE_HEIGHT);
+		this.setOrigin(2.63f, getHeight() / 2);
+
+		this.muzzleFlash = new MuzzleFlash(AssetLoader.cannonFlare, 2, 1.5f);
 	}
 
 	public void defineBody() {
@@ -37,17 +51,16 @@ public class Turret extends Sprite {
 		bodyDef.type = BodyType.DynamicBody;
 
 		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(0.4f, 1.4f);
+		shape.setAsBox(TURRET_WIDTH, TURRET_HEIGHT);
 
 		FixtureDef fixDef = new FixtureDef();
 		fixDef.shape = shape;
 		fixDef.density = 0.01f;
+		fixDef.filter.groupIndex = Battlefront.PLAYER_INDEX;
 
 		turret = world.createBody(bodyDef);
 		turret.createFixture(fixDef);
 		turret.setAngularDamping(90000);
-	
-		
 
 		RevoluteJointDef jointDef = new RevoluteJointDef();
 		jointDef.bodyA = playScreen.tank.chassis;
@@ -61,10 +74,42 @@ public class Turret extends Sprite {
 	}
 
 	public void update() {
-		
-		this.setPosition(joint.getAnchorA().x - 4.4f, joint.getAnchorA().y - getHeight() / 2);
+
+		this.setPosition(joint.getAnchorA().x - 2.6f, joint.getAnchorA().y - getHeight() / 2);
 		this.setRotation(turret.getTransform().getRotation() * MathUtils.radiansToDegrees - 90);
 
+	}
+
+	public void shoot() {
 		
+		AssetLoader.cannonFiring.play();
+
+		firePoint = new Vector2(
+				turret.getPosition().x + fpRadius * MathUtils.cos((float) (turret.getAngle() + Math.PI / 2)),
+				turret.getPosition().y + fpRadius * MathUtils.sin((float) (turret.getAngle() + Math.PI / 2)));
+
+		Bullet bullet = new Bullet(world, playScreen);
+		bullet.defineBody(0.4f, firePoint.x, firePoint.y, (float) (turret.getTransform().getRotation() + Math.PI / 2));
+		bullet.setRadius(0.4f);
+		bullet.setColor(Color.WHITE);
+		bullet.setDamage(100);
+		bullet.setHealth(100);
+		bullet.setSpeed(300);
+		bullet.setLifetime(10);
+		playScreen.bullets.add(bullet);
+
+		System.out.println(bullet.b2body.getTransform().getPosition());
+	}
+
+	public void drawFlash(SpriteBatch batch) {
+
+		firePoint = new Vector2(
+				turret.getPosition().x + fpRadius * MathUtils.cos((float) (turret.getAngle() + Math.PI / 2)),
+				turret.getPosition().y + fpRadius * MathUtils.sin((float) (turret.getAngle() + Math.PI / 2)));
+	
+		muzzleFlash.setPosition(firePoint.x, firePoint.y);
+		muzzleFlash.setRotation(MathUtils.radiansToDegrees * turret.getTransform().getRotation() + 90);
+		muzzleFlash.draw(batch);
+
 	}
 }

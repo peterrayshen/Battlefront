@@ -17,8 +17,13 @@ import com.mygdx.battlefront.tools.AssetLoader;
 public class Tank extends Sprite{
 
 	public Body chassis;
+	
+	private static final float TANK_WIDTH = 2f;
+	private static final float TANK_HEIGHT = 3.5f;
+	private static final float SPRITE_WIDTH = 2.1f;
+	private static final float SPRITE_HEIGHT = 3.5f;
 
-	public Tank(World world, float x, float y, float width, float height) {
+	public Tank(World world, float x, float y) {
 		
 		
 		
@@ -27,19 +32,20 @@ public class Tank extends Sprite{
 		bodyDef.position.set(x, y);
 
 		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(width / 2, height / 2);
+		shape.setAsBox(TANK_WIDTH / 2, TANK_HEIGHT / 2);
 
 		FixtureDef fixDef = new FixtureDef();
 		fixDef.shape = shape;
 		fixDef.restitution = .1f;
 		fixDef.friction = .5f;
+		fixDef.filter.groupIndex = Battlefront.PLAYER_INDEX;
 
 		chassis = world.createBody(bodyDef);
 		chassis.createFixture(fixDef);
 		chassis.setLinearDamping(15);
 		
 		setRegion(AssetLoader.playerChassis);
-		setBounds(chassis.getPosition().x - getWidth() / 2, chassis.getPosition().y - getHeight() /2 , 5.2f, 3.1f);
+		setBounds(chassis.getPosition().x - getWidth() / 2, chassis.getPosition().y - getHeight() /2 , SPRITE_HEIGHT, SPRITE_WIDTH);
 		this.setOriginCenter();
 
 		
