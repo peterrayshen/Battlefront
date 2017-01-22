@@ -104,23 +104,27 @@ public class PlayScreen implements Screen {
 	public void render(float delta) {
 		update();
 		handleInput(delta);
+	
+		Gdx.gl.glClearColor(190 / 255f, 190 /255f, 190 /255f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		camera.update();
 		
-		sr.setProjectionMatrix(camera.combined);
-		for (int i = 0; i < bullets.size(); i++) {
-			bullets.get(i).drawBullet(sr);
-		}
+		
 	
 		
 		game.batch.setProjectionMatrix(camera.combined);
 		game.batch.begin();
 		tank.draw(game.batch);
 		turret.draw(game.batch);
-		turret.drawFlash(game.batch);
+		//turret.drawFlash(game.batch);
 		game.batch.end();
 		
-		debugRenderer.render(world, camera.combined);
+		sr.setProjectionMatrix(camera.combined);
+		for (int i = 0; i < bullets.size(); i++) {
+			bullets.get(i).drawBullet(sr);
+		}
+		
+		//debugRenderer.render(world, camera.combined);
 		
 		world.step(1 / 120f, 6, 2);
 		

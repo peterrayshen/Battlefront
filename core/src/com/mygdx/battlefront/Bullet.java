@@ -129,7 +129,7 @@ public class Bullet {
 	public void drawBullet(ShapeRenderer sr) {
 
 		sr.begin(ShapeType.Filled);
-		sr.setColor(color);
+		sr.setColor(color.BLACK);
 		sr.circle(b2body.getPosition().x, b2body.getPosition().y, radius, 100);
 		sr.end();
 

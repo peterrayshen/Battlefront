@@ -20,8 +20,8 @@ public class Turret extends Sprite {
 
 	private static final float TURRET_WIDTH = 0.4f;
 	private static final float TURRET_HEIGHT = 1.4f;
-	private static final float SPRITE_WIDTH = 3.3f;
-	private static final float SPRITE_HEIGHT = 1.5f;
+	private static final float SPRITE_WIDTH = 1.5f;
+	private static final float SPRITE_HEIGHT = 3.3f;
 
 	public static float fpRadius = 2.2f;
 
@@ -40,8 +40,8 @@ public class Turret extends Sprite {
 		defineBody();
 
 		setRegion(AssetLoader.playerTurret);
-		this.setBounds(joint.getAnchorA().x, joint.getAnchorA().y - getHeight() / 2, SPRITE_WIDTH, SPRITE_HEIGHT);
-		this.setOrigin(2.63f, getHeight() / 2);
+		this.setBounds(joint.getAnchorA().x, joint.getAnchorA().y - 0.6f, SPRITE_WIDTH, SPRITE_HEIGHT);
+		this.setOrigin(getWidth() / 2, 0.8f);
 
 		this.muzzleFlash = new MuzzleFlash(AssetLoader.cannonFlare, 2, 1.5f);
 	}
@@ -75,8 +75,8 @@ public class Turret extends Sprite {
 
 	public void update() {
 
-		this.setPosition(joint.getAnchorA().x - 2.6f, joint.getAnchorA().y - getHeight() / 2);
-		this.setRotation(turret.getTransform().getRotation() * MathUtils.radiansToDegrees - 90);
+		this.setPosition(joint.getAnchorA().x - getWidth() / 2, joint.getAnchorA().y - 0.6f);
+		this.setRotation(turret.getTransform().getRotation() * MathUtils.radiansToDegrees);
 
 	}
 
@@ -91,7 +91,7 @@ public class Turret extends Sprite {
 		Bullet bullet = new Bullet(world, playScreen);
 		bullet.defineBody(0.4f, firePoint.x, firePoint.y, (float) (turret.getTransform().getRotation() + Math.PI / 2));
 		bullet.setRadius(0.4f);
-		bullet.setColor(Color.WHITE);
+		bullet.setColor(Color.LIGHT_GRAY);
 		bullet.setDamage(100);
 		bullet.setHealth(100);
 		bullet.setSpeed(300);
@@ -108,7 +108,7 @@ public class Turret extends Sprite {
 				turret.getPosition().y + fpRadius * MathUtils.sin((float) (turret.getAngle() + Math.PI / 2)));
 	
 		muzzleFlash.setPosition(firePoint.x, firePoint.y);
-		muzzleFlash.setRotation(MathUtils.radiansToDegrees * turret.getTransform().getRotation() + 90);
+		muzzleFlash.setRotation(MathUtils.radiansToDegrees * turret.getTransform().getRotation());
 		muzzleFlash.draw(batch);
 
 	}

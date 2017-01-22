@@ -18,9 +18,9 @@ public class Tank extends Sprite{
 
 	public Body chassis;
 	
-	private static final float TANK_WIDTH = 2f;
-	private static final float TANK_HEIGHT = 3.5f;
-	private static final float SPRITE_WIDTH = 2.1f;
+	private static final float TANK_WIDTH = 3f;
+	private static final float TANK_HEIGHT = 3.3f;
+	private static final float SPRITE_WIDTH = 3.1f;
 	private static final float SPRITE_HEIGHT = 3.5f;
 
 	public Tank(World world, float x, float y) {
@@ -45,7 +45,7 @@ public class Tank extends Sprite{
 		chassis.setLinearDamping(15);
 		
 		setRegion(AssetLoader.playerChassis);
-		setBounds(chassis.getPosition().x - getWidth() / 2, chassis.getPosition().y - getHeight() /2 , SPRITE_HEIGHT, SPRITE_WIDTH);
+		setBounds(chassis.getPosition().x - getWidth() / 2, chassis.getPosition().y - getHeight() /2 , SPRITE_WIDTH, SPRITE_HEIGHT);
 		this.setOriginCenter();
 
 		
@@ -59,7 +59,7 @@ public class Tank extends Sprite{
 	public void update() {
 		
 		this.setPosition(chassis.getPosition().x - getWidth() / 2, chassis.getPosition().y - getHeight() /2);
-		this.setRotation(chassis.getTransform().getRotation() * MathUtils.radiansToDegrees - 90);
+		this.setRotation(chassis.getTransform().getRotation() * MathUtils.radiansToDegrees);
 		
 
 	
