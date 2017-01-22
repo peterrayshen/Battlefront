@@ -70,25 +70,14 @@ public class PlayScreen implements Screen {
 			tank.rotClock(delta);
 		if (Gdx.input.isKeyPressed(Input.Keys.A))
 			tank.rotCounterClock(delta);
-		if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) {
-			turret.joint.enableMotor(true);
-			turret.joint.setMotorSpeed(3);
-			turret.joint.setMaxMotorTorque(500);
-		} else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) {
-			turret.joint.enableMotor(true);
-			turret.joint.setMotorSpeed(-3);
-			turret.joint.setMaxMotorTorque(500);
-		} else {
-			turret.joint.setMotorSpeed(0);
-			turret.joint.enableMotor(false);
-		}
-		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+
+		if (Gdx.input.justTouched()) {
+			System.out.println(mouse);
 			turret.shoot();
 			turret.isShooting = true;
-		} else
+		} else {
 			turret.isShooting = false;
-		if (Gdx.input.isButtonPressed(Buttons.LEFT))
-			System.out.println(mouse);
+		}
 
 	}
 

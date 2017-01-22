@@ -23,7 +23,7 @@ public class Turret extends Sprite {
 	private static final float SPRITE_WIDTH = 1.5f;
 	private static final float SPRITE_HEIGHT = 3.3f;
 
-	public static float fpRadius = 0.6f;
+	public static float fpRadius = 2f;
 
 	private PlayScreen playScreen;
 	public RevoluteJoint joint;
@@ -62,11 +62,11 @@ public class Turret extends Sprite {
 		turret = world.createBody(bodyDef);
 		turret.createFixture(fixDef);
 		turret.setAngularDamping(90000);
+		
 
 		RevoluteJointDef jointDef = new RevoluteJointDef();
 		jointDef.bodyA = playScreen.tank.chassis;
 		jointDef.bodyB = turret;
-		jointDef.localAnchorB.y = -1.4f;
 
 		joint = (RevoluteJoint) world.createJoint(jointDef);
 
@@ -78,6 +78,10 @@ public class Turret extends Sprite {
 
 		this.setPosition(joint.getAnchorA().x - getWidth() / 2, joint.getAnchorA().y - 0.6f);
 		this.setRotation(turret.getTransform().getRotation() * MathUtils.radiansToDegrees);
+		
+		float rotation = MathUtils.atan2(playScreen.mouse.y - joint.getAnchorA().y,playScreen.mouse.x - joint.getAnchorA().x);
+		turret.setTransform(turret.getPosition(), (float) (rotation - Math.PI / 2) );
+		
 	
 	
 	}
@@ -98,7 +102,7 @@ public class Turret extends Sprite {
 		bullet.setColor(Color.LIGHT_GRAY);
 		bullet.setDamage(100);
 		bullet.setHealth(100);
-		bullet.setSpeed(300);
+		bullet.setSpeed(90);
 		bullet.setLifetime(10);
 		playScreen.bullets.add(bullet);
 
