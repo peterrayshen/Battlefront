@@ -47,6 +47,7 @@ public class Enemy {
 	
 		turret.update();
 		chassis.update();
+		chassis.b2body.applyForceToCenter(new Vector2(-100, 0), true);
 		
 		
 	}

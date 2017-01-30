@@ -6,52 +6,72 @@ import com.mygdx.battlefront.Enemy;
 import com.mygdx.battlefront.screens.PlayScreen;
 
 public class RoundController {
-	
+
 	boolean inRound = false;
-	
+
 	public Enemy[] enemies;
-	
-	public void startRound(World world, PlayScreen screen) {
+
+	private float roundTimer;
+	private int enemyCounter;
+	private int maxEnemiesPerRound = 15;
+
+	private World world;
+	private PlayScreen screen;
+
+	public RoundController(World world, PlayScreen screen) {
+		this.world = world;
+		this.screen = screen;
+	}
+
+	public void startRound() {
+		roundTimer = 0;
+		enemyCounter = 0;
+
 		inRound = true;
-		enemies = new Enemy[15];
-		
+		enemies = new Enemy[maxEnemiesPerRound];
+
 		for (int i = 0; i < enemies.length; i++) {
 			enemies[i] = new Enemy(world, screen, 40, MathUtils.random(-14, 9.5f));
 			enemies[i].setHealth(MathUtils.random(100, 500));
 		}
 		insertionSort(enemies);
-		
-		for (int i = 0; i < enemies.length; i ++) {
-			System.out.println(enemies[i].health);
-		}
-		
-		
+
+
 	}
-	
+
 	public void endRound() {
 		inRound = false;
 	}
-	
-	public void update() {
+
+	public void update(float delta) {
+		roundTimer += delta;
+		if (inRound) {
+			if (enemyCounter >= maxEnemiesPerRound) {
+				endRound();
+			} else if ((int) roundTimer % 2 == 0) {
+				screen.enemies.add(enemies[enemyCounter]);
+				enemyCounter++;
+			}
+		}
 		
+
 	}
-	
+
 	public void insertionSort(Enemy[] enemies) {
-		
+
 		for (int top = 1; top < enemies.length; top++) {
-			Enemy item = enemies[top]; 
-	
+			Enemy item = enemies[top];
+
 			int i = top;
-			while (i > 0 && item.health < enemies[i - 1].health) { 
+			while (i > 0 && item.health < enemies[i - 1].health) {
 				enemies[i] = enemies[i - 1];
-			
+
 				i--;
 			}
 			enemies[i] = item;
-		
-		}
-		
-	}
 
+		}
+
+	}
 
 }
