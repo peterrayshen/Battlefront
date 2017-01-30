@@ -23,8 +23,8 @@ public class Battlefront extends Game {
 		AssetLoader.load();
 		playScreen = new PlayScreen(this);
 		loseScreen = new LoseScreen(batch);
-		setScreen(loseScreen);
-		//setScreen(playScreen);
+		
+		setScreen(playScreen);
 		
 	}
 

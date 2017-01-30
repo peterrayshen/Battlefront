@@ -10,7 +10,7 @@ public class Player {
 	
 	private World world;
 	
-	private Chassis chassis;
+	public Chassis chassis;
 	private Turret turret;
 	
 	private PlayScreen screen;

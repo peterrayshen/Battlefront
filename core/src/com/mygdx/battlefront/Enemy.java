@@ -66,6 +66,8 @@ public class Enemy {
 		chassis.b2body.applyForceToCenter(new Vector2(-speed, 0), true);
 		
 		
+			
+		
 		
 	}
 	
