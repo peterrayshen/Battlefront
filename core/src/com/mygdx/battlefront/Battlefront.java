@@ -2,6 +2,8 @@ package com.mygdx.battlefront;
 
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.battlefront.screens.LoseScreen;
 import com.mygdx.battlefront.screens.PlayScreen;
@@ -21,11 +23,23 @@ public class Battlefront extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		AssetLoader.load();
+		loadMusic();
 		playScreen = new PlayScreen(this);
 		loseScreen = new LoseScreen(batch);
 		
 		setScreen(playScreen);
 		
+	}
+	
+	public void loadMusic() {
+		AssetManager assetManager = new AssetManager();
+		assetManager.load("song.mp3", Music.class);
+		assetManager.finishLoading();
+		
+		Music music = assetManager.get("song.mp3", Music.class);
+		music.setLooping(true);
+		music.setVolume(30);
+		music.play();
 	}
 
 	@Override

@@ -170,8 +170,6 @@ public class PlayScreen implements Screen {
 			player.drawFlash(game.batch);
 		}
 		game.batch.end();
-
-		debugRenderer.render(world, camera.combined);
 		
 		hud.stage.draw();
 
