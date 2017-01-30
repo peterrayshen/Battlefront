@@ -25,8 +25,8 @@ public class Enemy {
 		this.world = world;
 		this.screen = screen;
 		
-		chassis = new Chassis(world, x, y);
-		turret = new Turret(world, chassis);
+		chassis = new Chassis(world, x, y, Battlefront.ENEMY_INDEX);
+		turret = new Turret(world, chassis, Battlefront.ENEMY_INDEX);
 		
 		chassis.b2body.setTransform(chassis.b2body.getPosition(), (float) Math.PI / 2);
 		turret.b2body.setTransform(turret.b2body.getPosition(), (float) Math.PI / 2);
@@ -47,7 +47,7 @@ public class Enemy {
 	
 		turret.update();
 		chassis.update();
-		chassis.b2body.applyForceToCenter(new Vector2(-100, 0), true);
+		chassis.b2body.applyForceToCenter(new Vector2(-1000, 0), true);
 		
 		
 	}

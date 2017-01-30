@@ -2,6 +2,7 @@ package com.mygdx.battlefront.tools;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Logger;
 import com.mygdx.battlefront.Enemy;
 import com.mygdx.battlefront.screens.PlayScreen;
 
@@ -17,10 +18,13 @@ public class RoundController {
 
 	private World world;
 	private PlayScreen screen;
+	
+	
 
 	public RoundController(World world, PlayScreen screen) {
 		this.world = world;
 		this.screen = screen;
+	
 	}
 
 	public void startRound() {
@@ -45,12 +49,15 @@ public class RoundController {
 
 	public void update(float delta) {
 		roundTimer += delta;
+		
 		if (inRound) {
 			if (enemyCounter >= maxEnemiesPerRound) {
 				endRound();
-			} else if ((int) roundTimer % 2 == 0) {
+			} else if (MathUtils.round(roundTimer)  == 3) {
 				screen.enemies.add(enemies[enemyCounter]);
 				enemyCounter++;
+				roundTimer = 0;
+				
 			}
 		}
 		

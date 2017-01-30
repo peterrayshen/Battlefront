@@ -23,8 +23,8 @@ public class Player {
 		this.world = world;
 		this.screen = screen;
 		
-		chassis = new Chassis(world, x, y);
-		turret = new Turret(world, chassis);
+		chassis = new Chassis(world, x, y, Battlefront.PLAYER_INDEX);
+		turret = new Turret(world, chassis, Battlefront.PLAYER_INDEX);
 		
 	}
 	

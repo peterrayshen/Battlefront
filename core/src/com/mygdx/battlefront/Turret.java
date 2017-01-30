@@ -34,11 +34,11 @@ public class Turret extends Sprite {
 	public MuzzleFlash muzzleFlash;
 	
 
-	public Turret(World world, Chassis chassis) {
+	public Turret(World world, Chassis chassis, short filterIndex) {
 		
 		this.world = world;
 
-		defineBody(chassis);
+		defineBody(chassis, filterIndex);
 
 		setRegion(AssetLoader.playerTurret);
 		this.setBounds(joint.getAnchorA().x, joint.getAnchorA().y - 0.6f, SPRITE_WIDTH, SPRITE_HEIGHT);
@@ -47,7 +47,7 @@ public class Turret extends Sprite {
 		this.muzzleFlash = new MuzzleFlash(AssetLoader.cannonFlare, 2, 1.5f);
 	}
 
-	public void defineBody(Chassis chassis) {
+	public void defineBody(Chassis chassis, short filterIndex) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
 
@@ -57,7 +57,7 @@ public class Turret extends Sprite {
 		FixtureDef fixDef = new FixtureDef();
 		fixDef.shape = shape;
 		fixDef.density = 0.01f;
-		fixDef.filter.groupIndex = Battlefront.PLAYER_INDEX;
+		fixDef.filter.groupIndex = filterIndex;
 
 		b2body = world.createBody(bodyDef);
 		b2body.createFixture(fixDef);
