@@ -36,7 +36,7 @@ public class RoundController {
 
 		for (int i = 0; i < enemies.length; i++) {
 			enemies[i] = new Enemy(world, screen, 40, MathUtils.random(-14, 9.5f));
-			enemies[i].setHealth(MathUtils.random(100, 500));
+			enemies[i].setInitialHealth(MathUtils.random(100, 500));
 		}
 		insertionSort(enemies);
 

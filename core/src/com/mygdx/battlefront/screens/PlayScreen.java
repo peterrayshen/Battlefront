@@ -133,6 +133,9 @@ public class PlayScreen implements Screen {
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).drawBullet(sr);
 		}
+		for(int i = 0; i < enemies.size(); i++) {
+			enemies.get(i).drawHealthBar(sr);
+		}
 
 		game.batch.setProjectionMatrix(camera.combined);
 		game.batch.begin();
