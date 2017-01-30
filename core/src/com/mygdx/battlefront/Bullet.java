@@ -106,18 +106,24 @@ public class Bullet {
 
 	public void kill() {
 		this.b2body.destroyFixture(b2body.getFixtureList().first());
-		
 
 	}
 
 	public void update(float delta) {
-
 
 		lifeTimer = lifeTimer + delta;
 		if (lifeTimer > lifeTime) {
 			remove = true;
 		}
 
+		if (b2body.getPosition().x < -18f)
+			remove = true;
+		else if (b2body.getPosition().x > 34)
+			remove = true;
+		else if (b2body.getPosition().y > 15)
+			remove = true;
+		else if (b2body.getPosition().y < -17.5f)
+			remove = true;
 	}
 
 	public boolean shouldRemove() {

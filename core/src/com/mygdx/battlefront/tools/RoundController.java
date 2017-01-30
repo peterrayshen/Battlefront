@@ -25,11 +25,14 @@ public class RoundController {
 	public RoundController(World world, PlayScreen screen) {
 		this.world = world;
 		this.screen = screen;
+		
+		
 		round = 0;
 	
 	}
 
 	public void startRound() {
+		
 		round++;
 		roundTimer = 0;
 		enemyCounter = 0;
@@ -40,7 +43,7 @@ public class RoundController {
 		for (int i = 0; i < enemies.length; i++) {
 			enemies[i] = new Enemy(world, screen, 40, MathUtils.random(-14, 9.5f));
 			enemies[i].setInitialHealth(MathUtils.random(100, 500));
-			enemies[i].speed = MathUtils.random(450, 850);
+			enemies[i].speed = MathUtils.random(450 + round * 50, 850 + round * 50);
 		}
 		
 		sortByHealth(enemies);
