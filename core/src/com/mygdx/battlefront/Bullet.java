@@ -106,14 +106,12 @@ public class Bullet {
 
 	public void kill() {
 		this.b2body.destroyFixture(b2body.getFixtureList().first());
+		
 
 	}
 
 	public void update(float delta) {
 
-		if (health <= 0) {
-			remove = true;
-		}
 
 		lifeTimer = lifeTimer + delta;
 		if (lifeTimer > lifeTime) {

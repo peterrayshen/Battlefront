@@ -39,6 +39,8 @@ public class Player {
 		turret.update();
 		chassis.update();
 		
+		
+		
 	}
 	
 	public void draw(SpriteBatch batch) {

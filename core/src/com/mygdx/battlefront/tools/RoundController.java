@@ -55,6 +55,7 @@ public class RoundController {
 				endRound();
 			} else if (MathUtils.round(roundTimer)  == 3) {
 				screen.enemies.add(enemies[enemyCounter]);
+				System.out.println(enemies[enemyCounter].health);
 				enemyCounter++;
 				roundTimer = 0;
 				
