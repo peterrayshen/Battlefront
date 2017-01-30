@@ -26,6 +26,8 @@ public class Enemy {
 	public int health;
 	public int totalHealth;
 	
+	public float speed;
+	
 	public Enemy(World world, PlayScreen screen, float x, float y) {
 		
 		
@@ -37,7 +39,7 @@ public class Enemy {
 		
 		chassis.b2body.setTransform(chassis.b2body.getPosition(), (float) Math.PI / 2);
 		chassis.b2body.getFixtureList().first().setUserData(this);
-		chassis.b2body.getFixtureList().first().setDensity(1000f);
+	
 		
 		turret.b2body.setTransform(turret.b2body.getPosition(), (float) Math.PI / 2);
 		turret.b2body.getFixtureList().first().setUserData("enemyTurret");
@@ -61,7 +63,7 @@ public class Enemy {
 	
 		turret.update();
 		chassis.update();
-		chassis.b2body.applyForceToCenter(new Vector2(-750, 0), true);
+		chassis.b2body.applyForceToCenter(new Vector2(-speed, 0), true);
 		
 		
 		

@@ -19,15 +19,18 @@ public class RoundController {
 	private World world;
 	private PlayScreen screen;
 	
+	public int round;
 	
 
 	public RoundController(World world, PlayScreen screen) {
 		this.world = world;
 		this.screen = screen;
+		round = 0;
 	
 	}
 
 	public void startRound() {
+		round++;
 		roundTimer = 0;
 		enemyCounter = 0;
 
@@ -37,8 +40,10 @@ public class RoundController {
 		for (int i = 0; i < enemies.length; i++) {
 			enemies[i] = new Enemy(world, screen, 40, MathUtils.random(-14, 9.5f));
 			enemies[i].setInitialHealth(MathUtils.random(100, 500));
+			enemies[i].speed = MathUtils.random(450, 850);
 		}
-		insertionSort(enemies);
+		
+		sortByHealth(enemies);
 
 
 	}
@@ -61,11 +66,17 @@ public class RoundController {
 				
 			}
 		}
+		else {
+			if (roundTimer > 5) {
+				startRound();
+				System.out.println("round started");
+			}
+		}
 		
 
 	}
 
-	public void insertionSort(Enemy[] enemies) {
+	public void sortByHealth(Enemy[] enemies) {
 
 		for (int top = 1; top < enemies.length; top++) {
 			Enemy item = enemies[top];

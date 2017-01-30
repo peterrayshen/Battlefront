@@ -22,25 +22,27 @@ import com.mygdx.battlefront.Enemy;
 import com.mygdx.battlefront.Player;
 import com.mygdx.battlefront.Chassis;
 import com.mygdx.battlefront.Turret;
+import com.mygdx.battlefront.scenes.Hud;
 import com.mygdx.battlefront.tools.AssetLoader;
 import com.mygdx.battlefront.tools.RoundController;
 import com.mygdx.battlefront.tools.WorldContactListener;
+
+
 
 public class PlayScreen implements Screen {
 
 	private World world;
 	private Box2DDebugRenderer debugRenderer;
 	private ShapeRenderer sr;
-	private RoundController roundController;
+	public RoundController roundController;
 	
 
 	private OrthographicCamera camera;
 	public Battlefront game;
+	private Hud hud;
 
 	public Player player;
-
 	public Vector3 mouse;
-	
 	public Enemy enemy;
 
 	public ArrayList<Bullet> bullets;
@@ -65,6 +67,8 @@ public class PlayScreen implements Screen {
 		
 		roundController = new RoundController(world, this);
 		roundController.startRound();
+		
+		hud = new Hud(game.batch, this);
 	}
 
 	@Override
@@ -94,6 +98,8 @@ public class PlayScreen implements Screen {
 	}
 
 	public void update(float delta) {
+	
+		hud.update();
 		mouse = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
 		camera.unproject(mouse);
 		player.update();
@@ -149,6 +155,8 @@ public class PlayScreen implements Screen {
 		game.batch.end();
 
 		debugRenderer.render(world, camera.combined);
+		
+		hud.stage.draw();
 
 		world.step(1 / 120f, 6, 2);
 
