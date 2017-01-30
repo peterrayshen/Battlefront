@@ -100,10 +100,10 @@ public class Turret extends Sprite {
 		Bullet bullet = new Bullet(world, screen);
 		bullet.defineBody(0.4f, firePoint.x, firePoint.y, (float) (b2body.getTransform().getRotation() + Math.PI / 2));
 		bullet.setRadius(0.4f);
-		bullet.setColor(Color.GOLD);
+		bullet.setColor(Color.BLACK);
 		bullet.setDamage(100);
 		bullet.setHealth(100);
-		bullet.setSpeed(1200);
+		bullet.setSpeed(250);
 		bullet.setLifetime(3);
 		screen.bullets.add(bullet);
 

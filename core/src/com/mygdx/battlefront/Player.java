@@ -10,7 +10,7 @@ public class Player {
 	
 	private World world;
 	
-	private Chassis chassis;
+	public Chassis chassis;
 	private Turret turret;
 	
 	private PlayScreen screen;
@@ -24,6 +24,7 @@ public class Player {
 		this.screen = screen;
 		
 		chassis = new Chassis(world, x, y, Battlefront.PLAYER_INDEX);
+		chassis.b2body.getFixtureList().first().setUserData(this);
 		turret = new Turret(world, chassis, Battlefront.PLAYER_INDEX);
 		
 	}

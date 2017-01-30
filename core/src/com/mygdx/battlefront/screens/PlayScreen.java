@@ -88,7 +88,6 @@ public class PlayScreen implements Screen {
 			player.rotCounterClock(delta);
 
 		if (Gdx.input.justTouched()) {
-			System.out.println(mouse);
 			player.shoot();
 			player.isShooting = true;
 		} else {
@@ -125,11 +124,29 @@ public class PlayScreen implements Screen {
 		roundController.update(delta);
 		
 	}
+	
+	public void checkIfLost() {
+		for (int i = 0; i < enemies.size(); i++) {
+			if (enemies.get(i).chassis.b2body.getPosition().x < -18f)
+				game.setScreen(game.loseScreen);
+		}
+		if (player.chassis.b2body.getPosition().x < -18f)
+			game.setScreen(game.loseScreen);
+		else if (player.chassis.b2body.getPosition().x > 38)
+			game.setScreen(game.loseScreen);
+		else if (player.chassis.b2body.getPosition().y > 15)
+			game.setScreen(game.loseScreen);
+		else if (player.chassis.b2body.getPosition().y < -17.5f)
+			game.setScreen(game.loseScreen);
+	
+	
+	}
 
 	@Override
 	public void render(float delta) {
 		update(delta);
 		handleInput(delta);
+		checkIfLost();
 
 		Gdx.gl.glClearColor(190 / 255f, 190 / 255f, 190 / 255f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
