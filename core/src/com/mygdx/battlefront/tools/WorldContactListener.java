@@ -27,6 +27,7 @@ public class WorldContactListener implements ContactListener {
 
 				
 			((Enemy) fixB.getUserData()).health -= 40;
+			((Bullet) fixA.getUserData()).remove = true;
 			System.out.println("contact");
 			
 
@@ -35,6 +36,7 @@ public class WorldContactListener implements ContactListener {
 
 			
 			((Enemy) fixA.getUserData()).health -= 40;
+			((Bullet) fixB.getUserData()).remove = true;
 			System.out.println("contact");
 		}
 		// TODO Auto-generated method stub
@@ -62,6 +64,19 @@ public class WorldContactListener implements ContactListener {
 
 		if (fixB.getUserData() instanceof Enemy && fixA.getUserData() instanceof Bullet) {
 			contact.setEnabled(false);
+			
+		}
+		
+		if (fixB.getUserData() instanceof Bullet && fixA.getUserData().equals("enemyTurret")) {
+			contact.setEnabled(false);
+		
+			
+
+		}
+
+		if (fixB.getUserData().equals("enemyTurret") && fixA.getUserData() instanceof Bullet) {
+			contact.setEnabled(false);
+			
 			
 		}
 		

@@ -32,7 +32,7 @@ public class Enemy {
 		chassis.b2body.getFixtureList().first().setUserData(this);
 		
 		turret.b2body.setTransform(turret.b2body.getPosition(), (float) Math.PI / 2);
-		turret.b2body.getFixtureList().first().setUserData(this);
+		turret.b2body.getFixtureList().first().setUserData("enemyTurret");
 		turret.setRotation(MathUtils.radiansToDegrees * turret.b2body.getTransform().getRotation());
 		
 	}
@@ -50,7 +50,7 @@ public class Enemy {
 	
 		turret.update();
 		chassis.update();
-		chassis.b2body.applyForceToCenter(new Vector2(-1000, 0), true);
+		chassis.b2body.applyForceToCenter(new Vector2(-100, 0), true);
 		
 		
 		
