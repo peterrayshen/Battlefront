@@ -29,7 +29,10 @@ public class Enemy {
 		turret = new Turret(world, chassis, Battlefront.ENEMY_INDEX);
 		
 		chassis.b2body.setTransform(chassis.b2body.getPosition(), (float) Math.PI / 2);
+		chassis.b2body.getFixtureList().first().setUserData(this);
+		
 		turret.b2body.setTransform(turret.b2body.getPosition(), (float) Math.PI / 2);
+		turret.b2body.getFixtureList().first().setUserData(this);
 		turret.setRotation(MathUtils.radiansToDegrees * turret.b2body.getTransform().getRotation());
 		
 	}

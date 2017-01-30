@@ -24,6 +24,7 @@ import com.mygdx.battlefront.Chassis;
 import com.mygdx.battlefront.Turret;
 import com.mygdx.battlefront.tools.AssetLoader;
 import com.mygdx.battlefront.tools.RoundController;
+import com.mygdx.battlefront.tools.WorldContactListener;
 
 public class PlayScreen implements Screen {
 
@@ -31,6 +32,7 @@ public class PlayScreen implements Screen {
 	private Box2DDebugRenderer debugRenderer;
 	private ShapeRenderer sr;
 	private RoundController roundController;
+	
 
 	private OrthographicCamera camera;
 	public Battlefront game;
@@ -46,6 +48,7 @@ public class PlayScreen implements Screen {
 
 	public PlayScreen(Battlefront game) {
 		world = new World(new Vector2(), true);
+		world.setContactListener(new WorldContactListener(this));
 
 		this.game = game;
 		camera = new OrthographicCamera();
