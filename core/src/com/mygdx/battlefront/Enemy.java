@@ -1,10 +1,15 @@
 package com.mygdx.battlefront;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.battlefront.screens.PlayScreen;
 import com.mygdx.battlefront.tools.AssetLoader;
+
+
 
 public class Enemy {
 	
@@ -14,10 +19,14 @@ public class Enemy {
 	public Turret turret;
 	
 	private PlayScreen screen;
+	private float healthBarWidth;
 	
 	public boolean isShooting;
 	
 	public int health;
+	public int totalHealth;
+	
+	public float speed;
 	
 	public Enemy(World world, PlayScreen screen, float x, float y) {
 		
@@ -30,6 +39,7 @@ public class Enemy {
 		
 		chassis.b2body.setTransform(chassis.b2body.getPosition(), (float) Math.PI / 2);
 		chassis.b2body.getFixtureList().first().setUserData(this);
+	
 		
 		turret.b2body.setTransform(turret.b2body.getPosition(), (float) Math.PI / 2);
 		turret.b2body.getFixtureList().first().setUserData("enemyTurret");
@@ -37,8 +47,9 @@ public class Enemy {
 		
 	}
 	
-	public void setHealth(int health) {
+	public void setInitialHealth(int health) {
 		this.health = health;
+		this.totalHealth = health;
 	}
 	
 	public void shoot() {
@@ -47,10 +58,12 @@ public class Enemy {
 	}
 	
 	public void update() {
+		
+		healthBarWidth = (float) health / totalHealth * chassis.getWidth();
 	
 		turret.update();
 		chassis.update();
-		chassis.b2body.applyForceToCenter(new Vector2(-100, 0), true);
+		chassis.b2body.applyForceToCenter(new Vector2(-speed, 0), true);
 		
 		
 		
@@ -59,10 +72,22 @@ public class Enemy {
 	
 	
 	public void draw(SpriteBatch batch) {
-		
-		
 		chassis.draw(batch);
 		turret.draw(batch);
+	}
+	
+	public void drawHealthBar(ShapeRenderer sr) {
+		
+		sr.begin(ShapeType.Filled);
+		sr.setColor(Color.WHITE);
+		sr.rect(chassis.b2body.getPosition().x - chassis.getWidth() / 2 - 0.2f, chassis.b2body.getPosition().y + chassis.getHeight() / 2 + 0.3f , chassis.getWidth(),
+				0.3f);
+		sr.end();
+		sr.begin(ShapeType.Filled);
+		sr.setColor(Color.RED);
+		sr.rect(chassis.b2body.getPosition().x - chassis.getWidth() / 2 - 0.2f, chassis.b2body.getPosition().y + chassis.getHeight() / 2 + 0.3f , healthBarWidth,
+				0.3f);
+		sr.end();
 	}
 	
 	public void drawFlash(SpriteBatch batch) {
