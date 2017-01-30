@@ -22,6 +22,21 @@ public class WorldContactListener implements ContactListener {
 	public void beginContact(Contact contact) {
 		Fixture fixA = contact.getFixtureA();
 		Fixture fixB = contact.getFixtureB();
+		
+		if (fixA.getUserData() instanceof Bullet && fixB.getUserData() instanceof Enemy) {
+
+				
+			((Enemy) fixB.getUserData()).health -= 40;
+			System.out.println("contact");
+			
+
+		}
+		if (fixB.getUserData() instanceof Bullet && fixA.getUserData() instanceof Enemy) {
+
+			
+			((Enemy) fixA.getUserData()).health -= 40;
+			System.out.println("contact");
+		}
 		// TODO Auto-generated method stub
 		
 	}
@@ -41,13 +56,13 @@ public class WorldContactListener implements ContactListener {
 		
 		if (fixB.getUserData() instanceof Bullet && fixA.getUserData() instanceof Enemy) {
 			contact.setEnabled(false);
-			System.out.println("contact disabled");
+			
 
 		}
 
 		if (fixB.getUserData() instanceof Enemy && fixA.getUserData() instanceof Bullet) {
 			contact.setEnabled(false);
-			System.out.println("contact disabled");
+			
 		}
 		
 		

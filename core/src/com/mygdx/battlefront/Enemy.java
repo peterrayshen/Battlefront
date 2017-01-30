@@ -8,10 +8,10 @@ import com.mygdx.battlefront.tools.AssetLoader;
 
 public class Enemy {
 	
-	private World world;
+	public World world;
 	
-	private Chassis chassis;
-	private Turret turret;
+	public Chassis chassis;
+	public Turret turret;
 	
 	private PlayScreen screen;
 	
@@ -53,7 +53,10 @@ public class Enemy {
 		chassis.b2body.applyForceToCenter(new Vector2(-1000, 0), true);
 		
 		
+		
 	}
+	
+	
 	
 	public void draw(SpriteBatch batch) {
 		
