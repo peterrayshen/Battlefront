@@ -104,7 +104,7 @@ public class Turret extends Sprite {
 		bullet.setDamage(100);
 		bullet.setHealth(100);
 		bullet.setSpeed(1200);
-		bullet.setLifetime(10);
+		bullet.setLifetime(3);
 		screen.bullets.add(bullet);
 
 		

@@ -97,6 +97,16 @@ public class PlayScreen implements Screen {
 		for(int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).update();
 		}
+		for (int i = 0; i < bullets.size(); i++) {
+			bullets.get(i).update(delta);
+			
+			if (bullets.get(i).shouldRemove()) {
+				bullets.get(i).world.destroyBody(bullets.get(i).b2body);
+				bullets.remove(i);
+				
+			}
+			
+		}
 		roundController.update(delta);
 		
 	}
