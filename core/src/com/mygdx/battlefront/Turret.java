@@ -107,7 +107,7 @@ public class Turret extends Sprite {
 		bullet.setLifetime(10);
 		screen.bullets.add(bullet);
 
-		System.out.println(bullet.b2body.getTransform().getPosition());
+		
 	}
 
 	public void drawFlash(SpriteBatch batch) {

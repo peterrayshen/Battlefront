@@ -23,12 +23,14 @@ import com.mygdx.battlefront.Player;
 import com.mygdx.battlefront.Chassis;
 import com.mygdx.battlefront.Turret;
 import com.mygdx.battlefront.tools.AssetLoader;
+import com.mygdx.battlefront.tools.RoundController;
 
 public class PlayScreen implements Screen {
 
 	private World world;
 	private Box2DDebugRenderer debugRenderer;
 	private ShapeRenderer sr;
+	private RoundController roundController;
 
 	private OrthographicCamera camera;
 	public Battlefront game;
@@ -57,6 +59,9 @@ public class PlayScreen implements Screen {
 		bullets = new ArrayList<Bullet>();
 		
 		enemy = new Enemy(world, this,  3, 3);
+		
+		roundController = new RoundController();
+		roundController.startRound(world, this);
 	}
 
 	@Override
@@ -90,6 +95,7 @@ public class PlayScreen implements Screen {
 		camera.unproject(mouse);
 		player.update();
 		enemy.update();
+		roundController.update();
 		
 	}
 

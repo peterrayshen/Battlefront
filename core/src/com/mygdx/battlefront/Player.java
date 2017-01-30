@@ -17,6 +17,8 @@ public class Player {
 	
 	public boolean isShooting;
 	
+	public int health = 100;
+	
 	public Player(World world, PlayScreen screen, float x, float y) {
 		this.world = world;
 		this.screen = screen;

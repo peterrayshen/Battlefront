@@ -17,7 +17,11 @@ public class Enemy {
 	
 	public boolean isShooting;
 	
+	public int health;
+	
 	public Enemy(World world, PlayScreen screen, float x, float y) {
+		
+		
 		this.world = world;
 		this.screen = screen;
 		
@@ -28,6 +32,10 @@ public class Enemy {
 		turret.b2body.setTransform(turret.b2body.getPosition(), (float) Math.PI / 2);
 		turret.setRotation(MathUtils.radiansToDegrees * turret.b2body.getTransform().getRotation());
 		
+	}
+	
+	public void setHealth(int health) {
+		this.health = health;
 	}
 	
 	public void shoot() {
