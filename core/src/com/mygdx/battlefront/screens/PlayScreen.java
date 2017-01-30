@@ -56,7 +56,7 @@ public class PlayScreen implements Screen {
 
 		bullets = new ArrayList<Bullet>();
 		
-		enemy = new Enemy(world, 3, 3);
+		enemy = new Enemy(world, this,  3, 3);
 	}
 
 	@Override
@@ -88,7 +88,6 @@ public class PlayScreen implements Screen {
 	public void update() {
 		mouse = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
 		camera.unproject(mouse);
-
 		player.update();
 		enemy.update();
 		

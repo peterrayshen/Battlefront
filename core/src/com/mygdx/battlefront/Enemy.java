@@ -1,65 +1,88 @@
 package com.mygdx.battlefront;
-
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.mygdx.battlefront.screens.PlayScreen;
 import com.mygdx.battlefront.tools.AssetLoader;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
-public class Enemy extends Sprite {
-	
-	public static final float SPRITE_WIDTH = 2.5f;
-	public static final float SPRITE_HEIGHT = 4.5f;
-	
-	public static final float BODY_WIDTH = 2.5f;
-	public static final float BODY_HEIGHT = 4.5f;
-	
-	public Body b2body;
+public class Enemy {
 	
 	private World world;
 	
-	private Chassis tank;
+	private Chassis chassis;
 	private Turret turret;
 	
-	public Enemy(World world, float x, float y) {
-		
+	private PlayScreen screen;
+	
+	public boolean isShooting;
+	
+	public Enemy(World world, PlayScreen screen, float x, float y) {
 		this.world = world;
+		this.screen = screen;
 		
-		defineBody(x, y);
+		chassis = new Chassis(world, x, y);
+		turret = new Turret(world, chassis);
 		
-		this.setOriginCenter();
-		this.setBounds(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2, SPRITE_WIDTH, SPRITE_HEIGHT);
-		this.setRegion(AssetLoader.car);
+		chassis.b2body.setTransform(chassis.b2body.getPosition(), (float) Math.PI / 2);
+		turret.b2body.setTransform(turret.b2body.getPosition(), (float) Math.PI / 2);
+		turret.setRotation(MathUtils.radiansToDegrees * turret.b2body.getTransform().getRotation());
+		
 	}
 	
-	public void defineBody(float x, float y) {
-		
-		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = BodyType.DynamicBody;
-		bodyDef.position.set(x, y);
-
-		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(BODY_WIDTH / 2, BODY_HEIGHT / 2);
-
-		FixtureDef fixDef = new FixtureDef();
-		fixDef.shape = shape;
-		fixDef.restitution = .1f;
-		fixDef.friction = .5f;
-		fixDef.filter.groupIndex = Battlefront.ENEMY_INDEX;
-		
-		b2body = world.createBody(bodyDef);
-		b2body.createFixture(fixDef);
-		b2body.setLinearDamping(15);
-		
+	public void shoot() {
+		AssetLoader.cannonFiring.play();
+		turret.shoot(screen);
 	}
 	
 	public void update() {
-		this.setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-		this.setRotation(MathUtils.radiansToDegrees * b2body.getTransform().getRotation());
+	
+		turret.update();
+		chassis.update();
+		
+		
+	}
+	
+	public void draw(SpriteBatch batch) {
+		
+		
+		chassis.draw(batch);
+		turret.draw(batch);
+	}
+	
+	public void drawFlash(SpriteBatch batch) {
+		turret.drawFlash(batch);
+	}
+	
+	public void goForward(float delta) {
+		float x = (float) Math.cos(chassis.b2body.getTransform().getRotation() + Math.PI / 2);
+		float y = (float) Math.sin(chassis.b2body.getTransform().getRotation() + Math.PI / 2);
+		
+		Vector2 dir = new Vector2(x, y);
+		dir.scl(600);
+		chassis.b2body.applyForceToCenter(dir, true);
+	
+	}
+	
+	public void goBackward (float delta) {
+		float x = (float) Math.cos(chassis.b2body.getTransform().getRotation() + Math.PI / 2);
+		float y = (float) Math.sin(chassis.b2body.getTransform().getRotation() + Math.PI / 2);
+		
+		Vector2 dir = new Vector2(x, y);
+	
+		dir.scl(600);
+		dir.rotate(180);
+		
+		chassis.b2body.applyForceToCenter(dir, true);
+	}
+	
+	public void rotClock(float delta) {
+		chassis.b2body.setTransform(chassis.b2body.getWorldCenter(), (float)(chassis.b2body.getTransform().getRotation() - 150 * Math.PI / 180 * delta));
+		
+	}
+	
+	public void rotCounterClock(float delta) {
+		chassis.b2body.setTransform(chassis.b2body.getWorldCenter(), (float)(chassis.b2body.getTransform().getRotation() + 150 * Math.PI / 180 * delta));
 	}
 
 }

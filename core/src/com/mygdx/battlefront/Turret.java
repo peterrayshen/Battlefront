@@ -78,6 +78,7 @@ public class Turret extends Sprite {
 	
 		this.setPosition(joint.getAnchorA().x - getWidth() / 2, joint.getAnchorA().y - 0.6f);
 		
+		
 	}
 	
 	public void rotateTurret(float rotation) {
