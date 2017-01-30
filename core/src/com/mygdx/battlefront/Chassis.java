@@ -24,7 +24,7 @@ public class Chassis extends Sprite{
 	private static final float SPRITE_WIDTH = 3.1f;
 	private static final float SPRITE_HEIGHT = 3.5f;
 
-	public Chassis(World world, float x, float y) {
+	public Chassis(World world, float x, float y, short filterIndex) {
 		
 		
 		BodyDef bodyDef = new BodyDef();
@@ -38,7 +38,7 @@ public class Chassis extends Sprite{
 		fixDef.shape = shape;
 		fixDef.restitution = .1f;
 		fixDef.friction = .5f;
-		fixDef.filter.groupIndex = Battlefront.PLAYER_INDEX;
+		fixDef.filter.groupIndex = filterIndex;
 
 		b2body = world.createBody(bodyDef);
 		b2body.createFixture(fixDef);

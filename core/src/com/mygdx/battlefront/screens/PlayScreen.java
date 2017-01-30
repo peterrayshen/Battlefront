@@ -23,12 +23,14 @@ import com.mygdx.battlefront.Player;
 import com.mygdx.battlefront.Chassis;
 import com.mygdx.battlefront.Turret;
 import com.mygdx.battlefront.tools.AssetLoader;
+import com.mygdx.battlefront.tools.RoundController;
 
 public class PlayScreen implements Screen {
 
 	private World world;
 	private Box2DDebugRenderer debugRenderer;
 	private ShapeRenderer sr;
+	private RoundController roundController;
 
 	private OrthographicCamera camera;
 	public Battlefront game;
@@ -40,6 +42,7 @@ public class PlayScreen implements Screen {
 	public Enemy enemy;
 
 	public ArrayList<Bullet> bullets;
+	public ArrayList<Enemy> enemies;
 
 	public PlayScreen(Battlefront game) {
 		world = new World(new Vector2(), true);
@@ -55,8 +58,10 @@ public class PlayScreen implements Screen {
 		player = new Player(world, this, 0, 0);
 
 		bullets = new ArrayList<Bullet>();
+		enemies = new ArrayList<Enemy>();
 		
-		enemy = new Enemy(world, 3, 3);
+		roundController = new RoundController(world, this);
+		roundController.startRound();
 	}
 
 	@Override
@@ -85,18 +90,20 @@ public class PlayScreen implements Screen {
 
 	}
 
-	public void update() {
+	public void update(float delta) {
 		mouse = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
 		camera.unproject(mouse);
-
 		player.update();
-		enemy.update();
+		for(int i = 0; i < enemies.size(); i++) {
+			enemies.get(i).update();
+		}
+		roundController.update(delta);
 		
 	}
 
 	@Override
 	public void render(float delta) {
-		update();
+		update(delta);
 		handleInput(delta);
 
 		Gdx.gl.glClearColor(190 / 255f, 190 / 255f, 190 / 255f, 1);
@@ -111,7 +118,9 @@ public class PlayScreen implements Screen {
 		game.batch.setProjectionMatrix(camera.combined);
 		game.batch.begin();
 		player.draw(game.batch);
-		enemy.draw(game.batch);
+		for (int i = 0; i < enemies.size(); i++) {
+			enemies.get(i).draw(game.batch);
+		}
 		if (player.isShooting) {
 			player.drawFlash(game.batch);
 		}

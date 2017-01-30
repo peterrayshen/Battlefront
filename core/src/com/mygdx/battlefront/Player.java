@@ -17,12 +17,14 @@ public class Player {
 	
 	public boolean isShooting;
 	
+	public int health = 100;
+	
 	public Player(World world, PlayScreen screen, float x, float y) {
 		this.world = world;
 		this.screen = screen;
 		
-		chassis = new Chassis(world, x, y);
-		turret = new Turret(world, chassis);
+		chassis = new Chassis(world, x, y, Battlefront.PLAYER_INDEX);
+		turret = new Turret(world, chassis, Battlefront.PLAYER_INDEX);
 		
 	}
 	
