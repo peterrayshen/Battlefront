@@ -28,14 +28,14 @@ public class WorldContactListener implements ContactListener {
 
 			((Enemy) fixB.getUserData()).health -= 40;
 			((Bullet) fixA.getUserData()).remove = true;
-			System.out.println("contact");
+	
 
 		}
 		if (fixB.getUserData() instanceof Bullet && fixA.getUserData() instanceof Enemy) {
 
 			((Enemy) fixA.getUserData()).health -= 40;
 			((Bullet) fixB.getUserData()).remove = true;
-			System.out.println("contact");
+			
 		}
 
 		if (fixB.getUserData() instanceof Player && fixA.getUserData() instanceof Enemy) {
@@ -53,8 +53,7 @@ public class WorldContactListener implements ContactListener {
 
 	@Override
 	public void endContact(Contact contact) {
-		Fixture fixA = contact.getFixtureA();
-		Fixture fixB = contact.getFixtureB();
+	
 		// TODO Auto-generated method stub
 
 	}

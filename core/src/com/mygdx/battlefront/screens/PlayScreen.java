@@ -88,7 +88,6 @@ public class PlayScreen implements Screen {
 			player.rotCounterClock(delta);
 
 		if (Gdx.input.justTouched()) {
-			System.out.println(mouse);
 			player.shoot();
 			player.isShooting = true;
 		} else {
