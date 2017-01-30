@@ -7,9 +7,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class AssetLoader {
 	
-	public static Texture tanks, flare, bg, blueTank;
+	public static Texture tanks, flare, bg, blueTank, carTexture;
 	
-	public static TextureRegion playerChassis, playerTurret, cannonFlare;
+	public static TextureRegion playerChassis, playerTurret, cannonFlare, car;
 	
 	public static Sound cannonFiring;
 	
@@ -18,6 +18,7 @@ public class AssetLoader {
 		flare = new Texture(Gdx.files.internal("cannon_flare.png"));
 		bg = new Texture(Gdx.files.internal("bg.png"));
 		blueTank = new Texture(Gdx.files.internal("blue_tank.png"));
+		carTexture = new Texture(Gdx.files.internal("car.png"));
 		
 		cannonFiring = Gdx.audio.newSound(Gdx.files.internal("cannon_sound.mp3"));
 		
@@ -25,6 +26,7 @@ public class AssetLoader {
 		playerTurret = new TextureRegion(blueTank, 1296, 80, 233, 532);
 		
 		cannonFlare = new TextureRegion(flare, 143, 34, 555, 364);
+		car = new TextureRegion(carTexture, 0, 0, 397, 800);
 		
 	}
 	
@@ -33,6 +35,7 @@ public class AssetLoader {
 		flare.dispose();
 		bg.dispose();
 		blueTank.dispose();
+		carTexture.dispose();
 	}
 
 }

@@ -12,6 +12,7 @@ public class Battlefront extends Game {
 	public SpriteBatch batch;
 	
 	public static final int PLAYER_INDEX = -1;
+	public static final int ENEMY_INDEX = -2;
 	public static final int PROJECTILE_INDEX = -1;
 	
 	@Override

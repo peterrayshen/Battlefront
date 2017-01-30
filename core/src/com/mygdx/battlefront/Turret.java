@@ -25,20 +25,20 @@ public class Turret extends Sprite {
 
 	public static float fpRadius = 2f;
 
-	private PlayScreen playScreen;
+	
 	public RevoluteJoint joint;
-	public Body turret;
+	public Body b2body;
 	private World world;
 	private Vector2 firePoint;
 
 	public MuzzleFlash muzzleFlash;
-	public boolean isShooting;
+	
 
-	public Turret(World world, PlayScreen playScreen) {
-		this.playScreen = playScreen;
+	public Turret(World world, Chassis chassis) {
+		
 		this.world = world;
 
-		defineBody();
+		defineBody(chassis);
 
 		setRegion(AssetLoader.playerTurret);
 		this.setBounds(joint.getAnchorA().x, joint.getAnchorA().y - 0.6f, SPRITE_WIDTH, SPRITE_HEIGHT);
@@ -47,7 +47,7 @@ public class Turret extends Sprite {
 		this.muzzleFlash = new MuzzleFlash(AssetLoader.cannonFlare, 2, 1.5f);
 	}
 
-	public void defineBody() {
+	public void defineBody(Chassis chassis) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
 
@@ -59,14 +59,14 @@ public class Turret extends Sprite {
 		fixDef.density = 0.01f;
 		fixDef.filter.groupIndex = Battlefront.PLAYER_INDEX;
 
-		turret = world.createBody(bodyDef);
-		turret.createFixture(fixDef);
-		turret.setAngularDamping(90000);
+		b2body = world.createBody(bodyDef);
+		b2body.createFixture(fixDef);
+		b2body.setAngularDamping(90000);
 		
 
 		RevoluteJointDef jointDef = new RevoluteJointDef();
-		jointDef.bodyA = playScreen.tank.chassis;
-		jointDef.bodyB = turret;
+		jointDef.bodyA = chassis.b2body;
+		jointDef.bodyB = b2body;
 
 		joint = (RevoluteJoint) world.createJoint(jointDef);
 
@@ -75,36 +75,36 @@ public class Turret extends Sprite {
 	}
 
 	public void update() {
-
+	
 		this.setPosition(joint.getAnchorA().x - getWidth() / 2, joint.getAnchorA().y - 0.6f);
-		this.setRotation(turret.getTransform().getRotation() * MathUtils.radiansToDegrees);
 		
-		float rotation = MathUtils.atan2(playScreen.mouse.y - joint.getAnchorA().y,playScreen.mouse.x - joint.getAnchorA().x);
-		turret.setTransform(turret.getPosition(), (float) (rotation - Math.PI / 2) );
-		
-	
-	
 	}
+	
+	public void rotateTurret(float rotation) {
+		b2body.setTransform(b2body.getPosition(), (float) (rotation - Math.PI / 2) );
+		this.setRotation(rotation * MathUtils.radiansToDegrees - 90);
+	}
+	
+	
 
-	public void shoot() {
+	public void shoot(PlayScreen screen) {
 		
 		
 		
-		AssetLoader.cannonFiring.play();
 
 		firePoint = new Vector2(
-				turret.getPosition().x + 2 * fpRadius * MathUtils.cos((float) (turret.getAngle() + Math.PI / 2)),
-				turret.getPosition().y + 2 * fpRadius * MathUtils.sin((float) (turret.getAngle() + Math.PI / 2)));
+				b2body.getPosition().x + 2 * fpRadius * MathUtils.cos((float) (b2body.getAngle() + Math.PI / 2)),
+				b2body.getPosition().y + 2 * fpRadius * MathUtils.sin((float) (b2body.getAngle() + Math.PI / 2)));
 
-		Bullet bullet = new Bullet(world, playScreen);
-		bullet.defineBody(0.4f, firePoint.x, firePoint.y, (float) (turret.getTransform().getRotation() + Math.PI / 2));
+		Bullet bullet = new Bullet(world, screen);
+		bullet.defineBody(0.4f, firePoint.x, firePoint.y, (float) (b2body.getTransform().getRotation() + Math.PI / 2));
 		bullet.setRadius(0.4f);
-		bullet.setColor(Color.LIGHT_GRAY);
+		bullet.setColor(Color.GOLD);
 		bullet.setDamage(100);
 		bullet.setHealth(100);
-		bullet.setSpeed(90);
+		bullet.setSpeed(1200);
 		bullet.setLifetime(10);
-		playScreen.bullets.add(bullet);
+		screen.bullets.add(bullet);
 
 		System.out.println(bullet.b2body.getTransform().getPosition());
 	}
@@ -112,12 +112,12 @@ public class Turret extends Sprite {
 	public void drawFlash(SpriteBatch batch) {
 
 		firePoint = new Vector2(
-				turret.getPosition().x + fpRadius * MathUtils.cos((float) (turret.getAngle() + Math.PI / 2)),
-				turret.getPosition().y + fpRadius * MathUtils.sin((float) (turret.getAngle() + Math.PI / 2)));
+				b2body.getPosition().x + fpRadius * MathUtils.cos((float) (b2body.getAngle() + Math.PI / 2)),
+				b2body.getPosition().y + fpRadius * MathUtils.sin((float) (b2body.getAngle() + Math.PI / 2)));
 	
 		
 		muzzleFlash.setPosition(firePoint.x , firePoint.y - getWidth() / 2 );
-		muzzleFlash.setRotation(MathUtils.radiansToDegrees * turret.getTransform().getRotation() + 90);
+		muzzleFlash.setRotation(MathUtils.radiansToDegrees * b2body.getTransform().getRotation() + 90);
 		muzzleFlash.setOrigin(0, getWidth() / 2);
 		muzzleFlash.draw(batch);
 		

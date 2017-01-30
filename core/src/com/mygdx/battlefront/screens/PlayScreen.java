@@ -18,7 +18,9 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.mygdx.battlefront.Battlefront;
 import com.mygdx.battlefront.Bullet;
-import com.mygdx.battlefront.Tank;
+import com.mygdx.battlefront.Enemy;
+import com.mygdx.battlefront.Player;
+import com.mygdx.battlefront.Chassis;
 import com.mygdx.battlefront.Turret;
 import com.mygdx.battlefront.tools.AssetLoader;
 
@@ -31,10 +33,11 @@ public class PlayScreen implements Screen {
 	private OrthographicCamera camera;
 	public Battlefront game;
 
-	public Tank tank;
-	public Turret turret;
+	public Player player;
 
 	public Vector3 mouse;
+	
+	public Enemy enemy;
 
 	public ArrayList<Bullet> bullets;
 
@@ -49,10 +52,11 @@ public class PlayScreen implements Screen {
 		debugRenderer = new Box2DDebugRenderer();
 		sr = new ShapeRenderer();
 
-		tank = new Tank(world, 0, 0);
-		turret = new Turret(world, this);
+		player = new Player(world, this, 0, 0);
 
 		bullets = new ArrayList<Bullet>();
+		
+		enemy = new Enemy(world, 3, 3);
 	}
 
 	@Override
@@ -63,20 +67,20 @@ public class PlayScreen implements Screen {
 
 	public void handleInput(float delta) {
 		if (Gdx.input.isKeyPressed(Input.Keys.W))
-			tank.goForward(delta);
+			player.goForward(delta);
 		if (Gdx.input.isKeyPressed(Input.Keys.S))
-			tank.goBackward(delta);
+			player.goBackward(delta);
 		if (Gdx.input.isKeyPressed(Input.Keys.D))
-			tank.rotClock(delta);
+			player.rotClock(delta);
 		if (Gdx.input.isKeyPressed(Input.Keys.A))
-			tank.rotCounterClock(delta);
+			player.rotCounterClock(delta);
 
 		if (Gdx.input.justTouched()) {
 			System.out.println(mouse);
-			turret.shoot();
-			turret.isShooting = true;
+			player.shoot();
+			player.isShooting = true;
 		} else {
-			turret.isShooting = false;
+			player.isShooting = false;
 		}
 
 	}
@@ -85,8 +89,9 @@ public class PlayScreen implements Screen {
 		mouse = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
 		camera.unproject(mouse);
 
-		tank.update();
-		turret.update();
+		player.update();
+		enemy.update();
+		
 	}
 
 	@Override
@@ -105,10 +110,10 @@ public class PlayScreen implements Screen {
 
 		game.batch.setProjectionMatrix(camera.combined);
 		game.batch.begin();
-		tank.draw(game.batch);
-		turret.draw(game.batch);
-		if (turret.isShooting) {
-			turret.drawFlash(game.batch);
+		player.draw(game.batch);
+		enemy.draw(game.batch);
+		if (player.isShooting) {
+			player.drawFlash(game.batch);
 		}
 		game.batch.end();
 
