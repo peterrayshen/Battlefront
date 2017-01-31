@@ -5,9 +5,9 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.mygdx.battlefront.Bullet;
-import com.mygdx.battlefront.Enemy;
-import com.mygdx.battlefront.Player;
+import com.mygdx.battlefront.gameobjects.Bullet;
+import com.mygdx.battlefront.gameobjects.Enemy;
+import com.mygdx.battlefront.gameobjects.Player;
 import com.mygdx.battlefront.screens.PlayScreen;
 
 public class WorldContactListener implements ContactListener {

@@ -2,7 +2,7 @@ package com.mygdx.battlefront.tools;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.World;
-import com.mygdx.battlefront.Enemy;
+import com.mygdx.battlefront.gameobjects.Enemy;
 import com.mygdx.battlefront.screens.PlayScreen;
 
 public class RoundController {

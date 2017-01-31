@@ -1,4 +1,4 @@
-package com.mygdx.battlefront;
+package com.mygdx.battlefront.gameobjects;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.mygdx.battlefront.game.Battlefront;
 import com.mygdx.battlefront.screens.PlayScreen;
 import com.mygdx.battlefront.tools.AssetLoader;
 

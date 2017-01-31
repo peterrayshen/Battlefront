@@ -1,4 +1,4 @@
-package com.mygdx.battlefront;
+package com.mygdx.battlefront.game;
 
 
 import com.badlogic.gdx.Game;

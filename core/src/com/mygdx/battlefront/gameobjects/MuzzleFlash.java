@@ -1,4 +1,4 @@
-package com.mygdx.battlefront;
+package com.mygdx.battlefront.gameobjects;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
