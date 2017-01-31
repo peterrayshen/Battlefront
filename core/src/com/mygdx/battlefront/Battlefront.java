@@ -15,22 +15,32 @@ public class Battlefront extends Game {
 	public LoseScreen loseScreen;
 	public SpriteBatch batch;
 	
+	//storing filter indexes for collision management
 	public static final short PLAYER_INDEX = -1;
 	public static final short ENEMY_INDEX = -2;
 	public static final short PROJECTILE_INDEX = -1;
 	
 	@Override
+	//this method is called the moment the game is launched
 	public void create () {
 		batch = new SpriteBatch();
+		
+		//loads all assets from AssetLoader class (images, sounds etc)
 		AssetLoader.load();
+		
+		//loads the background music
 		loadMusic();
+		
+		//initiates game screens, one for while the user is playing and one for when he/she loses
 		playScreen = new PlayScreen(this);
 		loseScreen = new LoseScreen(batch);
 		
+		//game starts off with play screen
 		setScreen(playScreen);
 		
 	}
 	
+	//method that loads and plays the background music
 	public void loadMusic() {
 		AssetManager assetManager = new AssetManager();
 		assetManager.load("song.mp3", Music.class);
@@ -43,6 +53,8 @@ public class Battlefront extends Game {
 	}
 
 	@Override
+	//calls the screen to render
+	//this method is called many times each and every second
 	public void render () {
 		super.render();
 	

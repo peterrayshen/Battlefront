@@ -5,63 +5,53 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.battlefront.screens.PlayScreen;
 
 public class LoseScreen implements Screen{
 	
-
+	//this screen is displayed whenever the player loses
+	
 	public Stage stage;
 	private Viewport viewport;
 	
-	
-	private Label exitLabel;
-	
+	private Label messageLabel;
 	
 	private FreeTypeFontGenerator fontGenerator;
 	
 	public LoseScreen(SpriteBatch sb) {
 		
 		
-		
+		//imports a font and brings it into the game
 		fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("font.TTF"));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		parameter.size = 120;
 		BitmapFont font = fontGenerator.generateFont(parameter);
 		
+		//sets the viewport
 		viewport = new FitViewport(1280, 720, new OrthographicCamera());
 		stage = new Stage(viewport, sb);
 		
-		exitLabel = new Label("YOU LOSE",
+		//creates the text that says YOU LOSE
+		messageLabel = new Label("YOU LOSE",
 				new Label.LabelStyle(font, Color.WHITE));
-		exitLabel.setBounds(640, 380, 10, 10);
-		exitLabel.setAlignment(Align.center);
+		messageLabel.setBounds(640, 380, 10, 10);
+		messageLabel.setAlignment(Align.center);
 		
-		
-		
-		
-		stage.addActor(exitLabel);
-		
-		
-		
+		//adds the text to the screen
+		stage.addActor(messageLabel);
 		
 	}
 	
-	
+	//disposes of ressources
 	public void dispose() {
-		
 		stage.dispose();
 		fontGenerator.dispose();
 
@@ -70,11 +60,12 @@ public class LoseScreen implements Screen{
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		
 	}
 
+	//method that's called many times every second
 	@Override
 	public void render(float delta) {
+		//clears the screen and sets the background colour to grey
 		Gdx.gl.glClearColor(190 / 255f, 190 / 255f, 190 / 255f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		

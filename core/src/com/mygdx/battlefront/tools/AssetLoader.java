@@ -7,35 +7,40 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class AssetLoader {
 	
-	public static Texture tanks, flare, bg, blueTank, carTexture;
+	//this class loads all the assets for the game such as sound, and images
 	
-	public static TextureRegion playerChassis, playerTurret, cannonFlare, car;
+	//all the textures for the sprite
+	public static Texture tanks, flare, blueTank;
 	
+	//these texture regions are cut out from the textures
+	public static TextureRegion chassis, turret, cannonFlare;
+	
+	//sound variable
 	public static Sound cannonFiring;
 	
 	public static void load() {
+		//loads all the textures
 		tanks = new Texture(Gdx.files.internal("tanks.png"));
 		flare = new Texture(Gdx.files.internal("cannon_flare.png"));
-		bg = new Texture(Gdx.files.internal("bg.png"));
 		blueTank = new Texture(Gdx.files.internal("blue_tank.png"));
-		carTexture = new Texture(Gdx.files.internal("car.png"));
 		
-		cannonFiring = Gdx.audio.newSound(Gdx.files.internal("cannon_sound.mp3"));
+		//cuts out the tank chassis and turret from the texture
+		chassis = new TextureRegion(blueTank, 741, 139, 485, 614);
+		turret = new TextureRegion(blueTank, 1296, 80, 233, 532);
 		
-		playerChassis = new TextureRegion(blueTank, 741, 139, 485, 614);
-		playerTurret = new TextureRegion(blueTank, 1296, 80, 233, 532);
-		
+		//muzzle flash image
 		cannonFlare = new TextureRegion(flare, 143, 34, 555, 364);
-		car = new TextureRegion(carTexture, 0, 0, 397, 800);
+		
+		//shooting sound effect
+		cannonFiring = Gdx.audio.newSound(Gdx.files.internal("cannon_sound.mp3"));
 		
 	}
 	
+	//disposes of resources
 	public static void dispose() {
 		tanks.dispose();
 		flare.dispose();
-		bg.dispose();
 		blueTank.dispose();
-		carTexture.dispose();
 	}
 
 }
