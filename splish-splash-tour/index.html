@@ -1,4 +1,4 @@
-<title>Splish Splash Speedrun</title>
+<title>Seven at Splish Splash</title>
 
 <style id="app-css">
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Bungee&display=swap');
@@ -7,7 +7,6 @@
 html { -webkit-text-size-adjust: 100%; }
 body, h1, h2, h3, h4, p, ul, ol, li, figure, form { margin: 0; padding: 0; }
 ul, ol { list-style: none; }
-img { max-width: 100%; display: block; }
 button, input { font: inherit; color: inherit; }
 
 :root {
@@ -21,42 +20,26 @@ button, input { font: inherit; color: inherit; }
   --pool-dk: #0B7E93;
   --flare:   #FF5B2E;
   --sun:     #FFC531;
-  --shadow:  0 1px 0 rgba(8,39,47,.06), 0 12px 28px -18px rgba(8,39,47,.55);
+  --shadow:  0 1px 0 rgba(8,39,47,.05), 0 14px 30px -20px rgba(8,39,47,.5);
   --rule:    1px solid var(--line);
-
-  --step:  clamp(1.05rem, .96rem + .38vw, 1.18rem);
-  --h1:    clamp(2.6rem, 1.5rem + 5.2vw, 5.4rem);
-  --h2:    clamp(1.5rem, 1.15rem + 1.5vw, 2.15rem);
-  --h3:    clamp(1.22rem, 1.08rem + .6vw, 1.5rem);
+  --step:  clamp(1.02rem, .96rem + .3vw, 1.12rem);
+  --h1:    clamp(2.7rem, 1.4rem + 6vw, 5.6rem);
+  --h2:    clamp(1.5rem, 1.15rem + 1.5vw, 2.1rem);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --foam:   #05202A;
-    --tile:   #0A2D38;
-    --tile-2: #0E3A46;
-    --line:   #17454F;
-    --deep:   #E4F4F2;
-    --mist:   #8CB0B6;
-    --pool:   #2FC9DE;
-    --pool-dk:#7FE0EE;
-    --flare:  #FF7448;
-    --sun:    #FFD166;
-    --shadow: 0 1px 0 rgba(0,0,0,.3), 0 16px 30px -20px rgba(0,0,0,.9);
+    --foam:#05202A; --tile:#0A2D38; --tile-2:#0E3A46; --line:#17454F;
+    --deep:#E4F4F2; --mist:#8CB0B6; --pool:#2FC9DE; --pool-dk:#7FE0EE;
+    --flare:#FF7448; --sun:#FFD166;
+    --shadow: 0 1px 0 rgba(0,0,0,.3), 0 18px 34px -22px rgba(0,0,0,.9);
   }
 }
 :root[data-theme="dark"] {
-  --foam:   #05202A;
-  --tile:   #0A2D38;
-  --tile-2: #0E3A46;
-  --line:   #17454F;
-  --deep:   #E4F4F2;
-  --mist:   #8CB0B6;
-  --pool:   #2FC9DE;
-  --pool-dk:#7FE0EE;
-  --flare:  #FF7448;
-  --sun:    #FFD166;
-  --shadow: 0 1px 0 rgba(0,0,0,.3), 0 16px 30px -20px rgba(0,0,0,.9);
+  --foam:#05202A; --tile:#0A2D38; --tile-2:#0E3A46; --line:#17454F;
+  --deep:#E4F4F2; --mist:#8CB0B6; --pool:#2FC9DE; --pool-dk:#7FE0EE;
+  --flare:#FF7448; --sun:#FFD166;
+  --shadow: 0 1px 0 rgba(0,0,0,.3), 0 18px 34px -22px rgba(0,0,0,.9);
 }
 
 body {
@@ -64,748 +47,724 @@ body {
   color: var(--deep);
   font-family: 'Barlow', system-ui, -apple-system, 'Segoe UI', sans-serif;
   font-size: var(--step);
-  line-height: 1.55;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
-
-.wrap { width: min(100% - 2.2rem, 62rem); margin-inline: auto; }
-
+.wrap { width: min(100% - 2rem, 64rem); margin-inline: auto; }
 .label {
-  font-family: 'Barlow Condensed', 'Barlow Narrow', system-ui, sans-serif;
-  text-transform: uppercase;
-  letter-spacing: .13em;
-  font-weight: 600;
-  font-size: .8rem;
+  font-family: 'Barlow Condensed', system-ui, sans-serif;
+  text-transform: uppercase; letter-spacing: .13em; font-weight: 600; font-size: .8rem;
 }
+#icons { display: none; }
+.ic { width: 100%; height: 100%; display: block; overflow: visible; }
+.ic [stroke] { stroke-linecap: round; stroke-linejoin: round; }
 
-/* ---------- hero ---------- */
+/* ---------------- hero ---------------- */
 .hero {
-  position: relative;
-  overflow: hidden;
-  background: var(--deep);
-  color: var(--foam);
-  padding-block: clamp(2.4rem, 5vw, 4rem) clamp(2.2rem, 4vw, 3.2rem);
-  border-bottom: 6px solid var(--flare);
+  position: relative; overflow: hidden;
+  background: #08272F; color: #EDF5F3;
+  padding-block: clamp(2.6rem, 6vw, 4.4rem) 0;
 }
-:root[data-theme="dark"] .hero, :root:not([data-theme="light"]) .hero { color: #E4F4F2; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .hero { background: #041820; } }
 :root[data-theme="dark"] .hero { background: #041820; }
-
 .hero::before {
-  content: "";
-  position: absolute; inset: -40% -10% auto -10%; height: 180%;
+  content: ""; position: absolute; inset: -30% -10% auto -10%; height: 160%;
   background:
-    radial-gradient(60% 40% at 20% 0%, rgba(14,159,184,.55), transparent 65%),
-    radial-gradient(50% 45% at 88% 18%, rgba(255,91,46,.30), transparent 70%);
-  animation: drift 26s ease-in-out infinite alternate;
+    radial-gradient(55% 42% at 18% 0%, rgba(14,159,184,.6), transparent 66%),
+    radial-gradient(45% 40% at 86% 12%, rgba(255,91,46,.34), transparent 70%);
+  animation: drift 30s ease-in-out infinite alternate;
 }
-.hero::after {
-  content: "";
-  position: absolute; inset: auto 0 0 0; height: 14px;
-  background: repeating-linear-gradient(90deg, rgba(255,255,255,.16) 0 26px, transparent 26px 52px);
-}
-@keyframes drift { from { transform: translate3d(-3%,0,0) scale(1); } to { transform: translate3d(4%,2%,0) scale(1.08); } }
-@media (prefers-reduced-motion: reduce) { .hero::before { animation: none; } }
-
-.hero .wrap { position: relative; }
+@keyframes drift { from { transform: translate3d(-3%,0,0) scale(1);} to { transform: translate3d(4%,3%,0) scale(1.09);} }
+.hero .wrap { position: relative; padding-bottom: 1rem; }
 .hero .label { color: var(--sun); }
 .hero h1 {
   font-family: 'Bungee', 'Barlow Condensed', system-ui, sans-serif;
-  font-size: var(--h1);
-  line-height: .92;
-  letter-spacing: -.005em;
-  text-wrap: balance;
-  margin-block: .5rem .1rem;
+  font-size: var(--h1); line-height: .9; margin-block: .45rem .6rem; text-wrap: balance;
 }
 .hero h1 em { font-style: normal; color: var(--sun); display: block; }
-.lede { max-width: 34em; margin-top: 1.1rem; font-size: 1.06em; color: rgba(237,245,243,.86); }
-.lede b { color: #fff; font-weight: 600; }
+.hero .lede { max-width: 30em; color: rgba(237,245,243,.85); font-size: 1.08em; }
 
-.tallies { display: flex; flex-wrap: wrap; gap: 1.6rem; margin-top: 1.7rem; }
+.waveband { position: relative; display: block; width: 100%; height: clamp(70px, 9vw, 120px); }
+.waveband svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.waveband .w1 { fill: rgba(14,159,184,.45); animation: swim 14s linear infinite; }
+.waveband .w2 { fill: rgba(14,159,184,.75); animation: swim 9s linear infinite reverse; }
+.waveband .w3 { fill: var(--foam); }
+@keyframes swim { from { transform: translateX(0);} to { transform: translateX(-50%);} }
+@media (prefers-reduced-motion: reduce) {
+  .hero::before, .waveband .w1, .waveband .w2 { animation: none; }
+}
+
+.tallies { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.6rem; }
+.tally {
+  border: 1px solid rgba(237,245,243,.22); border-radius: 12px;
+  padding: .5rem .9rem .6rem; min-width: 6.6rem;
+}
 .tally b {
-  display: block;
-  font-family: 'Bungee', system-ui, sans-serif;
-  font-size: 1.5rem;
-  color: var(--sun);
-  font-variant-numeric: tabular-nums;
+  display: block; font-family: 'Bungee', system-ui, sans-serif;
+  font-size: 1.45rem; color: var(--sun); font-variant-numeric: tabular-nums; line-height: 1.1;
 }
 .tally span { color: rgba(237,245,243,.7); }
 
-/* ---------- how-to strip ---------- */
-.howto {
-  background: var(--tile);
-  border-bottom: var(--rule);
-  padding-block: 1rem;
-}
-.howto .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem 1rem; }
-.howto p:first-child { flex: 1 1 18rem; }
-.howto p { color: var(--mist); font-size: .95rem; }
+/* ---------------- status strip ---------------- */
+.howto { background: var(--tile); border-bottom: var(--rule); padding-block: .8rem; }
+.howto .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .9rem; }
+.howto p { color: var(--mist); font-size: .93rem; flex: 1 1 14rem; }
 .howto p b { color: var(--deep); font-weight: 600; }
-.whoami { color: var(--mist); margin-left: .4rem; }
+.whoami { color: var(--mist); }
 #who {
-  width: 8.5rem;
-  background: var(--foam);
-  border: var(--rule);
-  border-radius: 8px;
-  padding: .18rem .6rem;
-  font-size: .95rem;
+  width: 8.5rem; background: var(--foam); border: var(--rule);
+  border-radius: 8px; padding: .2rem .6rem; font-size: .95rem;
 }
 #who::placeholder { color: var(--mist); }
 #who.nudge { border-color: var(--flare); box-shadow: 0 0 0 3px color-mix(in srgb, var(--flare) 22%, transparent); }
-
 #status-chip {
-  margin-left: auto;
-  border: 1px dashed var(--line);
-  border-radius: 999px;
-  padding: .2rem .8rem;
-  color: var(--mist);
+  margin-left: auto; border: 1px dashed var(--line); border-radius: 999px;
+  padding: .18rem .75rem; color: var(--mist);
 }
 #status-chip[data-state="live"] { border-style: solid; border-color: var(--pool); color: var(--pool-dk); }
 #status-chip[data-state="read"] { border-color: var(--flare); color: var(--flare); }
 
-/* ---------- route ---------- */
-main { padding-block: clamp(2rem, 4vw, 3.4rem) 1rem; }
+/* ---------------- sections ---------------- */
+main { padding-block: clamp(2rem, 4vw, 3rem) 1rem; }
+section { margin-bottom: clamp(2.6rem, 5vw, 4rem); }
+.sec-head { margin-bottom: 1.4rem; }
+.sec-head .label { color: var(--flare); }
+.sec-head h2 { font-size: var(--h2); line-height: 1.08; font-weight: 700; text-wrap: balance; margin-top: .15rem; }
+.sec-head p { color: var(--mist); max-width: 52ch; margin-top: .3rem; }
 
-.block { margin-bottom: clamp(2.4rem, 4vw, 3.6rem); }
-.block-head {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: baseline;
-  gap: .3rem 1rem;
-  padding-bottom: .7rem;
-  border-bottom: 2px solid var(--deep);
-  margin-bottom: 1.6rem;
+/* ---------------- the five ---------------- */
+.five { display: grid; grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr)); gap: 1rem; }
+.pick {
+  position: relative; display: flex; flex-direction: column;
+  background: var(--tile); border: var(--rule); border-radius: 18px;
+  box-shadow: var(--shadow); padding: 1.1rem 1.1rem 1rem; overflow: hidden;
 }
-.clock {
-  font-family: 'Bungee', system-ui, sans-serif;
-  font-size: 1.05rem;
-  color: var(--flare);
-  font-variant-numeric: tabular-nums;
+.pick::after {
+  content: ""; position: absolute; inset: auto 0 0 0; height: 4px;
+  background: linear-gradient(90deg, var(--pool), var(--flare));
 }
-.block-head h2 { font-size: var(--h2); line-height: 1.1; font-weight: 700; text-wrap: balance; }
-.block-head p { grid-column: 1 / -1; color: var(--mist); max-width: 60ch; }
+.art {
+  height: 96px; margin: -.3rem -.3rem .6rem;
+  border-radius: 14px; background: var(--tile-2);
+  display: grid; place-items: center; padding: .8rem;
+  color: var(--pool-dk);
+}
+.art .ic { width: 78px; height: 78px; }
+.pick--hot .art { background: color-mix(in srgb, var(--flare) 13%, var(--tile-2)); color: var(--flare); }
+.pick h3 { font-size: 1.24rem; line-height: 1.15; font-weight: 700; }
+.pick .pitch { color: var(--mist); margin-top: .25rem; flex: 1; }
 
-.stops { display: flex; flex-direction: column; gap: 1.1rem; }
-
-.stop { display: grid; grid-template-columns: 3.3rem 1fr; gap: 1rem; position: relative; }
-.lane { display: flex; flex-direction: column; align-items: center; gap: .5rem; }
-.num {
-  width: 3.3rem; height: 3.3rem;
-  display: grid; place-items: center;
-  border-radius: 50%;
-  background: var(--pool);
-  color: #04222A;
-  font-family: 'Bungee', system-ui, sans-serif;
-  font-size: 1.15rem;
-  font-variant-numeric: tabular-nums;
-  box-shadow: inset 0 -3px 0 rgba(0,0,0,.18);
-}
-.stop--flare .num { background: var(--flare); color: #2A0A02; }
-.flume {
-  flex: 1;
-  width: 10px;
-  border-radius: 5px;
-  background: repeating-linear-gradient(180deg, var(--line) 0 10px, transparent 10px 20px);
-}
-.stop:last-child .flume { display: none; }
-
-.card {
-  background: var(--tile);
-  border: var(--rule);
-  border-radius: 4px 16px 16px 4px;
-  border-left: 4px solid var(--pool);
-  box-shadow: var(--shadow);
-  padding: 1.1rem 1.2rem 1rem;
-}
-.stop--flare .card { border-left-color: var(--flare); }
-
-.card-head { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem .7rem; }
-.card-head h3 { flex: 1 1 100%; }
-@media (min-width: 46rem) { .card-head h3 { flex: 0 1 auto; } }
-.card h3 { font-size: var(--h3); line-height: 1.15; font-weight: 700; }
-.chip {
-  border-radius: 999px;
-  padding: .12rem .62rem .18rem;
-  background: var(--tile-2);
-  color: var(--mist);
+.tags { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .7rem; }
+.tag {
   font-family: 'Barlow Condensed', system-ui, sans-serif;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  font-weight: 600;
-  font-size: .74rem;
+  text-transform: uppercase; letter-spacing: .09em; font-weight: 600; font-size: .76rem;
+  border-radius: 999px; padding: .12rem .55rem .16rem; background: var(--tile-2); color: var(--mist);
   white-space: nowrap;
 }
-.chip--intense  { background: color-mix(in srgb, var(--flare) 16%, transparent); color: var(--flare); }
-.chip--moderate { background: color-mix(in srgb, var(--pool) 18%, transparent); color: var(--pool-dk); }
-.chip--soft     { background: color-mix(in srgb, var(--sun) 26%, transparent); color: #7A5400; }
-.chip--crew     { background: color-mix(in srgb, var(--pool) 18%, transparent); color: var(--pool-dk); }
-.chip--pass     { background: transparent; border: 1px dashed var(--line); color: var(--mist); }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .chip--soft { color: var(--sun); } }
-:root[data-theme="dark"] .chip--soft { color: var(--sun); }
+.tag--intense  { background: color-mix(in srgb, var(--flare) 16%, transparent); color: var(--flare); }
+.tag--moderate { background: color-mix(in srgb, var(--pool) 18%, transparent); color: var(--pool-dk); }
+.tag--soft     { background: color-mix(in srgb, var(--sun) 28%, transparent); color: #7A5400; }
+.tag--h { border: 1px dashed var(--line); background: transparent; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tag--soft { color: var(--sun); } }
+:root[data-theme="dark"] .tag--soft { color: var(--sun); }
 
-.why { margin-top: .55rem; max-width: 62ch; }
-.why em { font-style: italic; color: var(--mist); }
-
-.specs {
-  display: flex; flex-wrap: wrap; gap: .1rem 1.5rem;
-  margin-top: .8rem; padding-top: .7rem;
-  border-top: var(--rule);
+/* ---------------- matchups ---------------- */
+.matchups { display: flex; flex-direction: column; gap: 1.1rem; }
+.vs-card {
+  background: var(--tile); border: var(--rule); border-radius: 18px;
+  box-shadow: var(--shadow); padding: 1rem 1rem .9rem;
 }
-.specs li { display: flex; align-items: baseline; gap: .45rem; }
-.specs dt, .specs .k {
+.q { display: flex; align-items: baseline; gap: .55rem; margin-bottom: .8rem; }
+.q b { font-size: 1.1rem; font-weight: 700; }
+.q .label { color: var(--flare); }
+
+.fight { display: grid; grid-template-columns: 1fr auto 1fr; gap: .6rem; align-items: stretch; }
+.side {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  border: 2px solid var(--line); border-radius: 14px; padding: .8rem .7rem .7rem;
+  background: var(--foam); transition: border-color .18s ease, background .18s ease;
+}
+.side .art { height: 84px; width: 100%; margin: 0 0 .5rem; background: transparent; }
+.side .art .ic { width: 66px; height: 66px; }
+.side[data-picked="yes"] { border-color: var(--flare); background: color-mix(in srgb, var(--flare) 8%, var(--tile)); }
+.side h4 { font-size: 1.06rem; line-height: 1.18; font-weight: 700; }
+.side .pitch { color: var(--mist); font-size: .92rem; margin-top: .2rem; }
+.side .tags { justify-content: center; }
+.vs {
+  align-self: center;
+  font-family: 'Bungee', system-ui, sans-serif; font-size: .9rem;
+  color: var(--mist); background: var(--tile-2);
+  border-radius: 999px; width: 2.4rem; height: 2.4rem;
+  display: grid; place-items: center;
+}
+
+button.vote {
+  margin-top: .7rem; width: 100%; cursor: pointer;
+  border: 1px solid var(--line); border-radius: 999px; background: var(--tile);
+  padding: .3rem .7rem;
   font-family: 'Barlow Condensed', system-ui, sans-serif;
-  text-transform: uppercase; letter-spacing: .1em; font-weight: 600;
-  font-size: .76rem; color: var(--mist);
+  text-transform: uppercase; letter-spacing: .1em; font-weight: 700; font-size: .84rem;
+  color: var(--mist); transition: background .15s ease, color .15s ease, border-color .15s ease;
 }
-.specs .v { font-weight: 600; font-variant-numeric: tabular-nums; }
+button.vote:hover { border-color: var(--pool); color: var(--pool-dk); }
+.side[data-picked="yes"] button.vote { background: var(--flare); border-color: var(--flare); color: #fff; }
+button.vote:disabled { opacity: .5; cursor: not-allowed; }
 
-/* ---------- crew bar ---------- */
-.bar { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .9rem; }
+.voters { display: flex; flex-wrap: wrap; gap: .25rem; justify-content: center; margin-top: .45rem; min-height: 1.1rem; }
+.voter {
+  font-family: 'Barlow Condensed', system-ui, sans-serif; font-size: .76rem;
+  text-transform: uppercase; letter-spacing: .07em; font-weight: 600;
+  background: var(--tile-2); color: var(--mist); border-radius: 4px; padding: .05rem .4rem;
+}
+
+.split { display: flex; height: 12px; border-radius: 999px; overflow: hidden; background: var(--tile-2); margin-top: .9rem; }
+.split i { display: block; height: 100%; transition: width .35s cubic-bezier(.3,.8,.4,1); }
+.split .fa { background: var(--flare); }
+.split .fb { background: var(--pool); }
+.tally-line {
+  display: flex; justify-content: space-between; margin-top: .35rem;
+  font-family: 'Barlow Condensed', system-ui, sans-serif;
+  text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; color: var(--mist);
+  font-variant-numeric: tabular-nums;
+}
+.tally-line b { color: var(--deep); }
+
+/* ---------------- threads ---------------- */
+.bar { display: flex; gap: .5rem; margin-top: .8rem; }
 button.act {
-  cursor: pointer;
-  background: transparent;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: .28rem .85rem;
+  cursor: pointer; background: transparent; border: 1px solid var(--line);
+  border-radius: 999px; padding: .22rem .8rem;
   font-family: 'Barlow Condensed', system-ui, sans-serif;
-  text-transform: uppercase; letter-spacing: .1em; font-weight: 600; font-size: .82rem;
-  color: var(--mist);
-  transition: background .15s ease, color .15s ease, border-color .15s ease;
+  text-transform: uppercase; letter-spacing: .1em; font-weight: 600; font-size: .8rem; color: var(--mist);
 }
 button.act:hover { border-color: var(--pool); color: var(--pool-dk); }
-button.act[aria-pressed="true"] { background: var(--flare); border-color: var(--flare); color: #fff; }
 button.act .n {
-  font-variant-numeric: tabular-nums;
-  margin-left: .4rem;
-  padding: 0 .38rem;
-  border-radius: 4px;
-  background: var(--tile-2);
-  color: var(--deep);
+  font-variant-numeric: tabular-nums; margin-left: .35rem;
+  padding: 0 .35rem; border-radius: 4px; background: var(--tile-2); color: var(--deep);
 }
-button.act[aria-pressed="true"] .n { background: rgba(255,255,255,.28); color: #fff; }
-button.act:disabled { opacity: .45; cursor: not-allowed; }
 :where(button, input, a):focus-visible { outline: 3px solid var(--pool); outline-offset: 2px; }
 
-.riders { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .6rem; }
-.rider {
-  font-family: 'Barlow Condensed', system-ui, sans-serif;
-  text-transform: uppercase; letter-spacing: .08em; font-size: .78rem; font-weight: 600;
-  background: color-mix(in srgb, var(--flare) 14%, transparent);
-  color: var(--flare);
-  border-radius: 4px; padding: .1rem .45rem;
-}
-
-.thread { margin-top: .9rem; border-top: var(--rule); padding-top: .8rem; }
+.thread { margin-top: .8rem; border-top: var(--rule); padding-top: .7rem; }
 .thread[hidden] { display: none; }
-.msgs { display: flex; flex-direction: column; gap: .55rem; margin-bottom: .7rem; }
-.msgs li { font-size: .97rem; }
+.msgs { display: flex; flex-direction: column; gap: .5rem; margin-bottom: .6rem; }
+.msgs li { font-size: .95rem; }
 .msgs .who { font-weight: 700; }
-.msgs .when { color: var(--mist); font-size: .8rem; margin-left: .4rem; font-variant-numeric: tabular-nums; }
+.msgs .when { color: var(--mist); font-size: .78rem; margin-left: .35rem; font-variant-numeric: tabular-nums; }
 .msgs .empty { color: var(--mist); font-style: italic; }
-.add { display: flex; gap: .5rem; flex-wrap: wrap; }
+.add { display: flex; gap: .45rem; flex-wrap: wrap; }
 .add input {
-  flex: 1 1 12rem;
-  background: var(--foam);
-  border: var(--rule);
-  border-radius: 8px;
-  padding: .45rem .7rem;
+  flex: 1 1 11rem; background: var(--foam); border: var(--rule);
+  border-radius: 8px; padding: .4rem .65rem;
 }
 .add input::placeholder { color: var(--mist); }
 .add button {
-  cursor: pointer;
-  border: none; border-radius: 8px;
-  background: var(--deep); color: var(--foam);
-  padding: .45rem 1.1rem;
+  cursor: pointer; border: none; border-radius: 8px;
+  background: var(--deep); color: var(--foam); padding: .4rem 1rem;
   font-family: 'Barlow Condensed', system-ui, sans-serif;
   text-transform: uppercase; letter-spacing: .1em; font-weight: 700;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .add button { background: var(--pool); color: #04222A; } }
 :root[data-theme="dark"] .add button { background: var(--pool); color: #04222A; }
-.add button:disabled { opacity: .45; cursor: not-allowed; }
+.add button:disabled, .add input:disabled { opacity: .5; cursor: not-allowed; }
 
-/* ---------- annex + brief ---------- */
-.panel {
-  background: var(--tile);
-  border: var(--rule);
-  border-radius: 16px;
-  box-shadow: var(--shadow);
-  padding: clamp(1.2rem, 3vw, 2rem);
-  margin-bottom: clamp(2rem, 4vw, 3rem);
+/* ---------------- height chart ---------------- */
+.rulers { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; }
+.ruler {
+  background: var(--tile); border: var(--rule); border-radius: 18px;
+  box-shadow: var(--shadow); padding: 1rem 1.1rem 1.1rem; position: relative; overflow: hidden;
 }
-.panel > h2 { font-size: var(--h2); line-height: 1.1; margin-bottom: .3rem; }
-.panel > .label { color: var(--flare); }
-.panel > p.intro { color: var(--mist); max-width: 60ch; margin-bottom: 1.3rem; }
+.ruler-top { display: flex; align-items: baseline; gap: .6rem; }
+.ruler-top b {
+  font-family: 'Bungee', system-ui, sans-serif; font-size: 2rem;
+  color: var(--pool-dk); font-variant-numeric: tabular-nums; line-height: 1;
+}
+.ruler--tall .ruler-top b { color: var(--flare); }
+.ruler--kids .ruler-top b { color: #7A5400; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .ruler--kids .ruler-top b { color: var(--sun); } }
+:root[data-theme="dark"] .ruler--kids .ruler-top b { color: var(--sun); }
+.ruler-top span { color: var(--mist); }
+.gauge { height: 8px; border-radius: 999px; background: var(--tile-2); margin: .7rem 0 .8rem; overflow: hidden; }
+.gauge i { display: block; height: 100%; background: var(--pool); }
+.ruler--tall .gauge i { background: var(--flare); }
+.ruler--kids .gauge i { background: var(--sun); }
+.ruler ul { display: flex; flex-wrap: wrap; gap: .35rem; }
+.ruler li {
+  font-size: .88rem; background: var(--tile-2); color: var(--deep);
+  border-radius: 6px; padding: .12rem .5rem;
+}
 
-.mini { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; }
-.mini > li { border-left: 3px solid var(--pool); padding-left: .8rem; }
-.mini h4 { font-size: 1.05rem; font-weight: 700; }
-.mini p { font-size: .95rem; color: var(--mist); }
+/* ---------------- the rest ---------------- */
+.rest { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .7rem; }
+.rest li {
+  display: flex; align-items: center; gap: .7rem;
+  background: var(--tile); border: var(--rule); border-radius: 12px; padding: .6rem .8rem;
+}
+.rest .mini-ic { width: 30px; height: 30px; flex: none; color: var(--pool-dk); }
+.rest b { display: block; font-weight: 700; font-size: .98rem; line-height: 1.2; }
+.rest span { color: var(--mist); font-size: .85rem; }
 
-.tablewrap { overflow-x: auto; }
-table { border-collapse: collapse; width: 100%; min-width: 30rem; }
-th, td { text-align: left; padding: .5rem .7rem; border-bottom: var(--rule); }
-thead th {
+/* ---------------- board ---------------- */
+.board {
+  background: var(--tile); border: var(--rule); border-radius: 18px;
+  box-shadow: var(--shadow); padding: clamp(1.1rem, 3vw, 1.8rem);
+}
+.board .msgs li { border-left: 3px solid var(--line); padding-left: .7rem; }
+
+footer { border-top: var(--rule); padding-block: 1.6rem 3rem; color: var(--mist); font-size: .88rem; }
+footer p { max-width: 60ch; }
+
+@media (max-width: 32rem) {
+  .fight { grid-template-columns: 1fr; }
+  .vs { justify-self: center; width: 2.1rem; height: 2.1rem; font-size: .8rem; }
+}
+
+/* ---------------- the crew ---------------- */
+.crew {
+  display: flex; align-items: flex-end; justify-content: flex-start;
+  flex-wrap: wrap; gap: .2rem .6rem; margin-top: 1.5rem;
+}
+.person { display: flex; flex-direction: column; align-items: center; gap: .3rem; }
+.person svg { display: block; overflow: visible; }
+.person .nm {
   font-family: 'Barlow Condensed', system-ui, sans-serif;
-  text-transform: uppercase; letter-spacing: .1em; font-size: .8rem; color: var(--mist);
-  border-bottom: 2px solid var(--deep);
+  text-transform: uppercase; letter-spacing: .08em; font-weight: 600; font-size: .78rem;
+  color: rgba(237,245,243,.78);
 }
-td.h { font-variant-numeric: tabular-nums; font-weight: 700; }
-tbody td:nth-child(2) {
+.hero .crew .person--ghost .nm { color: rgba(237,245,243,.45); }
+
+.picker { display: flex; flex-wrap: wrap; gap: .3rem; align-items: center; }
+.picker button {
+  cursor: pointer; background: transparent; border: 2px solid transparent;
+  border-radius: 999px; padding: .1rem; line-height: 0;
+  transition: border-color .15s ease, transform .15s ease;
+}
+.picker button:hover { transform: translateY(-2px); }
+.picker button[aria-pressed="true"] { border-color: var(--flare); }
+.picker button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+.tok { display: block; border-radius: 50%; background: var(--tile-2); }
+
+/* who's on which raft */
+.split-crew { margin-top: .8rem; padding-top: .7rem; border-top: var(--rule); }
+.split-crew .cap {
   font-family: 'Barlow Condensed', system-ui, sans-serif;
-  text-transform: uppercase; letter-spacing: .08em; font-size: .84rem; color: var(--mist);
+  text-transform: uppercase; letter-spacing: .09em; font-weight: 600;
+  font-size: .76rem; color: var(--mist); margin-bottom: .35rem;
 }
-tbody tr:hover { background: var(--tile-2); }
-
-.checks { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .4rem 1.4rem; }
-.checks li { display: flex; gap: .6rem; align-items: baseline; }
-.checks li::before { content: ""; width: .7rem; height: .7rem; border: 2px solid var(--pool); border-radius: 3px; flex: none; }
-
-/* ---------- board ---------- */
-.board .msgs { margin-bottom: 1rem; }
-.board .msgs li { border-left: 3px solid var(--line); padding-left: .8rem; }
-
-footer {
-  border-top: var(--rule);
-  padding-block: 2rem 3rem;
-  color: var(--mist);
-  font-size: .9rem;
+.rafts { display: flex; flex-wrap: wrap; gap: .35rem; }
+.raft {
+  display: flex; gap: .1rem; align-items: center;
+  border: 1px dashed var(--line); border-radius: 999px; padding: .15rem .3rem;
 }
-footer p { max-width: 62ch; margin-bottom: .6rem; }
-footer a { color: var(--pool-dk); }
+.side .split-crew { text-align: center; }
+.side .rafts { justify-content: center; }
 
-@media (max-width: 34rem) {
-  .stop { grid-template-columns: 1fr; gap: .5rem; }
-  .lane { flex-direction: row; align-items: center; gap: .8rem; }
-  .num { width: 2.6rem; height: 2.6rem; font-size: .95rem; }
-  .flume { flex: 1; width: auto; height: 8px; background: repeating-linear-gradient(90deg, var(--line) 0 10px, transparent 10px 20px); }
-  .stop:last-child .flume { display: block; }
-  .card { border-radius: 4px 12px 12px 4px; }
-}
+.voters .tok { margin: 0; }
+.voters { gap: .2rem; }
 </style>
 
 <div id="page">
 
+<svg id="icons" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <symbol id="ic-coaster" viewBox="0 0 64 64">
+      <path d="M4 46c8 0 9-22 20-22s12 16 20 16 8-12 16-12" fill="none" stroke="currentColor" stroke-width="3.4" opacity=".35"/>
+      <path d="M4 54c8 0 9-22 20-22s12 16 20 16 8-12 16-12" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <rect x="17" y="20" width="16" height="9" rx="4.5" fill="currentColor"/>
+      <path d="M40 20l6-7 6 7" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <path d="M46 26V13" fill="none" stroke="currentColor" stroke-width="3.4"/>
+    </symbol>
+    <symbol id="ic-capsule" viewBox="0 0 64 64">
+      <rect x="20" y="5" width="24" height="26" rx="12" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <circle cx="32" cy="16" r="4" fill="currentColor"/>
+      <path d="M22 31h20" stroke="currentColor" stroke-width="3.4"/>
+      <path d="M32 36v14m0 0l-6-6m6 6l6-6" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <path d="M12 57c5 0 5-4 10-4s5 4 10 4 5-4 10-4 5 4 10 4" fill="none" stroke="currentColor" stroke-width="3.4"/>
+    </symbol>
+    <symbol id="ic-funnel" viewBox="0 0 64 64">
+      <path d="M7 12h50L38 42v14l-12 5V42z" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <path d="M16 21h32M22 30h20" stroke="currentColor" stroke-width="3.4" opacity=".55"/>
+    </symbol>
+    <symbol id="ic-river" viewBox="0 0 64 64">
+      <path d="M6 14c10 0 10 12 22 12s12 12 24 12" fill="none" stroke="currentColor" stroke-width="3.4" opacity=".4"/>
+      <path d="M6 26c10 0 10 12 22 12s12 12 24 12" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <circle cx="34" cy="34" r="9" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <circle cx="34" cy="34" r="3" fill="currentColor"/>
+    </symbol>
+    <symbol id="ic-waves" viewBox="0 0 64 64">
+      <path d="M4 24c6 0 6-8 12-8s6 8 12 8 6-8 12-8 6 8 12 8 6-8 8-8" fill="none" stroke="currentColor" stroke-width="3.4" opacity=".4"/>
+      <path d="M4 38c6 0 6-8 12-8s6 8 12 8 6-8 12-8 6 8 12 8 6-8 8-8" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <path d="M4 52c6 0 6-8 12-8s6 8 12 8 6-8 12-8 6 8 12 8 6-8 8-8" fill="none" stroke="currentColor" stroke-width="3.4" opacity=".7"/>
+    </symbol>
+    <symbol id="ic-tube" viewBox="0 0 64 64">
+      <path d="M44 8H26a14 14 0 000 28h12a14 14 0 010 28H18" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <circle cx="46" cy="8" r="4" fill="currentColor"/>
+      <circle cx="18" cy="64" r="0" fill="currentColor"/>
+      <path d="M8 56h10" stroke="currentColor" stroke-width="3.4" opacity=".5"/>
+    </symbol>
+    <symbol id="ic-drop" viewBox="0 0 64 64">
+      <path d="M14 8h20" stroke="currentColor" stroke-width="3.4"/>
+      <path d="M24 10v34" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <path d="M24 44l-7-7m7 7l7-7" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <ellipse cx="34" cy="52" rx="24" ry="8" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <path d="M44 40l3-5 3 5" fill="none" stroke="currentColor" stroke-width="3" opacity=".6"/>
+    </symbol>
+    <symbol id="ic-speed" viewBox="0 0 64 64">
+      <path d="M14 8v30c0 8 4 14 12 16" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <path d="M34 8c0 14-6 12-6 22s10 6 10 18" fill="none" stroke="currentColor" stroke-width="3.4" opacity=".5"/>
+      <path d="M50 8v14c0 6-8 6-8 14s8 8 8 18" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <path d="M8 58h48" stroke="currentColor" stroke-width="3.4" opacity=".35"/>
+    </symbol>
+    <symbol id="ic-raft" viewBox="0 0 64 64">
+      <ellipse cx="32" cy="40" rx="26" ry="13" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <circle cx="21" cy="27" r="5" fill="currentColor"/>
+      <circle cx="43" cy="27" r="5" fill="currentColor"/>
+      <circle cx="32" cy="20" r="5" fill="currentColor" opacity=".55"/>
+      <path d="M6 56c6 0 6-4 13-4s6 4 13 4 6-4 13-4 6 4 13 4" fill="none" stroke="currentColor" stroke-width="3.2" opacity=".5"/>
+    </symbol>
+    <symbol id="ic-dark" viewBox="0 0 64 64">
+      <path d="M8 54V32a24 24 0 0148 0v22" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <path d="M20 54V34a12 12 0 0124 0v20" fill="none" stroke="currentColor" stroke-width="3.4" opacity=".45"/>
+      <ellipse cx="32" cy="50" rx="9" ry="5" fill="currentColor"/>
+      <path d="M4 58h56" stroke="currentColor" stroke-width="3.4"/>
+    </symbol>
+    <symbol id="ic-light" viewBox="0 0 64 64">
+      <path d="M18 6v34a14 14 0 0028 0V6" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <path d="M34 16l-8 12h12l-8 12" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <path d="M8 22h6M50 22h6M8 36h6M50 36h6" stroke="currentColor" stroke-width="3.2" opacity=".5"/>
+      <path d="M20 58h24" stroke="currentColor" stroke-width="3.4" opacity=".4"/>
+    </symbol>
+    <symbol id="ic-twist" viewBox="0 0 64 64">
+      <path d="M16 8c8 6-8 12 0 18s-8 12 0 18 -6 8 0 12" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <path d="M32 8c8 6-8 12 0 18s-8 12 0 18 -6 8 0 12" fill="none" stroke="currentColor" stroke-width="3.4" opacity=".6"/>
+      <path d="M48 8c8 6-8 12 0 18s-8 12 0 18 -6 8 0 12" fill="none" stroke="currentColor" stroke-width="3.4" opacity=".35"/>
+    </symbol>
+    <symbol id="ic-mat" viewBox="0 0 64 64">
+      <path d="M10 6l-4 46M26 6l-2 46M38 6l2 46M54 6l4 46" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <path d="M4 58h56" stroke="currentColor" stroke-width="3.4" opacity=".4"/>
+      <rect x="20" y="16" width="8" height="12" rx="4" fill="currentColor"/>
+    </symbol>
+    <symbol id="ic-reef" viewBox="0 0 64 64">
+      <path d="M6 20c10 0 8 12 18 12s10-12 20-12 8 10 14 10" fill="none" stroke="currentColor" stroke-width="3.4" opacity=".4"/>
+      <path d="M34 46c-14 0-22-6-28-6 8-14 18-22 28-22s20 8 26 22c-6 0-12 6-26 6z" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <circle cx="44" cy="30" r="3" fill="currentColor"/>
+      <path d="M8 56h48" stroke="currentColor" stroke-width="3.2" opacity=".4"/>
+    </symbol>
+    <symbol id="ic-chill" viewBox="0 0 64 64">
+      <circle cx="46" cy="16" r="9" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <path d="M46 2v4M46 26v4M60 16h-4M36 16h-4M56 6l-3 3M39 23l-3 3" stroke="currentColor" stroke-width="3" opacity=".6"/>
+      <path d="M6 46h30l10-8" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <path d="M10 46v8M34 46v8" stroke="currentColor" stroke-width="3.4"/>
+      <path d="M4 58h56" stroke="currentColor" stroke-width="3.2" opacity=".4"/>
+    </symbol>
+    <symbol id="ic-dino" viewBox="0 0 64 64">
+      <path d="M12 54c0-16 8-28 20-28 8 0 12 4 14 10l10 4-8 4c0 8-6 10-14 10z" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <circle cx="42" cy="36" r="2.6" fill="currentColor"/>
+      <path d="M24 28l4-8 4 8M32 27l4-9 4 9" fill="none" stroke="currentColor" stroke-width="3" opacity=".6"/>
+      <path d="M4 58h56" stroke="currentColor" stroke-width="3.2" opacity=".4"/>
+    </symbol>
+    <symbol id="ic-kids" viewBox="0 0 64 64">
+      <path d="M32 10v14" stroke="currentColor" stroke-width="3.4"/>
+      <path d="M14 24h36l-6 10H20z" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <path d="M22 42v8M32 40v12M42 42v8" stroke="currentColor" stroke-width="3.4" opacity=".65"/>
+      <path d="M8 58h48" stroke="currentColor" stroke-width="3.2" opacity=".4"/>
+    </symbol>
+  </defs>
+</svg>
+
 <header class="hero">
   <div class="wrap">
-    <p class="label">Sunday · August 23 · 2549 Splish Splash Drive, Calverton</p>
-    <h1>Splish Splash <em>Speedrun</em></h1>
-    <p class="lede">All 23 attractions, put in the order we should actually do them &mdash; headliners while the lines are short, rafts once everyone's warmed up, waves when the sun is at its worst. <b>Tap "I'm in" on the ones you want</b> and leave notes so we're not relitigating the plan in the parking lot.</p>
+    <p class="label">Splish Splash · Calverton, Long Island</p>
+    <h1>Seven of Us <em>Go Down a Slide</em></h1>
+    <p class="lede">This is our journey through the waterpark: five rides we're definitely doing, and six we need to settle. Tap yourself below, then start voting.</p>
+    <div class="crew" id="crew"></div>
     <div class="tallies">
-      <div class="tally"><b>23</b><span class="label">Attractions</span></div>
-      <div class="tally"><b>8</b><span class="label">Timed blocks</span></div>
-      <div class="tally"><b>2</b><span class="label">Wave pools</span></div>
-      <div class="tally"><b>48&Prime;</b><span class="label">Tallest minimum</span></div>
+      <div class="tally"><b>5</b><span class="label">Locked in</span></div>
+      <div class="tally"><b>6</b><span class="label">To settle</span></div>
+      <div class="tally"><b>23</b><span class="label">In the park</span></div>
     </div>
+  </div>
+  <div class="waveband" aria-hidden="true">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path class="w1" d="M0 60c150-40 250 40 400 0s250-40 400 0 250 40 400 0v120H0z"/>
+      <path class="w2" d="M0 80c150-30 250 30 400 0s250-30 400 0 250 30 400 0v60H0z"/>
+      <path class="w3" d="M0 104c200-24 400 24 600 0s400-24 600 0v24H0z"/>
+    </svg>
   </div>
 </header>
 
 <div class="howto">
   <div class="wrap">
-    <p><b>How this works:</b> everything you tap or post here saves to the page for the whole group.</p>
-    <label class="label whoami" for="who">Posting as</label>
-    <input id="who" type="text" maxlength="24" placeholder="your name" autocomplete="off" spellcheck="false">
+    <p class="label whoami">Which one are you?</p>
+    <div class="picker" id="picker"></div>
     <p class="label" id="status-chip" data-state="checking">Connecting…</p>
   </div>
 </div>
 
 <main class="wrap">
 
-  <section class="block">
-    <div class="block-head">
-      <p class="clock">10:00</p>
-      <h2>Gates open: burn the headliners</h2>
-      <p>These three build the longest queues by noon. Bootlegger's Run and Riptide Racer only need 42&Prime;, but Bombs Away is a hard 48&Prime; &mdash; sort that out before anyone climbs fifty feet of stairs.</p>
+  <section>
+    <div class="sec-head">
+      <p class="label">No arguments</p>
+      <h2>The five we're doing</h2>
+      <p>Three that will scare somebody, one river to recover on, one pool to float in. Where the raft is a fixed size, here's how the seven of us break up.</p>
     </div>
-    <ol class="stops">
+    <div class="five">
 
-      <li class="stop stop--flare">
-        <div class="lane"><span class="num">01</span><span class="flume"></span></div>
-        <div class="card" data-ride="bootleggers">
-          <div class="card-head"><h3>Bootlegger's Run</h3><span class="chip chip--intense">Intense</span><span class="chip">4-person raft</span><span class="chip chip--pass">H2Go</span></div>
-          <p class="why">A roller coaster without rails: hydromagnetic tech shoves a four-person raft <em>uphill</em> between the drops and sweeping turns. Best ride in the park, worst line by lunchtime &mdash; this is stop one, no debate.</p>
-          <ul class="specs">
-            <li><span class="k">Height</span><span class="v">42&Prime;</span></li>
-            <li><span class="k">42&ndash;48&Prime;</span><span class="v">Adult on the raft</span></li>
-            <li><span class="k">Weight</span><span class="v">700 lb per raft</span></li>
-          </ul>
-        </div>
-      </li>
+      <article class="pick pick--hot" data-thread="bootleggers" data-split="4">
+        <div class="art"><svg class="ic"><use href="#ic-coaster"/></svg></div>
+        <h3>Bootlegger's Run</h3>
+        <p class="pitch">A roller coaster without rails — it shoves the raft <em>uphill</em>.</p>
+        <div class="tags"><span class="tag tag--intense">Intense</span><span class="tag">42&Prime;</span><span class="tag">4 per raft</span><span class="tag tag--h">H2Go</span></div>
+      </article>
 
-      <li class="stop stop--flare">
-        <div class="lane"><span class="num">02</span><span class="flume"></span></div>
-        <div class="card" data-ride="bombs-away">
-          <div class="card-head"><h3>Bombs Away</h3><span class="chip chip--intense">Intense</span><span class="chip">Drop capsule</span></div>
-          <p class="why">Two AquaLaunch capsules, fifty feet up, right above Riptide Racer. You get a countdown, the floor disappears, and you free-fall at 26 feet per second down 300 feet of slide. The whole thing lasts about eleven seconds.</p>
-          <ul class="specs">
-            <li><span class="k">Height</span><span class="v">48&Prime;</span></li>
-            <li><span class="k">Weight</span><span class="v">300 lb</span></li>
-            <li><span class="k">Duration</span><span class="v">~11 sec</span></li>
-          </ul>
-        </div>
-      </li>
+      <article class="pick pick--hot" data-thread="bombs-away" data-split="2">
+        <div class="art"><svg class="ic"><use href="#ic-capsule"/></svg></div>
+        <h3>Bombs Away</h3>
+        <p class="pitch">Countdown, the floor vanishes, 26 feet per second. Over in 11 seconds.</p>
+        <div class="tags"><span class="tag tag--intense">Intense</span><span class="tag">48&Prime;</span><span class="tag">300 lb</span></div>
+      </article>
 
-      <li class="stop">
-        <div class="lane"><span class="num">03</span><span class="flume"></span></div>
-        <div class="card" data-ride="riptide-racer">
-          <div class="card-head"><h3>Riptide Racer</h3><span class="chip chip--moderate">Moderate</span><span class="chip">Side-by-side racer</span><span class="chip chip--pass">Speedy Pass</span></div>
-          <p class="why">A carnival game blown up to waterslide scale &mdash; race the person next to you, settle it in one run. It's directly below Bombs Away, so do them back to back while we're already at that tower.</p>
-          <ul class="specs">
-            <li><span class="k">Height</span><span class="v">42&Prime;</span></li>
-            <li><span class="k">Weight</span><span class="v">300 lb</span></li>
-            <li><span class="k">Format</span><span class="v">Race a friend</span></li>
-          </ul>
-        </div>
-      </li>
-    </ol>
+      <article class="pick pick--hot" data-thread="von-dark" data-split="2">
+        <div class="art"><svg class="ic"><use href="#ic-funnel"/></svg></div>
+        <h3>Dr. Von Dark's</h3>
+        <p class="pitch">Pitch black, a full 360 spin, then a 40-foot drop you never see coming.</p>
+        <div class="tags"><span class="tag tag--intense">Intense</span><span class="tag">48&Prime;</span><span class="tag">2 per raft</span><span class="tag tag--h">H2Go</span></div>
+      </article>
+
+      <article class="pick" data-thread="lazy-river">
+        <div class="art"><svg class="ic"><use href="#ic-river"/></svg></div>
+        <h3>Lazy River</h3>
+        <p class="pitch">The recovery lap. Grab tubes together, say nothing for ten minutes.</p>
+        <div class="tags"><span class="tag tag--soft">Soft</span><span class="tag">No minimum</span><span class="tag tag--h">H2Go</span></div>
+      </article>
+
+      <article class="pick" data-thread="kahuna-bay">
+        <div class="art"><svg class="ic"><use href="#ic-waves"/></svg></div>
+        <h3>Kahuna Bay</h3>
+        <p class="pitch">Four-foot waves. Swim out past the shallow crowd before a set starts.</p>
+        <div class="tags"><span class="tag tag--moderate">Moderate</span><span class="tag">4 ft waves</span><span class="tag">No minimum</span></div>
+      </article>
+
+    </div>
   </section>
 
-  <section class="block">
-    <div class="block-head">
-      <p class="clock">11:30</p>
-      <h2>The dark block</h2>
-      <p>Three enclosed rides in a row, all 48&Prime; and up. If anyone hates pitch-black tubes, this is the stretch to sit out &mdash; send them to Soak City and regroup at 12:45.</p>
+  <section>
+    <div class="sec-head">
+      <p class="label">Tap a side</p>
+      <h2>Six things to settle</h2>
+      <p>Tap a side and your face moves there. Majority wins; change your mind as often as you like.</p>
     </div>
-    <ol class="stops">
+    <div class="matchups">
 
-      <li class="stop stop--flare">
-        <div class="lane"><span class="num">04</span><span class="flume"></span></div>
-        <div class="card" data-ride="von-dark">
-          <div class="card-head"><h3>Dr. Von Dark's Tunnel of Terror</h3><span class="chip chip--intense">Intense</span><span class="chip">2-person raft</span><span class="chip chip--pass">H2Go</span></div>
-          <p class="why">One of only three slides like it in the country. You drop through a waterfall to start, then spin a full 360 in total darkness before a 40-foot drop you never see coming. Take a partner &mdash; it's a two-person raft.</p>
-          <ul class="specs">
-            <li><span class="k">Height</span><span class="v">48&Prime;</span></li>
-            <li><span class="k">Weight</span><span class="v">400 lb combined</span></li>
-            <li><span class="k">Drop</span><span class="v">40 ft</span></li>
-          </ul>
+      <article class="vs-card" data-vs="dark" data-thread="vs-dark">
+        <p class="q"><span class="label">Round 01</span><b>One more in the dark?</b></p>
+        <div class="fight">
+          <div class="side" data-side="a">
+            <div class="art"><svg class="ic"><use href="#ic-funnel"/></svg></div>
+            <h4>Alien Invasion</h4>
+            <p class="pitch">No raft to carry — a conveyor does it. Then you spin in the funnel.</p>
+            <div class="tags"><span class="tag tag--intense">Intense</span><span class="tag">48&Prime;</span></div>
+            <button type="button" class="vote" data-side="a">Pick this</button>
+            <div class="voters"></div>
+          </div>
+          <span class="vs">VS</span>
+          <div class="side" data-side="b">
+            <div class="art"><svg class="ic"><use href="#ic-tube"/></svg></div>
+            <h4>Dragon's Den</h4>
+            <p class="pitch">Catapults you into a mist-filled bowl. The dragon is down there.</p>
+            <div class="tags"><span class="tag tag--intense">Intense</span><span class="tag">48&Prime;</span></div>
+            <button type="button" class="vote" data-side="b">Pick this</button>
+            <div class="voters"></div>
+          </div>
         </div>
-      </li>
+        <div class="split"><i class="fa"></i><i class="fb"></i></div>
+        <p class="tally-line"><span class="ta">Alien Invasion <b>0</b></span><span class="tb"><b>0</b> Dragon's Den</span></p>
+      </article>
 
-      <li class="stop stop--flare">
-        <div class="lane"><span class="num">05</span><span class="flume"></span></div>
-        <div class="card" data-ride="alien-invasion">
-          <div class="card-head"><h3>Alien Invasion</h3><span class="chip chip--intense">Intense</span><span class="chip">Family raft funnel</span><span class="chip chip--pass">H2Go</span></div>
-          <p class="why">The one ride with no raft to carry &mdash; a conveyor belt hauls it up for you. Quick drop through the dark, then you spin freely in the funnel with no idea which pass drops you out the bottom. Nothing else in the park feels like it.</p>
-          <ul class="specs">
-            <li><span class="k">Height</span><span class="v">48&Prime;</span></li>
-            <li><span class="k">Weight</span><span class="v">700 lb combined</span></li>
-            <li><span class="k">Perk</span><span class="v">No raft to carry</span></li>
-          </ul>
+      <article class="vs-card" data-vs="dare" data-thread="vs-dare">
+        <p class="q"><span class="label">Round 02</span><b>Which dare?</b></p>
+        <div class="fight">
+          <div class="side" data-side="a">
+            <div class="art"><svg class="ic"><use href="#ic-drop"/></svg></div>
+            <h4>Shotgun Falls</h4>
+            <p class="pitch">Straight down into a ten-foot-deep pool. Be ready to swim.</p>
+            <div class="tags"><span class="tag tag--intense">Intense</span><span class="tag">48&Prime;</span></div>
+            <button type="button" class="vote" data-side="a">Pick this</button>
+            <div class="voters"></div>
+          </div>
+          <span class="vs">VS</span>
+          <div class="side" data-side="b">
+            <div class="art"><svg class="ic"><use href="#ic-speed"/></svg></div>
+            <h4>Max Trax</h4>
+            <p class="pitch">Fifty-foot plunge, or the double hump that gives you airtime.</p>
+            <div class="tags"><span class="tag tag--moderate">Moderate</span><span class="tag">42&Prime;</span></div>
+            <button type="button" class="vote" data-side="b">Pick this</button>
+            <div class="voters"></div>
+          </div>
         </div>
-      </li>
+        <div class="split"><i class="fa"></i><i class="fb"></i></div>
+        <p class="tally-line"><span class="ta">Shotgun Falls <b>0</b></span><span class="tb"><b>0</b> Max Trax</span></p>
+      </article>
 
-      <li class="stop stop--flare">
-        <div class="lane"><span class="num">06</span><span class="flume"></span></div>
-        <div class="card" data-ride="dragons-den">
-          <div class="card-head"><h3>Dragon's Den</h3><span class="chip chip--intense">Intense</span><span class="chip">Enclosed tube</span><span class="chip chip--pass">H2Go</span></div>
-          <p class="why">Catapults you through twisting darkness into a mist-shrouded bowl, circling past the dragon before it spits you out. The third dark ride in a row, and the one people underrate.</p>
-          <ul class="specs">
-            <li><span class="k">Height</span><span class="v">48&Prime;</span></li>
-            <li><span class="k">Weight</span><span class="v">400 lb combined</span></li>
-            <li><span class="k">Lights</span><span class="v">None</span></li>
-          </ul>
+      <article class="vs-card" data-vs="crew" data-thread="vs-crew">
+        <p class="q"><span class="label">Round 03</span><b>The one we all ride together</b></p>
+        <div class="fight">
+          <div class="side" data-side="a">
+            <div class="art"><svg class="ic"><use href="#ic-raft"/></svg></div>
+            <h4>Mammoth River</h4>
+            <p class="pitch">Big open raft, long winding run, a thousand pounds of us.</p>
+            <div class="tags"><span class="tag tag--moderate">Moderate</span><span class="tag">48&Prime;</span></div>
+            <button type="button" class="vote" data-side="a">Pick this</button>
+            <div class="voters"></div>
+          </div>
+          <span class="vs">VS</span>
+          <div class="side" data-side="b">
+            <div class="art"><svg class="ic"><use href="#ic-dark"/></svg></div>
+            <h4>Hollywood Stunt Rider</h4>
+            <p class="pitch">Same raft, total darkness. Every drop is a surprise.</p>
+            <div class="tags"><span class="tag tag--moderate">Moderate</span><span class="tag">48&Prime;</span><span class="tag tag--h">H2Go</span></div>
+            <button type="button" class="vote" data-side="b">Pick this</button>
+            <div class="voters"></div>
+          </div>
         </div>
-      </li>
-    </ol>
+        <div class="split"><i class="fa"></i><i class="fb"></i></div>
+        <p class="tally-line"><span class="ta">Mammoth River <b>0</b></span><span class="tb"><b>0</b> Stunt Rider</span></p>
+      </article>
+
+      <article class="vs-card" data-vs="shade" data-thread="vs-shade">
+        <p class="q"><span class="label">Round 04</span><b>Shade break</b></p>
+        <div class="fight">
+          <div class="side" data-side="a">
+            <div class="art"><svg class="ic"><use href="#ic-light"/></svg></div>
+            <h4>Hyperlight</h4>
+            <p class="pitch">Enclosed tube where the lights and music pulse the whole way down.</p>
+            <div class="tags"><span class="tag tag--moderate">Moderate</span><span class="tag">42&Prime;</span><span class="tag tag--h">H2Go</span></div>
+            <button type="button" class="vote" data-side="a">Pick this</button>
+            <div class="voters"></div>
+          </div>
+          <span class="vs">VS</span>
+          <div class="side" data-side="b">
+            <div class="art"><svg class="ic"><use href="#ic-twist"/></svg></div>
+            <h4>Giant Twister</h4>
+            <p class="pitch">Three slides winding through the treetops. Race them side by side.</p>
+            <div class="tags"><span class="tag tag--moderate">Moderate</span><span class="tag">42&Prime;</span><span class="tag tag--h">H2Go</span></div>
+            <button type="button" class="vote" data-side="b">Pick this</button>
+            <div class="voters"></div>
+          </div>
+        </div>
+        <div class="split"><i class="fa"></i><i class="fb"></i></div>
+        <p class="tally-line"><span class="ta">Hyperlight <b>0</b></span><span class="tb"><b>0</b> Giant Twister</span></p>
+      </article>
+
+      <article class="vs-card" data-vs="quick" data-thread="vs-quick">
+        <p class="q"><span class="label">Round 05</span><b>Quick hit while we're walking past</b></p>
+        <div class="fight">
+          <div class="side" data-side="a">
+            <div class="art"><svg class="ic"><use href="#ic-mat"/></svg></div>
+            <h4>Riptide Racer</h4>
+            <p class="pitch">Head-first on a mat, four lanes. Settles an argument in one run.</p>
+            <div class="tags"><span class="tag tag--moderate">Moderate</span><span class="tag">42&Prime;</span></div>
+            <button type="button" class="vote" data-side="a">Pick this</button>
+            <div class="voters"></div>
+          </div>
+          <span class="vs">VS</span>
+          <div class="side" data-side="b">
+            <div class="art"><svg class="ic"><use href="#ic-reef"/></svg></div>
+            <h4>Barrier Reef</h4>
+            <p class="pitch">Dark reef tunnels, and there's a shark waiting at the end.</p>
+            <div class="tags"><span class="tag tag--intense">Intense</span><span class="tag">42&Prime;</span></div>
+            <button type="button" class="vote" data-side="b">Pick this</button>
+            <div class="voters"></div>
+          </div>
+        </div>
+        <div class="split"><i class="fa"></i><i class="fb"></i></div>
+        <p class="tally-line"><span class="ta">Riptide Racer <b>0</b></span><span class="tb"><b>0</b> Barrier Reef</span></p>
+      </article>
+
+      <article class="vs-card" data-vs="end" data-thread="vs-end">
+        <p class="q"><span class="label">Round 06</span><b>Where we crash at the end</b></p>
+        <div class="fight">
+          <div class="side" data-side="a">
+            <div class="art"><svg class="ic"><use href="#ic-waves"/></svg></div>
+            <h4>Surf City</h4>
+            <p class="pitch">The classic pool — rolling breakers, room to actually talk.</p>
+            <div class="tags"><span class="tag tag--moderate">Moderate</span><span class="tag">No minimum</span></div>
+            <button type="button" class="vote" data-side="a">Pick this</button>
+            <div class="voters"></div>
+          </div>
+          <span class="vs">VS</span>
+          <div class="side" data-side="b">
+            <div class="art"><svg class="ic"><use href="#ic-chill"/></svg></div>
+            <h4>Soak City</h4>
+            <p class="pitch">Nothing to climb, nowhere to be. Chairs and a slow drift.</p>
+            <div class="tags"><span class="tag tag--soft">Soft</span><span class="tag">No minimum</span></div>
+            <button type="button" class="vote" data-side="b">Pick this</button>
+            <div class="voters"></div>
+          </div>
+        </div>
+        <div class="split"><i class="fa"></i><i class="fb"></i></div>
+        <p class="tally-line"><span class="ta">Surf City <b>0</b></span><span class="tb"><b>0</b> Soak City</span></p>
+      </article>
+
+    </div>
   </section>
 
-  <section class="block">
-    <div class="block-head">
-      <p class="clock">12:45</p>
-      <h2>Food, then float</h2>
-      <p>Eat before the one o'clock crush, then take one full lap of the river to digest. This is the regroup point &mdash; anyone who wandered off finds us here.</p>
+  <section>
+    <div class="sec-head">
+      <p class="label">Check before you queue</p>
+      <h2>Who can ride what</h2>
     </div>
-    <ol class="stops">
-      <li class="stop">
-        <div class="lane"><span class="num">07</span><span class="flume"></span></div>
-        <div class="card" data-ride="lazy-river">
-          <div class="card-head"><h3>Lazy River</h3><span class="chip chip--soft">Soft</span><span class="chip">Tube float</span><span class="chip chip--pass">H2Go</span></div>
-          <p class="why">Gentle current, landscaped the whole way, spraying fountains you can't dodge. Grab tubes as a block so nobody gets separated, and treat one lap as the official lunch recovery.</p>
-          <ul class="specs">
-            <li><span class="k">Height</span><span class="v">None posted</span></li>
-            <li><span class="k">Kids</span><span class="v">Adult companion</span></li>
-            <li><span class="k">Lap</span><span class="v">One, minimum</span></li>
-          </ul>
-        </div>
-      </li>
-    </ol>
+    <div class="rulers">
+      <div class="ruler ruler--tall">
+        <p class="ruler-top"><b>48&Prime;</b><span class="label">and up</span></p>
+        <div class="gauge"><i style="width:100%"></i></div>
+        <ul>
+          <li>Bombs Away</li><li>Dr. Von Dark's</li><li>Alien Invasion</li>
+          <li>Dragon's Den</li><li>Shotgun Falls</li><li>Mammoth River</li><li>Stunt Rider</li>
+        </ul>
+      </div>
+      <div class="ruler">
+        <p class="ruler-top"><b>42&Prime;</b><span class="label">and up</span></p>
+        <div class="gauge"><i style="width:72%"></i></div>
+        <ul>
+          <li>Bootlegger's Run</li><li>Riptide Racer</li><li>Barrier Reef</li>
+          <li>Hyperlight</li><li>Giant Twister</li><li>Max Trax</li><li>Dinosaur Falls</li>
+        </ul>
+      </div>
+      <div class="ruler ruler--kids">
+        <p class="ruler-top"><b>54&Prime;</b><span class="label">and under</span></p>
+        <div class="gauge"><i style="width:40%"></i></div>
+        <ul>
+          <li>Stingray Bay</li><li>Pirates Cove</li><li>Kiddie Slides</li>
+          <li>Octopus Pool</li><li>Yellow Submarine</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
-  <section class="block">
-    <div class="block-head">
-      <p class="clock">13:30</p>
-      <h2>The dares</h2>
-      <p>Three body slides, no raft between you and the chute, and a 250-pound limit on all of them. Shortest rides of the day and the ones you'll argue about on the drive home.</p>
+  <section>
+    <div class="sec-head">
+      <p class="label">Also there</p>
+      <h2>If we somehow have time</h2>
     </div>
-    <ol class="stops">
-
-      <li class="stop stop--flare">
-        <div class="lane"><span class="num">08</span><span class="flume"></span></div>
-        <div class="card" data-ride="shotgun-falls">
-          <div class="card-head"><h3>Shotgun Falls</h3><span class="chip chip--intense">Intense</span><span class="chip">Free fall</span></div>
-          <p class="why">A five-foot vertical drop straight into a ten-foot-deep pool. Over in seconds, and the landing is the part nobody warns you about &mdash; be ready to swim.</p>
-          <ul class="specs">
-            <li><span class="k">Height</span><span class="v">48&Prime;</span></li>
-            <li><span class="k">Weight</span><span class="v">250 lb</span></li>
-            <li><span class="k">Landing</span><span class="v">10 ft deep</span></li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="stop">
-        <div class="lane"><span class="num">09</span><span class="flume"></span></div>
-        <div class="card" data-ride="max-trax">
-          <div class="card-head"><h3>Max Trax</h3><span class="chip chip--moderate">Moderate</span><span class="chip">Speed slides</span></div>
-          <p class="why">Two slides and the choice matters: a fifty-foot vertical plunge, or the double hump that gives you airtime on the second bump. <em>Take the hump.</em></p>
-          <ul class="specs">
-            <li><span class="k">Height</span><span class="v">42&Prime;</span></li>
-            <li><span class="k">Weight</span><span class="v">250 lb</span></li>
-            <li><span class="k">Drop</span><span class="v">50 ft</span></li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="stop stop--flare">
-        <div class="lane"><span class="num">10</span><span class="flume"></span></div>
-        <div class="card" data-ride="barrier-reef">
-          <div class="card-head"><h3>Barrier Reef</h3><span class="chip chip--intense">Intense</span><span class="chip">Dark body slide</span></div>
-          <p class="why">Plunge and twist through dark reef tunnels &mdash; and there's a shark waiting at the end. Rated intense but only needs 42&Prime;, so it's the one the shorter half of the group can still do here.</p>
-          <ul class="specs">
-            <li><span class="k">Height</span><span class="v">42&Prime;</span></li>
-            <li><span class="k">Weight</span><span class="v">250 lb</span></li>
-            <li><span class="k">Lights</span><span class="v">None</span></li>
-          </ul>
-        </div>
-      </li>
-    </ol>
-  </section>
-
-  <section class="block">
-    <div class="block-head">
-      <p class="clock">14:30</p>
-      <h2>Crew rides &mdash; everybody in one boat</h2>
-      <p>Three raft rides you actually ride together, and the only block where we all end up in the same photo. Mammoth River takes a thousand pounds a raft, so nobody sits this one out.</p>
-    </div>
-    <ol class="stops">
-
-      <li class="stop">
-        <div class="lane"><span class="num">11</span><span class="flume"></span></div>
-        <div class="card" data-ride="mammoth-river">
-          <div class="card-head"><h3>Mammoth River</h3><span class="chip chip--moderate">Moderate</span><span class="chip">Family raft</span></div>
-          <p class="why">The long one &mdash; a winding river run with gentle thrills, built for a full raft of people yelling at each other. Tame by this park's standards, which is exactly why everyone will do it twice.</p>
-          <ul class="specs">
-            <li><span class="k">Height</span><span class="v">48&Prime;</span></li>
-            <li><span class="k">36&ndash;48&Prime;</span><span class="v">Adult, holding posture</span></li>
-            <li><span class="k">Weight</span><span class="v">1000 lb combined</span></li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="stop">
-        <div class="lane"><span class="num">12</span><span class="flume"></span></div>
-        <div class="card" data-ride="hollywood-stunt-rider">
-          <div class="card-head"><h3>Hollywood Stunt Rider</h3><span class="chip chip--moderate">Moderate</span><span class="chip">Dark family raft</span><span class="chip chip--pass">H2Go</span></div>
-          <p class="why">A minute of total darkness on a family raft &mdash; you hear the water and feel the drops with no warning of either, until the light at the end of the tunnel. The park's most popular ride for a reason.</p>
-          <ul class="specs">
-            <li><span class="k">Height</span><span class="v">48&Prime;</span></li>
-            <li><span class="k">36&ndash;48&Prime;</span><span class="v">Adult, holding posture</span></li>
-            <li><span class="k">Weight</span><span class="v">700 lb combined</span></li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="stop">
-        <div class="lane"><span class="num">13</span><span class="flume"></span></div>
-        <div class="card" data-ride="dinosaur-falls">
-          <div class="card-head"><h3>Dinosaur Falls</h3><span class="chip chip--moderate">Moderate</span><span class="chip">Themed raft</span><span class="chip chip--pass">H2Go</span></div>
-          <p class="why">Rafts through twisting rapids with dinosaurs roaring overhead the whole way down. The most theatrical ride here and the easiest sell to anyone who's had enough of the dark tubes.</p>
-          <ul class="specs">
-            <li><span class="k">Height</span><span class="v">42&Prime;</span></li>
-            <li><span class="k">Weight</span><span class="v">250 lb solo</span></li>
-            <li><span class="k">Raft</span><span class="v">400 lb combined</span></li>
-          </ul>
-        </div>
-      </li>
-    </ol>
-  </section>
-
-  <section class="block">
-    <div class="block-head">
-      <p class="clock">15:30</p>
-      <h2>Treetops and light show</h2>
-      <p>The shaded stretch, both rides 42&Prime;. Lines here move faster than the towers &mdash; good place to pick up ride count if the day's been heavy on stairs.</p>
-    </div>
-    <ol class="stops">
-
-      <li class="stop">
-        <div class="lane"><span class="num">14</span><span class="flume"></span></div>
-        <div class="card" data-ride="giant-twister">
-          <div class="card-head"><h3>Giant Twister</h3><span class="chip chip--moderate">Moderate</span><span class="chip">Body slides</span><span class="chip chip--pass">H2Go</span></div>
-          <p class="why">Three twisting body slides winding high through the treetops, side by side to the splash pool &mdash; so it's another race, and the most scenic thirty seconds in the park if you keep your eyes open.</p>
-          <ul class="specs">
-            <li><span class="k">Height</span><span class="v">42&Prime;</span></li>
-            <li><span class="k">Weight</span><span class="v">250 lb</span></li>
-            <li><span class="k">Lanes</span><span class="v">3, race them</span></li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="stop">
-        <div class="lane"><span class="num">15</span><span class="flume"></span></div>
-        <div class="card" data-ride="hyperlight">
-          <div class="card-head"><h3>Hyperlight</h3><span class="chip chip--moderate">Moderate</span><span class="chip">Light &amp; sound tube</span><span class="chip chip--pass">H2Go</span></div>
-          <p class="why">The rebuilt Long Island favourite: an enclosed tube where the lights and the music pulse along with you the whole way down. Ride it single for the effects, double for the yelling.</p>
-          <ul class="specs">
-            <li><span class="k">Height</span><span class="v">42&Prime;</span></li>
-            <li><span class="k">Weight</span><span class="v">250 lb solo</span></li>
-            <li><span class="k">Double</span><span class="v">400 lb combined</span></li>
-          </ul>
-        </div>
-      </li>
-    </ol>
-  </section>
-
-  <section class="block">
-    <div class="block-head">
-      <p class="clock">16:15</p>
-      <h2>Waves</h2>
-      <p>Two wave pools, not interchangeable. Kahuna Bay has the four-foot sets; Surf City is the classic and the better place to actually hear each other. Anyone under 48&Prime; has to wear a lifejacket in both.</p>
-    </div>
-    <ol class="stops">
-
-      <li class="stop">
-        <div class="lane"><span class="num">16</span><span class="flume"></span></div>
-        <div class="card" data-ride="kahuna-bay">
-          <div class="card-head"><h3>Kahuna Bay Wavepool</h3><span class="chip chip--moderate">Moderate</span><span class="chip">Wave pool</span></div>
-          <p class="why">Spectacular four-foot waves that keep on coming. Swim out past the shallow crowd before a set starts, or you'll spend the whole cycle getting rolled into strangers.</p>
-          <ul class="specs">
-            <li><span class="k">Waves</span><span class="v">4 ft</span></li>
-            <li><span class="k">Alone</span><span class="v">42&Prime; minimum</span></li>
-            <li><span class="k">Under 48&Prime;</span><span class="v">Lifejacket required</span></li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="stop">
-        <div class="lane"><span class="num">17</span><span class="flume"></span></div>
-        <div class="card" data-ride="surf-city">
-          <div class="card-head"><h3>Surf City</h3><span class="chip chip--moderate">Moderate</span><span class="chip">Wave pool</span></div>
-          <p class="why">The classic pool &mdash; rolling breakers, more room, and the spot to park chairs if we want a base for the last hour.</p>
-          <ul class="specs">
-            <li><span class="k">Height</span><span class="v">None posted</span></li>
-            <li><span class="k">Under 48&Prime;</span><span class="v">Lifejacket required</span></li>
-            <li><span class="k">Best for</span><span class="v">Base camp</span></li>
-          </ul>
-        </div>
-      </li>
-    </ol>
-  </section>
-
-  <section class="block">
-    <div class="block-head">
-      <p class="clock">17:00</p>
-      <h2>Last call</h2>
-      <p>Queues are shortest in the final hour, so the re-ride is the cheapest of the day. Whatever tops the "I'm in" count wins &mdash; check the board before we split up.</p>
-    </div>
-    <ol class="stops">
-
-      <li class="stop">
-        <div class="lane"><span class="num">18</span><span class="flume"></span></div>
-        <div class="card" data-ride="soak-city">
-          <div class="card-head"><h3>Soak City</h3><span class="chip chip--soft">Soft</span><span class="chip">Cool-down</span></div>
-          <p class="why">The quiet corner &mdash; no height limits, nothing to climb, nowhere to be. Where whoever's done finds a chair while the rest of us get one last run in.</p>
-          <ul class="specs">
-            <li><span class="k">Height</span><span class="v">None posted</span></li>
-            <li><span class="k">Effort</span><span class="v">Zero</span></li>
-            <li><span class="k">Good for</span><span class="v">Regrouping</span></li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="stop stop--flare">
-        <div class="lane"><span class="num">19</span></div>
-        <div class="card" data-ride="last-call">
-          <div class="card-head"><h3>Group's pick</h3><span class="chip chip--crew">Vote decides</span></div>
-          <p class="why">Vote here for whichever ride you want one more crack at. Highest count wins and we all go &mdash; no negotiating at 5:20 with wet phones.</p>
-          <ul class="specs">
-            <li><span class="k">Decided by</span><span class="v">Whoever votes</span></li>
-            <li><span class="k">Deadline</span><span class="v">17:00</span></li>
-          </ul>
-        </div>
-      </li>
-    </ol>
-  </section>
-
-  <section class="panel">
-    <p class="label">If anyone brings kids</p>
-    <h2>The shallow end of the park</h2>
-    <p class="intro">Five kid-scaled areas, all capped at 54&Prime; and all requiring an adult along. Any of them works as a base camp if the group needs to split for an hour.</p>
-    <ul class="mini">
-      <li><h4>Stingray Bay</h4><p>The all-new kids zone: kid-sized slides, interactive play features, silly sprayers around every corner and a dump bucket overhead.</p></li>
-      <li><h4>Pirates Cove</h4><p>An interactive pirate ship with ropes, slides and water cannons &mdash; parents climb aboard too. The hardest one to pull them away from.</p></li>
-      <li><h4>Kiddie Slides</h4><p>Three shrunk-down slides in Kiddie Cove, one of which a parent can ride alongside a very small guest.</p></li>
-      <li><h4>Octopus Pool</h4><p>Swing off the tentacles of a giant octopus, then cool down in the fountains. Swings hold 50 lb, so it's for the little ones only.</p></li>
-      <li><h4>Yellow Submarine</h4><p>A wading pool built around a bright yellow sub you slide down the back of, under a constant falling spray.</p></li>
+    <ul class="rest">
+      <li><svg class="ic mini-ic"><use href="#ic-dino"/></svg><span><b>Dinosaur Falls</b><span>Raft ride, roaring dinosaurs</span></span></li>
+      <li><svg class="ic mini-ic"><use href="#ic-kids"/></svg><span><b>Stingray Bay</b><span>New kids zone, dump bucket</span></span></li>
+      <li><svg class="ic mini-ic"><use href="#ic-kids"/></svg><span><b>Pirates Cove</b><span>Pirate ship, water cannons</span></span></li>
+      <li><svg class="ic mini-ic"><use href="#ic-kids"/></svg><span><b>Kiddie Slides</b><span>Three, kid-sized</span></span></li>
+      <li><svg class="ic mini-ic"><use href="#ic-kids"/></svg><span><b>Octopus Pool</b><span>Swings on the tentacles</span></span></li>
+      <li><svg class="ic mini-ic"><use href="#ic-kids"/></svg><span><b>Yellow Submarine</b><span>Wading pool with a slide</span></span></li>
     </ul>
   </section>
 
-  <section class="panel">
-    <p class="label">Before we go</p>
-    <h2>Every limit, in one place</h2>
-    <p class="intro">Straight from the park's posted restrictions. Measure at the gate rather than argue at the top of the stairs &mdash; and treat the sign at the ride as the final word.</p>
-    <div class="tablewrap">
-      <table>
-        <thead><tr><th scope="col">Attraction</th><th scope="col">Rating</th><th scope="col">Minimum</th><th scope="col">Weight &amp; fine print</th></tr></thead>
-        <tbody>
-          <tr><td>Alien Invasion</td><td>Intense</td><td class="h">48&Prime;</td><td>700 lb combined</td></tr>
-          <tr><td>Bombs Away</td><td>Intense</td><td class="h">48&Prime;</td><td>300 lb</td></tr>
-          <tr><td>Dr. Von Dark's Tunnel of Terror</td><td>Intense</td><td class="h">48&Prime;</td><td>400 lb combined</td></tr>
-          <tr><td>Dragon's Den</td><td>Intense</td><td class="h">48&Prime;</td><td>400 lb combined</td></tr>
-          <tr><td>Shotgun Falls</td><td>Intense</td><td class="h">48&Prime;</td><td>250 lb</td></tr>
-          <tr><td>Hollywood Stunt Rider</td><td>Moderate</td><td class="h">48&Prime;</td><td>700 lb combined; 36&ndash;48&Prime; with an adult</td></tr>
-          <tr><td>Mammoth River</td><td>Moderate</td><td class="h">48&Prime;</td><td>1000 lb combined; 36&ndash;48&Prime; with an adult</td></tr>
-          <tr><td>Barrier Reef</td><td>Intense</td><td class="h">42&Prime;</td><td>250 lb</td></tr>
-          <tr><td>Bootlegger's Run</td><td>Intense</td><td class="h">42&Prime;</td><td>700 lb per raft; 42&ndash;48&Prime; with an adult</td></tr>
-          <tr><td>Dinosaur Falls</td><td>Moderate</td><td class="h">42&Prime;</td><td>250 lb solo, 400 lb combined</td></tr>
-          <tr><td>Giant Twister</td><td>Moderate</td><td class="h">42&Prime;</td><td>250 lb</td></tr>
-          <tr><td>Hyperlight</td><td>Moderate</td><td class="h">42&Prime;</td><td>250 lb solo, 400 lb combined</td></tr>
-          <tr><td>Max Trax</td><td>Moderate</td><td class="h">42&Prime;</td><td>250 lb</td></tr>
-          <tr><td>Riptide Racer</td><td>Moderate</td><td class="h">42&Prime;</td><td>300 lb</td></tr>
-          <tr><td>Kahuna Bay Wavepool</td><td>Moderate</td><td class="h">&mdash;</td><td>42&Prime; to swim unaccompanied; lifejacket under 48&Prime;</td></tr>
-          <tr><td>Surf City</td><td>Moderate</td><td class="h">&mdash;</td><td>Lifejacket under 48&Prime;</td></tr>
-          <tr><td>Lazy River</td><td>Soft</td><td class="h">&mdash;</td><td>Adult companion</td></tr>
-          <tr><td>Soak City</td><td>Soft</td><td class="h">&mdash;</td><td>No posted limits</td></tr>
-          <tr><td>Kiddie Slides</td><td>Mild</td><td class="h">&mdash;</td><td>Maximum 54&Prime;; adult companion</td></tr>
-          <tr><td>Octopus Pool</td><td>Soft</td><td class="h">&mdash;</td><td>Maximum 54&Prime;; swings hold 50 lb</td></tr>
-          <tr><td>Pirates Cove</td><td>Soft</td><td class="h">&mdash;</td><td>Maximum 54&Prime;; adult companion</td></tr>
-          <tr><td>Stingray Bay</td><td>Soft</td><td class="h">&mdash;</td><td>Maximum 54&Prime;; adult companion</td></tr>
-          <tr><td>Yellow Submarine</td><td>Soft</td><td class="h">&mdash;</td><td>Maximum 54&Prime;; adult companion</td></tr>
-        </tbody>
-      </table>
+  <section class="board" data-thread="board">
+    <div class="sec-head" style="margin-bottom:.8rem">
+      <p class="label">Everything else</p>
+      <h2>The board</h2>
+      <p>Who's driving, when we're leaving, who owes whom for parking.</p>
     </div>
-  </section>
-
-  <section class="panel">
-    <p class="label">Bag check</p>
-    <h2>What actually matters today</h2>
-    <ul class="checks">
-      <li>Cash or card in a waterproof pouch</li>
-      <li>Sunscreen, and reapply after the wave pool</li>
-      <li>Water shoes for hot pavement</li>
-      <li>A towel each &mdash; nobody sharing</li>
-      <li>Locker money, decided at the gate</li>
-      <li>One phone designated for photos</li>
-      <li>Refillable bottle</li>
-      <li>Meeting spot: Surf City chairs</li>
-    </ul>
-    <p class="intro" style="margin-top:1.2rem;margin-bottom:0">If the queues turn brutal, the H2Go pass covers nine of these rides &mdash; Bootlegger's Run, Alien Invasion, Dr. Von Dark's, Dragon's Den, Dinosaur Falls, Giant Twister, Hollywood Stunt Rider, Hyperlight and the Lazy River &mdash; and Riptide Racer takes the Speedy Pass. Worth pricing at the gate before we commit to the schedule.</p>
-  </section>
-
-  <section class="panel board">
-    <p class="label">Group chat, but on the page</p>
-    <h2>The board</h2>
-    <p class="intro">Anything that isn't about one specific ride &mdash; who's driving, when we're leaving, who owes whom for parking.</p>
-    <ul class="msgs" data-board="1"></ul>
-    <form class="add" data-board="1">
+    <ul class="msgs"></ul>
+    <form class="add">
       <input type="text" name="text" maxlength="240" placeholder="Say something to the group" autocomplete="off">
       <button type="submit">Post</button>
     </form>
@@ -814,150 +773,335 @@ footer a { color: var(--pool-dk); }
 </main>
 
 <footer class="wrap">
-  <p>Ride names, thrill ratings, heights and weight limits are taken from the park's own attraction listings. Operating rides change day to day &mdash; the map at the gate and the sign at each ride are the real answers.</p>
-  <p>Times are suggestions, not reservations. The route is built to dodge the worst queues, not to be obeyed.</p>
+  <p>Heights, weights and thrill ratings come from the park's own listings — the sign at the ride is the final word. 2549 Splish Splash Drive, Calverton NY.</p>
 </footer>
 
 </div>
 
-<script type="application/json" id="board-data">{"hype":{},"notes":{},"board":[]}</script>
+<script type="application/json" id="board-data">{"votes":{},"notes":{},"board":[]}</script>
 
-<script id="app">
-(function () {
+<script id="app">(function () {
   "use strict";
 
   var PAGE = document.getElementById("page");
   var STATIC_BODY = PAGE.outerHTML;           // captured pristine, before hydration
-  var TITLE = "Splish Splash Speedrun";
-  var NAME_KEY = "ss-speedrun-name";
-  var PENDING_KEY = "ss-speedrun-pending";
+  var TITLE = "Seven at Splish Splash";
+  var ME_KEY = "ss-crew-me";
+  var PENDING_KEY = "ss-crew-pending";
+
+  /* ---------- the crew ---------- */
+
+  var PEOPLE = [
+    { id: "pira",    name: "Pira",     in: 73, sh: 22, skin: "#8A5A3B", hair: "#120C0C", cut: "buzz",   fit: "#0E9FB8" },
+    { id: "hyojoon", name: "Hyo Joon", in: 69, sh: 16, skin: "#F0C9A0", hair: "#15111A", cut: "swept",  fit: "#FFC531" },
+    { id: "peter",   name: "Peter",    in: 69, sh: 19, skin: "#EEC49E", hair: "#121012", cut: "part",   fit: "#FF8A6B" },
+    { id: "elton",   name: "Elton",    in: 66, sh: 28, skin: "#E3B183", hair: "#141014", cut: "spiky",  fit: "#1B4E6B" },
+    { id: "ryan",    name: "Ryan",     in: 66, sh: 24, skin: "#EFC7A0", hair: "#141014", cut: "fringe", fit: "#37B6A0" },
+    { id: "vanessa", name: "Vanessa",  in: 63, sh: 15, skin: "#F3CFA8", hair: "#181218", cut: "long",   fit: "#FF5B2E", suit: "one" },
+    { id: "plusone", name: "+1",       in: 68, sh: 19, skin: "#A8BEC4", hair: "#6B8794", cut: "cap",    fit: "#5B7B82", ghost: true }
+  ];
+  var PHOTOS = {"hyojoon": "data:image/jpeg;base64,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","pira": "data:image/jpeg;base64,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"};
+  PEOPLE.forEach(function (p) { if (PHOTOS[p.id]) p.photo = PHOTOS[p.id]; });
+
+  var BY_ID = {};
+  PEOPLE.forEach(function (p) { BY_ID[p.id] = p; });
+
+  var UID = 0;
+
+  function shade(hex, f) {
+    var n = parseInt(hex.slice(1), 16);
+    var r = Math.min(255, Math.round(((n >> 16) & 255) * f));
+    var g = Math.min(255, Math.round(((n >> 8) & 255) * f));
+    var b = Math.min(255, Math.round((n & 255) * f));
+    return "rgb(" + r + "," + g + "," + b + ")";
+  }
+
+  /* hair: a full cap with the face shape laid back over it, so the hairline reads */
+  function hair(p, cx, cy, r) {
+    var k = r / 15, cut = p.cut;
+    var f = {
+      buzz:   { dy: 1.6, rx: 1.3, ry: 2.2 },
+      spiky:  { dy: 2.6, rx: 1.4, ry: 3.2 },
+      swept:  { dy: 2.6, rx: 1.4, ry: 3.0 },
+      part:   { dy: 2.4, rx: 1.4, ry: 3.0 },
+      fringe: { dy: 3.4, rx: 1.5, ry: 4.2 },
+      long:   { dy: 2.8, rx: 1.6, ry: 3.4 },
+      cap:    { dy: 2.6, rx: 1.4, ry: 3.4 }
+    }[cut];
+    var s = "";
+
+    if (cut === "long") {
+      s += '<path d="M' + (cx - r - 0.4) + " " + (cy + 1 * k) + "q-2 " + (15 * k) + " 1.2 " + (23 * k) +
+           "q" + (4.4 * k) + " -2.4 " + (3.2 * k) + " -" + (23 * k) + " z" +
+           "M" + (cx + r + 0.4) + " " + (cy + 1 * k) + "q2 " + (15 * k) + " -1.2 " + (23 * k) +
+           "q-" + (4.4 * k) + " -2.4 -" + (3.2 * k) + " -" + (23 * k) + ' z" fill="' + p.hair + '"/>';
+    } else if (cut === "spiky") {
+      s += '<path d="M' + (cx - 11 * k) + " " + (cy - 11 * k) + "l1.8-7 3.2 7.4 3.2-9.6 3.2 9.6 3.2-7 2 7z" +
+           '" fill="' + p.hair + '"/>';
+    }
+
+    s += '<circle cx="' + cx + '" cy="' + cy + '" r="' + (r + 0.7) + '" fill="' + p.hair + '"/>';
+    s += '<ellipse cx="' + cx + '" cy="' + (cy + f.dy * k) + '" rx="' + (r - f.rx) + '" ry="' + (r - f.ry) +
+         '" fill="' + p.skin + '"/>';
+
+    if (cut === "swept") {
+      s += '<path d="M' + (cx - r + 1) + " " + (cy - 1 * k) + "q5-6.5 13-5 5 1 6 4.4-6-2.4-11-1t-8 3.4z" +
+           '" fill="' + p.hair + '"/>';
+    } else if (cut === "part") {
+      s += '<path d="M' + (cx + 3 * k) + " " + (cy - 9 * k) + "q-1.4 5.5-6 8.5 6 .6 9-4z" +
+           '" fill="' + p.hair + '"/>';
+    } else if (cut === "cap") {
+      s += '<path d="M' + (cx - r - 2 * k) + " " + (cy - 1.5 * k) + "h" + (r + 2 * k) + "v" + (3 * k) +
+           "h-" + (r + 2 * k) + ' z" fill="' + shade(p.hair, 0.85) + '"/>';
+    }
+    return s;
+  }
+
+  /* big cute face — eyes, highlights, blush, smile */
+  function face(p, cx, cy, r) {
+    var k = r / 15;
+    var eyeX = 5.4 * k, eyeY = cy + 2.4 * k;
+    var ink = "#2B2429";
+    var s = "";
+    s += '<ellipse cx="' + (cx - eyeX) + '" cy="' + eyeY + '" rx="' + (2.9 * k) + '" ry="' + (3.4 * k) + '" fill="' + ink + '"/>';
+    s += '<ellipse cx="' + (cx + eyeX) + '" cy="' + eyeY + '" rx="' + (2.9 * k) + '" ry="' + (3.4 * k) + '" fill="' + ink + '"/>';
+    s += '<circle cx="' + (cx - eyeX + 1.1 * k) + '" cy="' + (eyeY - 1.2 * k) + '" r="' + (1.05 * k) + '" fill="#fff"/>';
+    s += '<circle cx="' + (cx + eyeX + 1.1 * k) + '" cy="' + (eyeY - 1.2 * k) + '" r="' + (1.05 * k) + '" fill="#fff"/>';
+    s += '<ellipse cx="' + (cx - 10 * k) + '" cy="' + (cy + 6.6 * k) + '" rx="' + (2.8 * k) + '" ry="' + (1.9 * k) + '" fill="#FF7A6B" opacity=".38"/>';
+    s += '<ellipse cx="' + (cx + 10 * k) + '" cy="' + (cy + 6.6 * k) + '" rx="' + (2.8 * k) + '" ry="' + (1.9 * k) + '" fill="#FF7A6B" opacity=".38"/>';
+    s += '<path d="M' + (cx - 3.2 * k) + " " + (cy + 8 * k) + "q" + (3.2 * k) + " " + (3.4 * k) + " " + (6.4 * k) +
+         ' 0" fill="none" stroke="' + ink + '" stroke-width="' + (1.5 * k) + '" stroke-linecap="round"/>';
+    return s;
+  }
+
+  /* head: a photo if we have one, otherwise the drawn face */
+  function head(p, cx, cy, r) {
+    var id = "hd" + (++UID);
+    var s = '<circle cx="' + cx + '" cy="' + cy + '" r="' + (r + 1.4) + '" fill="' +
+            (p.photo ? p.fit : shade(p.skin, 0.82)) + '"/>';
+    if (p.photo) {
+      s += '<clipPath id="' + id + '"><circle cx="' + cx + '" cy="' + cy + '" r="' + r + '"/></clipPath>';
+      s += '<image href="' + p.photo + '" x="' + (cx - r) + '" y="' + (cy - r) + '" width="' + (2 * r) +
+           '" height="' + (2 * r) + '" preserveAspectRatio="xMidYMid slice" clip-path="url(#' + id + ')"/>';
+    } else {
+      s += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="' + p.skin + '"/>';
+      s += hair(p, cx, cy, r);
+      s += face(p, cx, cy, r);
+    }
+    return s;
+  }
+
+  /* bobblehead figure on a 48x104 grid, standing on the baseline */
+  function figure(p, px) {
+    var tallest = 73, shortest = 63;
+    var cx = 24, base = 100, r = 15;
+    var bodyH = 29 + ((p.in - shortest) / (tallest - shortest)) * 13;   // 29..42
+    var cy = base - bodyH - r + 3;
+    var torsoTop = cy + r - 4;
+    var torsoH = bodyH * 0.54;
+    var torsoBot = torsoTop + torsoH;
+    var w = Math.max(11, p.sh * 0.72);
+    var legLen = base - torsoBot - 1.5;
+    var legW = Math.max(4.6, w * 0.3);
+    var limb = shade(p.skin, 0.8);
+    var g = p.ghost ? ' opacity=".68"' : "";
+
+    var s = '<svg viewBox="0 0 48 104" width="' + (px * 48 / 104).toFixed(1) + '" height="' + px +
+            '" role="img" aria-label="' + p.name + '"' + g + ">";
+    // legs + little feet
+    s += '<rect x="' + (cx - w * 0.3 - legW / 2) + '" y="' + torsoBot + '" width="' + legW + '" height="' + legLen +
+         '" rx="' + (legW / 2) + '" fill="' + p.skin + '"/>';
+    s += '<rect x="' + (cx + w * 0.3 - legW / 2) + '" y="' + torsoBot + '" width="' + legW + '" height="' + legLen +
+         '" rx="' + (legW / 2) + '" fill="' + limb + '"/>';
+    s += '<ellipse cx="' + (cx - w * 0.3) + '" cy="' + (base - 1) + '" rx="' + (legW * 0.8) + '" ry="1.8" fill="' + limb + '"/>';
+    s += '<ellipse cx="' + (cx + w * 0.3) + '" cy="' + (base - 1) + '" rx="' + (legW * 0.8) + '" ry="1.8" fill="' + limb + '"/>';
+    // stubby arms, angled out, with little hands
+    var armLen = torsoH * 0.95, armW = 5;
+    [[-1, -13], [1, 13]].forEach(function (a) {
+      var sx = cx + a[0] * (w / 2 + armW * 0.72);
+      s += '<g transform="rotate(' + a[1] + " " + sx + " " + (torsoTop + 3) + ')">' +
+        '<rect x="' + (sx - armW / 2) + '" y="' + (torsoTop + 1) + '" width="' + armW + '" height="' + armLen +
+        '" rx="' + (armW / 2) + '" fill="' + limb + '"/>' +
+        '<circle cx="' + sx + '" cy="' + (torsoTop + 1 + armLen) + '" r="' + (armW * 0.62) + '" fill="' + p.skin + '"/>' +
+        "</g>";
+    });
+    // torso
+    s += '<rect x="' + (cx - w / 2) + '" y="' + torsoTop + '" width="' + w + '" height="' + (torsoH + 2) +
+         '" rx="' + (w * 0.34) + '" fill="' + p.skin + '"/>';
+    // swimwear
+    if (p.suit === "one") {
+      s += '<rect x="' + (cx - w / 2 + 0.8) + '" y="' + (torsoTop + torsoH * 0.28) + '" width="' + (w - 1.6) +
+           '" height="' + (torsoH * 0.78) + '" rx="' + (w * 0.26) + '" fill="' + p.fit + '"/>';
+    } else {
+      s += '<rect x="' + (cx - w / 2 - 0.8) + '" y="' + (torsoBot - torsoH * 0.42) + '" width="' + (w + 1.6) +
+           '" height="' + (torsoH * 0.5 + 2) + '" rx="' + (w * 0.2) + '" fill="' + p.fit + '"/>';
+      s += '<rect x="' + (cx - 0.6) + '" y="' + (torsoBot - torsoH * 0.1) + '" width="1.2" height="' + (torsoH * 0.22) +
+           '" fill="' + shade(p.fit, 0.78) + '"/>';
+    }
+    s += head(p, cx, cy, r);
+    return s + "</svg>";
+  }
+
+  /* head-only token */
+  function token(p, px) {
+    var cx = 14, cy = 14.6, r = 11.2;
+    var g = p.ghost ? ' opacity=".78"' : "";
+    return '<svg class="tok" viewBox="0 0 28 28" width="' + px + '" height="' + px +
+      '" role="img" aria-label="' + p.name + '"' + g + '>' +
+      '<circle cx="14" cy="14" r="14" fill="' + p.fit + '" opacity=".24"/>' +
+      head(p, cx, cy, r) + "</svg>";
+  }
+
+  /* ---------- state ---------- */
 
   var dataEl = document.getElementById("board-data");
   var state;
   try { state = JSON.parse(dataEl.textContent || "{}"); } catch (e) { state = {}; }
-  state.hype = state.hype || {};
+  state.votes = state.votes || {};
   state.notes = state.notes || {};
   state.board = state.board || [];
 
-  var api = null;
-  var writable = false;
+  var api = null, writable = false;
   var chip = document.getElementById("status-chip");
+  var picker = document.getElementById("picker");
 
-  function setChip(stateName, text) {
-    chip.setAttribute("data-state", stateName);
-    chip.textContent = text;
-  }
+  function setChip(s, t) { chip.setAttribute("data-state", s); chip.textContent = t; }
+  function myId() { try { return localStorage.getItem(ME_KEY) || ""; } catch (e) { return ""; } }
+  function setMe(id) { try { localStorage.setItem(ME_KEY, id); } catch (e) {} }
+  function nameOf(id) { return BY_ID[id] ? BY_ID[id].name : "Someone"; }
 
-  function myName() {
-    try { return localStorage.getItem(NAME_KEY) || ""; } catch (e) { return ""; }
-  }
-  function rememberName(n) {
-    try { localStorage.setItem(NAME_KEY, n); } catch (e) {}
-  }
-  var whoField = document.getElementById("who");
-  whoField.value = myName();
-  whoField.addEventListener("input", function () {
-    rememberName(whoField.value.trim().slice(0, 24));
-    paintAll();
-  });
-
-  function askName() {
-    var n = whoField.value.trim().slice(0, 24);
-    if (n) { rememberName(n); return n; }
-    whoField.classList.add("nudge");
-    whoField.focus();
-    setTimeout(function () { whoField.classList.remove("nudge"); }, 1600);
+  function askMe() {
+    var id = myId();
+    if (id && BY_ID[id]) return id;
+    picker.classList.add("nudge");
+    picker.scrollIntoView({ block: "center", behavior: "smooth" });
+    setTimeout(function () { picker.classList.remove("nudge"); }, 1800);
     return "";
   }
 
   function clock(ts) {
-    var d = new Date(ts);
-    var h = d.getHours();
-    var m = String(d.getMinutes()).padStart(2, "0");
-    var ap = h >= 12 ? "pm" : "am";
-    h = h % 12 || 12;
+    var d = new Date(ts), h = d.getHours(), m = String(d.getMinutes()).padStart(2, "0");
+    var ap = h >= 12 ? "pm" : "am"; h = h % 12 || 12;
     return h + ":" + m + ap;
   }
-
   function esc(s) {
     return String(s).replace(/[&<>"]/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
     });
   }
 
-  /* ---------- rendering ---------- */
+  /* ---------- build the crew UI ---------- */
 
-  document.querySelectorAll(".card[data-ride]").forEach(function (card) {
-    var id = card.getAttribute("data-ride");
+  document.getElementById("crew").innerHTML = PEOPLE.map(function (p) {
+    return '<div class="person' + (p.ghost ? " person--ghost" : "") + '">' +
+      figure(p, 128) + '<span class="nm">' + p.name + "</span></div>";
+  }).join("");
+
+  picker.innerHTML = PEOPLE.map(function (p) {
+    return '<button type="button" data-me="' + p.id + '" aria-pressed="false" title="' + p.name + '">' +
+      token(p, 34) + "</button>";
+  }).join("");
+
+  document.querySelectorAll("[data-split]").forEach(function (host) {
+    var per = parseInt(host.getAttribute("data-split"), 10);
+    var groups = [], left = PEOPLE.length;
+    while (left > 0) { groups.push(Math.min(per, left)); left -= per; }
+    var i = 0;
+    var rafts = groups.map(function (n) {
+      var heads = "";
+      for (var k = 0; k < n; k++) { heads += token(PEOPLE[i % PEOPLE.length], 22); i++; }
+      return '<span class="raft">' + heads + "</span>";
+    }).join("");
+    var box = document.createElement("div");
+    box.className = "split-crew";
+    box.innerHTML = '<p class="cap">Seven of us · ' + groups.join(" + ") + '</p><div class="rafts">' + rafts + "</div>";
+    host.append(box);
+  });
+
+  /* ---------- threads ---------- */
+
+  document.querySelectorAll("[data-thread]").forEach(function (host) {
+    if (host.classList.contains("board")) return;
     var bar = document.createElement("div");
     bar.className = "bar";
-    bar.innerHTML =
-      '<button type="button" class="act" data-act="hype" aria-pressed="false">I’m in <span class="n">0</span></button>' +
-      '<button type="button" class="act" data-act="notes" aria-expanded="false">Notes <span class="n">0</span></button>';
-    var riders = document.createElement("div");
-    riders.className = "riders";
+    bar.innerHTML = '<button type="button" class="act" data-act="notes" aria-expanded="false">Notes <span class="n">0</span></button>';
     var thread = document.createElement("div");
     thread.className = "thread";
     thread.hidden = true;
-    thread.innerHTML =
-      '<ul class="msgs"></ul>' +
-      '<form class="add"><input type="text" name="text" maxlength="240" placeholder="Note for the crew" autocomplete="off"><button type="submit">Post</button></form>';
-    card.append(bar, riders, thread);
-    paintRide(card, id);
+    thread.innerHTML = '<ul class="msgs"></ul><form class="add"><input type="text" maxlength="240" placeholder="Note for the crew" autocomplete="off"><button type="submit">Post</button></form>';
+    host.append(bar, thread);
   });
 
-  function paintRide(card, id) {
-    var voters = state.hype[id] || [];
-    var notes = state.notes[id] || [];
-    var me = myName();
-    var hypeBtn = card.querySelector('[data-act="hype"]');
-    hypeBtn.querySelector(".n").textContent = voters.length;
-    hypeBtn.setAttribute("aria-pressed", me && voters.indexOf(me) > -1 ? "true" : "false");
-    card.querySelector('[data-act="notes"] .n').textContent = notes.length;
-    card.querySelector(".riders").innerHTML = voters
-      .map(function (v) { return '<span class="rider">' + esc(v) + "</span>"; })
-      .join("");
-    paintMsgs(card.querySelector(".thread .msgs"), notes, "No notes yet.");
-  }
-
   function paintMsgs(ul, list, emptyText) {
-    if (!list.length) {
-      ul.innerHTML = '<li class="empty">' + emptyText + "</li>";
-      return;
-    }
-    ul.innerHTML = list
-      .map(function (m) {
-        return "<li><span class=\"who\">" + esc(m.who) + "</span>" +
-          '<span class="when">' + clock(m.ts) + "</span><br>" + esc(m.text) + "</li>";
-      })
-      .join("");
+    if (!ul) return;
+    if (!list.length) { ul.innerHTML = '<li class="empty">' + emptyText + "</li>"; return; }
+    ul.innerHTML = list.map(function (m) {
+      return '<li><span class="who">' + esc(nameOf(m.who)) + '</span><span class="when">' +
+        clock(m.ts) + "</span><br>" + esc(m.text) + "</li>";
+    }).join("");
   }
 
-  function paintBoard() {
-    paintMsgs(document.querySelector('.msgs[data-board="1"]'), state.board, "Nothing on the board yet.");
-  }
-
-  function paintAll() {
-    document.querySelectorAll(".card[data-ride]").forEach(function (card) {
-      paintRide(card, card.getAttribute("data-ride"));
+  function paintThreads() {
+    document.querySelectorAll("[data-thread]").forEach(function (host) {
+      var key = host.getAttribute("data-thread");
+      var list = state.notes[key] || [];
+      var btn = host.querySelector('[data-act="notes"]');
+      if (btn) btn.querySelector(".n").textContent = list.length;
+      if (key === "board") paintMsgs(host.querySelector(".msgs"), state.board, "Nothing here yet.");
+      else paintMsgs(host.querySelector(".thread .msgs"), list, "No notes yet.");
     });
-    paintBoard();
   }
 
-  paintBoard();
+  /* ---------- votes ---------- */
+
+  function paintPicker() {
+    var me = myId();
+    picker.querySelectorAll("button").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-me") === me));
+    });
+  }
+
+  function paintVotes() {
+    var me = myId();
+    document.querySelectorAll("[data-vs]").forEach(function (card) {
+      var picks = state.votes[card.getAttribute("data-vs")] || {};
+      var a = [], b = [];
+      Object.keys(picks).forEach(function (id) { (picks[id] === "a" ? a : b).push(id); });
+      var total = a.length + b.length;
+      var pct = total ? Math.round((a.length / total) * 100) : 50;
+
+      card.querySelectorAll(".side").forEach(function (side) {
+        var s = side.getAttribute("data-side");
+        var mine = me && picks[me] === s;
+        side.setAttribute("data-picked", mine ? "yes" : "no");
+        side.querySelector(".vote").textContent = mine ? "Your pick" : "Pick this";
+        side.querySelector(".voters").innerHTML = (s === "a" ? a : b).map(function (id) {
+          return BY_ID[id] ? token(BY_ID[id], 26) : "";
+        }).join("");
+      });
+
+      card.querySelector(".split .fa").style.width = (total ? pct : 50) + "%";
+      card.querySelector(".split .fb").style.width = (total ? 100 - pct : 50) + "%";
+      card.querySelectorAll(".tally-line b")[0].textContent = a.length;
+      card.querySelectorAll(".tally-line b")[1].textContent = b.length;
+    });
+  }
+
+  function paintAll() { paintPicker(); paintVotes(); paintThreads(); }
+  paintAll();
 
   /* ---------- ops ---------- */
 
   function apply(op) {
-    if (op.kind === "hype") {
-      var v = state.hype[op.ride] || [];
-      var i = v.indexOf(op.who);
-      if (i > -1) v.splice(i, 1); else v.push(op.who);
-      state.hype[op.ride] = v;
+    if (op.kind === "vote") {
+      var picks = state.votes[op.vs] || {};
+      if (picks[op.who] === op.side) delete picks[op.who];
+      else picks[op.who] = op.side;
+      state.votes[op.vs] = picks;
     } else if (op.kind === "note") {
-      var list = state.notes[op.ride] || [];
+      var list = state.notes[op.key] || [];
       list.push({ who: op.who, text: op.text, ts: op.ts });
-      state.notes[op.ride] = list.slice(-40);
+      state.notes[op.key] = list.slice(-40);
     } else if (op.kind === "board") {
       state.board.push({ who: op.who, text: op.text, ts: op.ts });
       state.board = state.board.slice(-60);
@@ -980,10 +1124,8 @@ footer a { color: var(--pool-dk); }
   function goReadOnly(why) {
     writable = false;
     setChip("read", why);
-    document.querySelectorAll(".add input, .add button, [data-act='hype']").forEach(function (el) {
-      el.disabled = true;
-    });
-    whoField.disabled = true;
+    document.querySelectorAll(".add input, .add button, button.vote, .picker button")
+      .forEach(function (el) { el.disabled = true; });
     document.querySelectorAll(".add input").forEach(function (el) {
       el.placeholder = "Read-only view — use the comment button instead";
     });
@@ -992,53 +1134,55 @@ footer a { color: var(--pool-dk); }
   function save(op) {
     if (!api) return;
     setChip("live", "Saving…");
-    api.publish(buildDoc()).then(
-      function () { setChip("live", "Saved for the group"); },
-      function (err) {
-        var code = (err && err.code) || "upstream_error";
-        if (code === "conflict") {
-          try { sessionStorage.setItem(PENDING_KEY, JSON.stringify(op)); } catch (e) {}
-          setChip("live", "Someone else posted — merging…");
-        } else if (code === "not_writer" || code === "not_granted" ||
-                   code === "not_declared" || code === "capability_disabled" ||
-                   code === "capability_removed" || code === "consent_required") {
-          goReadOnly("Read-only view — comment instead");
-        } else if (code === "rate_limited") {
-          setChip("read", "Too fast — wait a moment");
-        } else {
-          setChip("read", "Didn’t save — try again");
-        }
+    api.publish(buildDoc()).then(function () {
+      setChip("live", "Saved for the group");
+    }, function (err) {
+      var code = (err && err.code) || "upstream_error";
+      if (code === "conflict") {
+        try { sessionStorage.setItem(PENDING_KEY, JSON.stringify(op)); } catch (e) {}
+        setChip("live", "Someone else voted — merging…");
+      } else if (code === "not_writer" || code === "not_granted" || code === "not_declared" ||
+                 code === "capability_disabled" || code === "capability_removed" || code === "consent_required") {
+        goReadOnly("Read-only view — comment instead");
+      } else if (code === "rate_limited") {
+        setChip("read", "Too fast — wait a moment");
+      } else {
+        setChip("read", "Didn’t save — try again");
       }
-    );
+    });
   }
 
-  function commit(op) {
-    apply(op);
-    paintAll();
-    save(op);
-  }
+  function commit(op) { apply(op); paintAll(); save(op); }
 
   /* ---------- interaction ---------- */
 
   document.addEventListener("click", function (ev) {
-    var btn = ev.target.closest("button.act");
-    if (!btn) return;
-    var card = btn.closest(".card");
-    var act = btn.getAttribute("data-act");
-
-    if (act === "notes") {
-      var thread = card.querySelector(".thread");
-      thread.hidden = !thread.hidden;
-      btn.setAttribute("aria-expanded", String(!thread.hidden));
-      if (!thread.hidden) card.querySelector(".thread input").focus();
+    var meBtn = ev.target.closest(".picker button");
+    if (meBtn) {
+      setMe(meBtn.getAttribute("data-me"));
+      paintAll();
       return;
     }
-
-    if (act === "hype") {
+    var voteBtn = ev.target.closest("button.vote");
+    if (voteBtn) {
       if (!writable) return;
-      var who = askName();
+      var who = askMe();
       if (!who) return;
-      commit({ kind: "hype", ride: card.getAttribute("data-ride"), who: who });
+      commit({
+        kind: "vote",
+        vs: voteBtn.closest("[data-vs]").getAttribute("data-vs"),
+        side: voteBtn.getAttribute("data-side"),
+        who: who
+      });
+      return;
+    }
+    var notesBtn = ev.target.closest('[data-act="notes"]');
+    if (notesBtn) {
+      var host = notesBtn.closest("[data-thread]");
+      var thread = host.querySelector(".thread");
+      thread.hidden = !thread.hidden;
+      notesBtn.setAttribute("aria-expanded", String(!thread.hidden));
+      if (!thread.hidden) thread.querySelector("input").focus();
     }
   });
 
@@ -1050,18 +1194,12 @@ footer a { color: var(--pool-dk); }
     var input = form.querySelector("input");
     var text = input.value.trim();
     if (!text) return;
-    var who = askName();
+    var who = askMe();
     if (!who) return;
     input.value = "";
-    if (form.getAttribute("data-board")) {
-      commit({ kind: "board", who: who, text: text, ts: Date.now() });
-    } else {
-      commit({
-        kind: "note",
-        ride: form.closest(".card").getAttribute("data-ride"),
-        who: who, text: text, ts: Date.now()
-      });
-    }
+    var key = form.closest("[data-thread]").getAttribute("data-thread");
+    if (key === "board") commit({ kind: "board", who: who, text: text, ts: Date.now() });
+    else commit({ kind: "note", key: key, who: who, text: text, ts: Date.now() });
   });
 
   /* ---------- capability ---------- */
@@ -1080,10 +1218,9 @@ footer a { color: var(--pool-dk); }
 
   if (window.claude && typeof window.claude.use === "function") {
     setChip("checking", "Connecting…");
-    window.claude.use("artifact").then(
-      function (a) { if (a) boot(a); else goReadOnly("Read-only view — comment instead"); },
-      function () { goReadOnly("Offline — comment instead"); }
-    );
+    window.claude.use("artifact").then(function (a) {
+      if (a) boot(a); else goReadOnly("Read-only view — comment instead");
+    }, function () { goReadOnly("Offline — comment instead"); });
   } else {
     goReadOnly("Preview — open the link to post");
   }
