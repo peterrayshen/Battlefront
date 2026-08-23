@@ -1,0 +1,1078 @@
+<title>Splish Splash Speedrun</title>
+
+<style id="app-css">
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Bungee&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body, h1, h2, h3, h4, p, ul, ol, li, figure, form { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+img { max-width: 100%; display: block; }
+button, input { font: inherit; color: inherit; }
+
+:root {
+  --foam:    #EDF5F3;
+  --tile:    #FFFFFF;
+  --tile-2:  #E3EFEE;
+  --line:    #C9E0DE;
+  --deep:    #08272F;
+  --mist:    #5B7B82;
+  --pool:    #0E9FB8;
+  --pool-dk: #0B7E93;
+  --flare:   #FF5B2E;
+  --sun:     #FFC531;
+  --shadow:  0 1px 0 rgba(8,39,47,.06), 0 12px 28px -18px rgba(8,39,47,.55);
+  --rule:    1px solid var(--line);
+
+  --step:  clamp(1.05rem, .96rem + .38vw, 1.18rem);
+  --h1:    clamp(2.6rem, 1.5rem + 5.2vw, 5.4rem);
+  --h2:    clamp(1.5rem, 1.15rem + 1.5vw, 2.15rem);
+  --h3:    clamp(1.22rem, 1.08rem + .6vw, 1.5rem);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --foam:   #05202A;
+    --tile:   #0A2D38;
+    --tile-2: #0E3A46;
+    --line:   #17454F;
+    --deep:   #E4F4F2;
+    --mist:   #8CB0B6;
+    --pool:   #2FC9DE;
+    --pool-dk:#7FE0EE;
+    --flare:  #FF7448;
+    --sun:    #FFD166;
+    --shadow: 0 1px 0 rgba(0,0,0,.3), 0 16px 30px -20px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"] {
+  --foam:   #05202A;
+  --tile:   #0A2D38;
+  --tile-2: #0E3A46;
+  --line:   #17454F;
+  --deep:   #E4F4F2;
+  --mist:   #8CB0B6;
+  --pool:   #2FC9DE;
+  --pool-dk:#7FE0EE;
+  --flare:  #FF7448;
+  --sun:    #FFD166;
+  --shadow: 0 1px 0 rgba(0,0,0,.3), 0 16px 30px -20px rgba(0,0,0,.9);
+}
+
+body {
+  background: var(--foam);
+  color: var(--deep);
+  font-family: 'Barlow', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: var(--step);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { width: min(100% - 2.2rem, 62rem); margin-inline: auto; }
+
+.label {
+  font-family: 'Barlow Condensed', 'Barlow Narrow', system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .13em;
+  font-weight: 600;
+  font-size: .8rem;
+}
+
+/* ---------- hero ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--deep);
+  color: var(--foam);
+  padding-block: clamp(2.4rem, 5vw, 4rem) clamp(2.2rem, 4vw, 3.2rem);
+  border-bottom: 6px solid var(--flare);
+}
+:root[data-theme="dark"] .hero, :root:not([data-theme="light"]) .hero { color: #E4F4F2; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .hero { background: #041820; } }
+:root[data-theme="dark"] .hero { background: #041820; }
+
+.hero::before {
+  content: "";
+  position: absolute; inset: -40% -10% auto -10%; height: 180%;
+  background:
+    radial-gradient(60% 40% at 20% 0%, rgba(14,159,184,.55), transparent 65%),
+    radial-gradient(50% 45% at 88% 18%, rgba(255,91,46,.30), transparent 70%);
+  animation: drift 26s ease-in-out infinite alternate;
+}
+.hero::after {
+  content: "";
+  position: absolute; inset: auto 0 0 0; height: 14px;
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,.16) 0 26px, transparent 26px 52px);
+}
+@keyframes drift { from { transform: translate3d(-3%,0,0) scale(1); } to { transform: translate3d(4%,2%,0) scale(1.08); } }
+@media (prefers-reduced-motion: reduce) { .hero::before { animation: none; } }
+
+.hero .wrap { position: relative; }
+.hero .label { color: var(--sun); }
+.hero h1 {
+  font-family: 'Bungee', 'Barlow Condensed', system-ui, sans-serif;
+  font-size: var(--h1);
+  line-height: .92;
+  letter-spacing: -.005em;
+  text-wrap: balance;
+  margin-block: .5rem .1rem;
+}
+.hero h1 em { font-style: normal; color: var(--sun); display: block; }
+.lede { max-width: 34em; margin-top: 1.1rem; font-size: 1.06em; color: rgba(237,245,243,.86); }
+.lede b { color: #fff; font-weight: 600; }
+
+.tallies { display: flex; flex-wrap: wrap; gap: 1.6rem; margin-top: 1.7rem; }
+.tally b {
+  display: block;
+  font-family: 'Bungee', system-ui, sans-serif;
+  font-size: 1.5rem;
+  color: var(--sun);
+  font-variant-numeric: tabular-nums;
+}
+.tally span { color: rgba(237,245,243,.7); }
+
+/* ---------- how-to strip ---------- */
+.howto {
+  background: var(--tile);
+  border-bottom: var(--rule);
+  padding-block: 1rem;
+}
+.howto .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem 1rem; }
+.howto p:first-child { flex: 1 1 18rem; }
+.howto p { color: var(--mist); font-size: .95rem; }
+.howto p b { color: var(--deep); font-weight: 600; }
+.whoami { color: var(--mist); margin-left: .4rem; }
+#who {
+  width: 8.5rem;
+  background: var(--foam);
+  border: var(--rule);
+  border-radius: 8px;
+  padding: .18rem .6rem;
+  font-size: .95rem;
+}
+#who::placeholder { color: var(--mist); }
+#who.nudge { border-color: var(--flare); box-shadow: 0 0 0 3px color-mix(in srgb, var(--flare) 22%, transparent); }
+
+#status-chip {
+  margin-left: auto;
+  border: 1px dashed var(--line);
+  border-radius: 999px;
+  padding: .2rem .8rem;
+  color: var(--mist);
+}
+#status-chip[data-state="live"] { border-style: solid; border-color: var(--pool); color: var(--pool-dk); }
+#status-chip[data-state="read"] { border-color: var(--flare); color: var(--flare); }
+
+/* ---------- route ---------- */
+main { padding-block: clamp(2rem, 4vw, 3.4rem) 1rem; }
+
+.block { margin-bottom: clamp(2.4rem, 4vw, 3.6rem); }
+.block-head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: .3rem 1rem;
+  padding-bottom: .7rem;
+  border-bottom: 2px solid var(--deep);
+  margin-bottom: 1.6rem;
+}
+.clock {
+  font-family: 'Bungee', system-ui, sans-serif;
+  font-size: 1.05rem;
+  color: var(--flare);
+  font-variant-numeric: tabular-nums;
+}
+.block-head h2 { font-size: var(--h2); line-height: 1.1; font-weight: 700; text-wrap: balance; }
+.block-head p { grid-column: 1 / -1; color: var(--mist); max-width: 60ch; }
+
+.stops { display: flex; flex-direction: column; gap: 1.1rem; }
+
+.stop { display: grid; grid-template-columns: 3.3rem 1fr; gap: 1rem; position: relative; }
+.lane { display: flex; flex-direction: column; align-items: center; gap: .5rem; }
+.num {
+  width: 3.3rem; height: 3.3rem;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--pool);
+  color: #04222A;
+  font-family: 'Bungee', system-ui, sans-serif;
+  font-size: 1.15rem;
+  font-variant-numeric: tabular-nums;
+  box-shadow: inset 0 -3px 0 rgba(0,0,0,.18);
+}
+.stop--flare .num { background: var(--flare); color: #2A0A02; }
+.flume {
+  flex: 1;
+  width: 10px;
+  border-radius: 5px;
+  background: repeating-linear-gradient(180deg, var(--line) 0 10px, transparent 10px 20px);
+}
+.stop:last-child .flume { display: none; }
+
+.card {
+  background: var(--tile);
+  border: var(--rule);
+  border-radius: 4px 16px 16px 4px;
+  border-left: 4px solid var(--pool);
+  box-shadow: var(--shadow);
+  padding: 1.1rem 1.2rem 1rem;
+}
+.stop--flare .card { border-left-color: var(--flare); }
+
+.card-head { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; }
+.card h3 { font-size: var(--h3); line-height: 1.15; font-weight: 700; }
+.chip {
+  border-radius: 999px;
+  padding: .12rem .62rem .18rem;
+  background: var(--tile-2);
+  color: var(--mist);
+  font-family: 'Barlow Condensed', system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-weight: 600;
+  font-size: .74rem;
+  white-space: nowrap;
+}
+.chip--thrill { background: color-mix(in srgb, var(--flare) 16%, transparent); color: var(--flare); }
+.chip--crew   { background: color-mix(in srgb, var(--pool) 18%, transparent); color: var(--pool-dk); }
+.chip--chill  { background: color-mix(in srgb, var(--sun) 26%, transparent); color: #7A5400; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .chip--chill { color: var(--sun); } }
+:root[data-theme="dark"] .chip--chill { color: var(--sun); }
+
+.why { margin-top: .55rem; max-width: 62ch; }
+.why em { font-style: italic; color: var(--mist); }
+
+.specs {
+  display: flex; flex-wrap: wrap; gap: .1rem 1.5rem;
+  margin-top: .8rem; padding-top: .7rem;
+  border-top: var(--rule);
+}
+.specs li { display: flex; align-items: baseline; gap: .45rem; }
+.specs dt, .specs .k {
+  font-family: 'Barlow Condensed', system-ui, sans-serif;
+  text-transform: uppercase; letter-spacing: .1em; font-weight: 600;
+  font-size: .76rem; color: var(--mist);
+}
+.specs .v { font-weight: 600; font-variant-numeric: tabular-nums; }
+
+.nerve { display: inline-flex; gap: 3px; transform: translateY(1px); }
+.nerve i { width: 9px; height: 14px; border-radius: 2px; background: var(--line); display: block; }
+.nerve i.on { background: var(--flare); }
+
+/* ---------- crew bar ---------- */
+.bar { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .9rem; }
+button.act {
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: .28rem .85rem;
+  font-family: 'Barlow Condensed', system-ui, sans-serif;
+  text-transform: uppercase; letter-spacing: .1em; font-weight: 600; font-size: .82rem;
+  color: var(--mist);
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+button.act:hover { border-color: var(--pool); color: var(--pool-dk); }
+button.act[aria-pressed="true"] { background: var(--flare); border-color: var(--flare); color: #fff; }
+button.act .n {
+  font-variant-numeric: tabular-nums;
+  margin-left: .4rem;
+  padding: 0 .38rem;
+  border-radius: 4px;
+  background: var(--tile-2);
+  color: var(--deep);
+}
+button.act[aria-pressed="true"] .n { background: rgba(255,255,255,.28); color: #fff; }
+button.act:disabled { opacity: .45; cursor: not-allowed; }
+:where(button, input, a):focus-visible { outline: 3px solid var(--pool); outline-offset: 2px; }
+
+.riders { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .6rem; }
+.rider {
+  font-family: 'Barlow Condensed', system-ui, sans-serif;
+  text-transform: uppercase; letter-spacing: .08em; font-size: .78rem; font-weight: 600;
+  background: color-mix(in srgb, var(--flare) 14%, transparent);
+  color: var(--flare);
+  border-radius: 4px; padding: .1rem .45rem;
+}
+
+.thread { margin-top: .9rem; border-top: var(--rule); padding-top: .8rem; }
+.thread[hidden] { display: none; }
+.msgs { display: flex; flex-direction: column; gap: .55rem; margin-bottom: .7rem; }
+.msgs li { font-size: .97rem; }
+.msgs .who { font-weight: 700; }
+.msgs .when { color: var(--mist); font-size: .8rem; margin-left: .4rem; font-variant-numeric: tabular-nums; }
+.msgs .empty { color: var(--mist); font-style: italic; }
+.add { display: flex; gap: .5rem; flex-wrap: wrap; }
+.add input {
+  flex: 1 1 12rem;
+  background: var(--foam);
+  border: var(--rule);
+  border-radius: 8px;
+  padding: .45rem .7rem;
+}
+.add input::placeholder { color: var(--mist); }
+.add button {
+  cursor: pointer;
+  border: none; border-radius: 8px;
+  background: var(--deep); color: var(--foam);
+  padding: .45rem 1.1rem;
+  font-family: 'Barlow Condensed', system-ui, sans-serif;
+  text-transform: uppercase; letter-spacing: .1em; font-weight: 700;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .add button { background: var(--pool); color: #04222A; } }
+:root[data-theme="dark"] .add button { background: var(--pool); color: #04222A; }
+.add button:disabled { opacity: .45; cursor: not-allowed; }
+
+/* ---------- annex + brief ---------- */
+.panel {
+  background: var(--tile);
+  border: var(--rule);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: clamp(1.2rem, 3vw, 2rem);
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+.panel > h2 { font-size: var(--h2); line-height: 1.1; margin-bottom: .3rem; }
+.panel > .label { color: var(--flare); }
+.panel > p.intro { color: var(--mist); max-width: 60ch; margin-bottom: 1.3rem; }
+
+.mini { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; }
+.mini > li { border-left: 3px solid var(--pool); padding-left: .8rem; }
+.mini h4 { font-size: 1.05rem; font-weight: 700; }
+.mini p { font-size: .95rem; color: var(--mist); }
+
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 30rem; }
+th, td { text-align: left; padding: .5rem .7rem; border-bottom: var(--rule); }
+thead th {
+  font-family: 'Barlow Condensed', system-ui, sans-serif;
+  text-transform: uppercase; letter-spacing: .1em; font-size: .8rem; color: var(--mist);
+  border-bottom: 2px solid var(--deep);
+}
+td.h { font-variant-numeric: tabular-nums; font-weight: 700; }
+tbody tr:hover { background: var(--tile-2); }
+
+.checks { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .4rem 1.4rem; }
+.checks li { display: flex; gap: .6rem; align-items: baseline; }
+.checks li::before { content: ""; width: .7rem; height: .7rem; border: 2px solid var(--pool); border-radius: 3px; flex: none; }
+
+/* ---------- board ---------- */
+.board .msgs { margin-bottom: 1rem; }
+.board .msgs li { border-left: 3px solid var(--line); padding-left: .8rem; }
+
+footer {
+  border-top: var(--rule);
+  padding-block: 2rem 3rem;
+  color: var(--mist);
+  font-size: .9rem;
+}
+footer p { max-width: 62ch; margin-bottom: .6rem; }
+footer a { color: var(--pool-dk); }
+
+@media (max-width: 34rem) {
+  .stop { grid-template-columns: 1fr; gap: .5rem; }
+  .lane { flex-direction: row; align-items: center; gap: .8rem; }
+  .num { width: 2.6rem; height: 2.6rem; font-size: .95rem; }
+  .flume { flex: 1; width: auto; height: 8px; background: repeating-linear-gradient(90deg, var(--line) 0 10px, transparent 10px 20px); }
+  .stop:last-child .flume { display: block; }
+  .card { border-radius: 4px 12px 12px 4px; }
+}
+</style>
+
+<div id="page">
+
+<header class="hero">
+  <div class="wrap">
+    <p class="label">Sunday · August 23 · Calverton, Long Island</p>
+    <h1>Splish Splash <em>Speedrun</em></h1>
+    <p class="lede">Every ride in the park, put in the order we should actually do them &mdash; headliners while the lines are short, rafts once everyone's warmed up, waves when the sun is at its worst. <b>Tap "I'm in" on the ones you want</b> and leave notes so we're not relitigating the plan in the parking lot.</p>
+    <div class="tallies">
+      <div class="tally"><b>22</b><span class="label">Attractions</span></div>
+      <div class="tally"><b>8</b><span class="label">Timed blocks</span></div>
+      <div class="tally"><b>2</b><span class="label">Wave pools</span></div>
+      <div class="tally"><b>54"</b><span class="label">Tallest requirement</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="howto">
+  <div class="wrap">
+    <p><b>How this works:</b> everything you tap or post here saves to the page for the whole group.</p>
+    <label class="label whoami" for="who">Posting as</label>
+    <input id="who" type="text" maxlength="24" placeholder="your name" autocomplete="off" spellcheck="false">
+    <p class="label" id="status-chip" data-state="checking">Connecting…</p>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <section class="block">
+    <div class="block-head">
+      <p class="clock">10:00</p>
+      <h2>Gates open: burn the big three first</h2>
+      <p>These three eat the longest lines by noon and all three are 48&Prime;-and-up, so do them while the park is still filling in. Walk right, not left &mdash; most people drift toward the wave pool first.</p>
+    </div>
+    <ol class="stops">
+
+      <li class="stop stop--flare">
+        <div class="lane"><span class="num">01</span><span class="flume"></span></div>
+        <div class="card" data-ride="bootleggers">
+          <div class="card-head"><h3>Bootlegger's Run</h3><span class="chip chip--thrill">Water coaster</span></div>
+          <p class="why">New York's only hydromagnetic water coaster: a four-person inline raft that gets blasted <em>uphill</em> between drops, the biggest of them from nearly five stories. It's the single best ride in the park and the line only gets worse &mdash; this is stop one, no debate.</p>
+          <ul class="specs">
+            <li><span class="k">Height</span><span class="v">48&Prime;</span></li>
+            <li><span class="k">Crew</span><span class="v">2&ndash;4 per raft</span></li>
+            <li><span class="k">Nerve</span><span class="nerve" data-nerve="4"></span></li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="stop stop--flare">
+        <div class="lane"><span class="num">02</span><span class="flume"></span></div>
+        <div class="card" data-ride="bombs-away">
+          <div class="card-head"><h3>Bombs Away</h3><span class="chip chip--thrill">Drop capsule</span></div>
+          <p class="why">You stand in a capsule 50 feet up, the floor opens, and you're gone &mdash; roughly 26 feet per second down 300 feet of slide, racing whoever's dumb enough to stand in the capsule next to you. <em>Best photo op of the day, if someone stays at the bottom.</em></p>
+          <ul class="specs">
+            <li><span class="k">Height</span><span class="v">48&Prime;</span></li>
+            <li><span class="k">Format</span><span class="v">Side-by-side racer</span></li>
+            <li><span class="k">Nerve</span><span class="nerve" data-nerve="5"></span></li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="stop stop--flare">
+        <div class="lane"><span class="num">03</span><span class="flume"></span></div>
+        <div class="card" data-ride="riptide-racer">
+          <div class="card-head"><h3>Riptide Racer</h3><span class="chip chip--thrill">Mat racer</span></div>
+          <p class="why">Four lanes, head-first, face down on a mat. The only ride here where the whole group settles something at once, so pick your bragging rights before you climb the stairs.</p>
+          <ul class="specs">
+            <li><span class="k">Height</span><span class="v">48&Prime;</span></li>
+            <li><span class="k">Lanes</span><span class="v">4 abreast</span></li>
+            <li><span class="k">Nerve</span><span class="nerve" data-nerve="3"></span></li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <p class="clock">11:30</p>
+      <h2>The dark block</h2>
+      <p>Three enclosed rides in a row. If anyone in the group hates the pitch-black tubes, this is the stretch to sit out &mdash; send them to the Lazy River and regroup at noon.</p>
+    </div>
+    <ol class="stops">
+
+      <li class="stop">
+        <div class="lane"><span class="num">04</span><span class="flume"></span></div>
+        <div class="card" data-ride="von-dark">
+          <div class="card-head"><h3>Dr. Von Dark's Tunnel of Terror</h3><span class="chip chip--thrill">Dark funnel</span></div>
+          <p class="why">Pitch-dark tube into a 40-foot drop, then a wall you scale sideways before gravity takes it back. You cannot see any of it coming, which is the entire point.</p>
+          <ul class="specs">
+            <li><span class="k">Height</span><span class="v">Posted at ride</span></li>
+            <li><span class="k">Lights</span><span class="v">None</span></li>
+            <li><span class="k">Nerve</span><span class="nerve" data-nerve="5"></span></li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="stop">
+        <div class="lane"><span class="num">05</span><span class="flume"></span></div>
+        <div class="card" data-ride="alien-invasion">
+          <div class="card-head"><h3>Alien Invasion</h3><span class="chip chip--thrill">Tornado funnel</span></div>
+          <p class="why">Dark tube feeding a giant funnel &mdash; you oscillate up one wall, hang for a beat, and drop out the bottom. Heavier rafts swing higher, so load up.</p>
+          <ul class="specs">
+            <li><span class="k">Height</span><span class="v">48&Prime;</span></li>
+            <li><span class="k">Ride</span><span class="v">Shared tube</span></li>
+            <li><span class="k">Nerve</span><span class="nerve" data-nerve="4"></span></li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="stop">
+        <div class="lane"><span class="num">06</span><span class="flume"></span></div>
+        <div class="card" data-ride="hyperlight">
+          <div class="card-head"><h3>Hyperlight</h3><span class="chip chip--thrill">Light &amp; sound</span></div>
+          <p class="why">The old Abyss, rebuilt as a fully enclosed tube with synced light and music &mdash; the water moves with the sound. Ride it single if you want the effects, double if you want to yell about them.</p>
+          <ul class="specs">
+            <li><span class="k">Height</span><span class="v">Posted at ride</span></li>
+            <li><span class="k">Ride</span><span class="v">Single or double tube</span></li>
+            <li><span class="k">Nerve</span><span class="nerve" data-nerve="3"></span></li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <p class="clock">12:45</p>
+      <h2>Food, then float</h2>
+      <p>Eat before the 1 o'clock crush, then do one full loop of the Lazy River to digest. This is the regroup point &mdash; anyone who wandered off finds us here.</p>
+    </div>
+    <ol class="stops">
+      <li class="stop">
+        <div class="lane"><span class="num">07</span><span class="flume"></span></div>
+        <div class="card" data-ride="lazy-river">
+          <div class="card-head"><h3>Lazy River</h3><span class="chip chip--chill">Float</span></div>
+          <p class="why">Tube loop with fountains and a wave stretch. Grab tubes as a block so nobody gets separated, and treat one lap as the official lunch recovery.</p>
+          <ul class="specs">
+            <li><span class="k">Height</span><span class="v">Posted at ride</span></li>
+            <li><span class="k">Lap</span><span class="v">One, minimum</span></li>
+            <li><span class="k">Nerve</span><span class="nerve" data-nerve="1"></span></li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <p class="clock">13:30</p>
+      <h2>The dares</h2>
+      <p>The three rides you have to talk yourself into. Cliff Diver has the tallest height requirement in the park at 54&Prime; &mdash; check that before anyone climbs eight stories of stairs.</p>
+    </div>
+    <ol class="stops">
+
+      <li class="stop stop--flare">
+        <div class="lane"><span class="num">08</span><span class="flume"></span></div>
+        <div class="card" data-ride="cliff-diver">
+          <div class="card-head"><h3>Cliff Diver</h3><span class="chip chip--thrill">Vertical drop</span></div>
+          <p class="why">Eight stories, straight down, no tube between you and the slide. The walk up is the hard part; the ride itself is over in about three seconds.</p>
+          <ul class="specs">
+            <li><span class="k">Height</span><span class="v">54&Prime;</span></li>
+            <li><span class="k">Drop</span><span class="v">8 stories</span></li>
+            <li><span class="k">Nerve</span><span class="nerve" data-nerve="5"></span></li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="stop stop--flare">
+        <div class="lane"><span class="num">09</span><span class="flume"></span></div>
+        <div class="card" data-ride="shotgun-falls">
+          <div class="card-head"><h3>Shotgun Falls</h3><span class="chip chip--thrill">Free fall</span></div>
+          <p class="why">A free-fall drop slide that dumps you into a ten-foot-deep pool. Cross your ankles, cross your arms, and be ready to swim on landing.</p>
+          <ul class="specs">
+            <li><span class="k">Height</span><span class="v">Posted at ride</span></li>
+            <li><span class="k">Landing</span><span class="v">10 ft deep</span></li>
+            <li><span class="k">Nerve</span><span class="nerve" data-nerve="5"></span></li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="stop">
+        <div class="lane"><span class="num">10</span><span class="flume"></span></div>
+        <div class="card" data-ride="max-trax">
+          <div class="card-head"><h3>Max Trax</h3><span class="chip chip--thrill">Speed slide</span></div>
+          <p class="why">Two speed slides, and the choice matters: 50 feet straight down, or the double hump that throws you off the mat for a second on the second bump. Take the hump.</p>
+          <ul class="specs">
+            <li><span class="k">Height</span><span class="v">42&Prime;</span></li>
+            <li><span class="k">Weight</span><span class="v">250 lb max</span></li>
+            <li><span class="k">Nerve</span><span class="nerve" data-nerve="4"></span></li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <p class="clock">14:30</p>
+      <h2>Crew rides &mdash; everybody in one boat</h2>
+      <p>Three raft rides you actually ride together, and the only block where the whole group ends up in the same photo. Mammoth River needs three to five people, so don't split up here.</p>
+    </div>
+    <ol class="stops">
+
+      <li class="stop">
+        <div class="lane"><span class="num">11</span><span class="flume"></span></div>
+        <div class="card" data-ride="mammoth-river">
+          <div class="card-head"><h3>Mammoth River</h3><span class="chip chip--crew">Family raft</span></div>
+          <p class="why">The big open raft &mdash; tame by this park's standards, which makes it the one everyone will do twice. Needs three to five riders, so it's the natural group ride.</p>
+          <ul class="specs">
+            <li><span class="k">Height</span><span class="v">48&Prime;</span></li>
+            <li><span class="k">Under 48&Prime;</span><span class="v">36&Prime;+ with an adult</span></li>
+            <li><span class="k">Nerve</span><span class="nerve" data-nerve="2"></span></li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="stop">
+        <div class="lane"><span class="num">12</span><span class="flume"></span></div>
+        <div class="card" data-ride="hollywood-stunt-rider">
+          <div class="card-head"><h3>Hollywood Stunt Rider</h3><span class="chip chip--crew">Dark raft</span></div>
+          <p class="why">Family raft in total darkness &mdash; every twist and drop is a surprise until the light at the end of the tunnel. Combined raft weight caps at 700 lb, so mind who you load in with.</p>
+          <ul class="specs">
+            <li><span class="k">Height</span><span class="v">48&Prime;</span></li>
+            <li><span class="k">Raft</span><span class="v">700 lb combined</span></li>
+            <li><span class="k">Nerve</span><span class="nerve" data-nerve="3"></span></li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="stop">
+        <div class="lane"><span class="num">13</span><span class="flume"></span></div>
+        <div class="card" data-ride="dinosaur-falls">
+          <div class="card-head"><h3>Dinosaur Falls</h3><span class="chip chip--crew">Tube slides</span></div>
+          <p class="why">Three pipeline slides, single or double tube. Take a double and race the other pair &mdash; the lanes run different lengths, so the winner is genuinely in doubt.</p>
+          <ul class="specs">
+            <li><span class="k">Height</span><span class="v">Posted at ride</span></li>
+            <li><span class="k">Slides</span><span class="v">3 lanes</span></li>
+            <li><span class="k">Nerve</span><span class="nerve" data-nerve="2"></span></li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <p class="clock">15:30</p>
+      <h2>Treetops and tubes</h2>
+      <p>The shaded stretch. Lines here move fast because they're body slides &mdash; good place to pick up ride count if the day's been heavy on stairs.</p>
+    </div>
+    <ol class="stops">
+
+      <li class="stop">
+        <div class="lane"><span class="num">14</span><span class="flume"></span></div>
+        <div class="card" data-ride="giant-twister">
+          <div class="card-head"><h3>Giant Twister</h3><span class="chip chip--thrill">Body slides</span></div>
+          <p class="why">Three twisting body slides that wind out high through the treetops &mdash; the most scenic 30 seconds in the park, if you keep your eyes open.</p>
+          <ul class="specs">
+            <li><span class="k">Height</span><span class="v">42&Prime;</span></li>
+            <li><span class="k">Weight</span><span class="v">250 lb max</span></li>
+            <li><span class="k">Nerve</span><span class="nerve" data-nerve="3"></span></li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="stop">
+        <div class="lane"><span class="num">15</span><span class="flume"></span></div>
+        <div class="card" data-ride="barrier-reef">
+          <div class="card-head"><h3>Barrier Reef</h3><span class="chip chip--thrill">Enclosed speed</span></div>
+          <p class="why">Two enclosed high-speed body slides, dark the whole way down. Quick queue, fast turnaround &mdash; easy to knock out both back to back.</p>
+          <ul class="specs">
+            <li><span class="k">Height</span><span class="v">Posted at ride</span></li>
+            <li><span class="k">Slides</span><span class="v">2 tubes</span></li>
+            <li><span class="k">Nerve</span><span class="nerve" data-nerve="3"></span></li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="stop">
+        <div class="lane"><span class="num">16</span><span class="flume"></span></div>
+        <div class="card" data-ride="dragons-den">
+          <div class="card-head"><h3>Dragon's Den</h3><span class="chip chip--thrill">Thrill slide</span></div>
+          <p class="why">The park's classic enclosed thrill slide and usually the quietest of this bunch late in the day. Worth a lap while the racers are still backed up.</p>
+          <ul class="specs">
+            <li><span class="k">Height</span><span class="v">Posted at ride</span></li>
+            <li><span class="k">Queue</span><span class="v">Usually short</span></li>
+            <li><span class="k">Nerve</span><span class="nerve" data-nerve="3"></span></li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <p class="clock">16:15</p>
+      <h2>Waves</h2>
+      <p>Two zero-entry wave pools, and they're not interchangeable. Kahuna Bay is the one with the four-foot sets; Surf City is the older, calmer pool and the better place to actually talk to each other.</p>
+    </div>
+    <ol class="stops">
+
+      <li class="stop">
+        <div class="lane"><span class="num">17</span><span class="flume"></span></div>
+        <div class="card" data-ride="kahuna-bay">
+          <div class="card-head"><h3>Kahuna Bay Wavepool</h3><span class="chip chip--chill">Wave pool</span></div>
+          <p class="why">Four-foot waves, the newer of the two pools. Swim out past the shallow crowd before a set starts or you'll spend the cycle getting rolled into other people.</p>
+          <ul class="specs">
+            <li><span class="k">Waves</span><span class="v">4 ft</span></li>
+            <li><span class="k">Entry</span><span class="v">Zero-entry</span></li>
+            <li><span class="k">Nerve</span><span class="nerve" data-nerve="2"></span></li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="stop">
+        <div class="lane"><span class="num">18</span><span class="flume"></span></div>
+        <div class="card" data-ride="surf-city">
+          <div class="card-head"><h3>Surf City</h3><span class="chip chip--chill">Wave pool</span></div>
+          <p class="why">The original 1995 wave pool &mdash; calmer sets, more room, and the spot to park chairs if we want a base for the last hour.</p>
+          <ul class="specs">
+            <li><span class="k">Waves</span><span class="v">Gentler sets</span></li>
+            <li><span class="k">Entry</span><span class="v">Zero-entry</span></li>
+            <li><span class="k">Nerve</span><span class="nerve" data-nerve="1"></span></li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <p class="clock">17:15</p>
+      <h2>Last call: re-ride the winner</h2>
+      <p>Whatever tops the "I'm in" count below is what we close on &mdash; queues are shortest in the last hour, so it's the cheapest re-ride of the day. Check the board before we split up.</p>
+    </div>
+    <ol class="stops">
+      <li class="stop stop--flare">
+        <div class="lane"><span class="num">19</span></div>
+        <div class="card" data-ride="last-call">
+          <div class="card-head"><h3>Group's pick</h3><span class="chip chip--crew">Vote decides</span></div>
+          <p class="why">Vote here for whichever ride you want one more crack at. Highest count wins and we all go, no negotiating at 5:20 with wet phones.</p>
+          <ul class="specs">
+            <li><span class="k">Decided by</span><span class="v">Whoever votes</span></li>
+            <li><span class="k">Deadline</span><span class="v">17:00</span></li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="panel">
+    <p class="label">If anyone brings kids</p>
+    <h2>The shallow end of the park</h2>
+    <p class="intro">Four kid-scaled areas, all clustered away from the thrill towers. Any of them works as a base camp if the group needs to split for an hour.</p>
+    <ul class="mini">
+      <li><h4>Stingray Bay</h4><p>The newest addition &mdash; a water playground with more than fifteen ways to get soaked, between the sprayers and the pint-sized slides.</p></li>
+      <li><h4>Kiddie Cove</h4><p>Full-size slides shrunk down to kid scale, so they get the same ride the rest of us are queueing an hour for.</p></li>
+      <li><h4>Octopus Pool</h4><p>Inside Kiddie Cove: a giant octopus with tentacles to swing off. Shade and seating right there for whoever's on duty.</p></li>
+      <li><h4>Monsoon Lagoon</h4><p>Shipwreck pool with a slide and a pile of pirate-themed water cannons. Loud, chaotic, and the hardest one to pull them away from.</p></li>
+    </ul>
+  </section>
+
+  <section class="panel">
+    <p class="label">Before we go</p>
+    <h2>Heights, in one place</h2>
+    <p class="intro">The posted requirements we could confirm ahead of time. Measure at the gate rather than argue at the top of eight flights of stairs &mdash; and treat the sign at the ride as the final word.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th scope="col">Ride</th><th scope="col">Minimum</th><th scope="col">Fine print</th></tr></thead>
+        <tbody>
+          <tr><td>Cliff Diver</td><td class="h">54&Prime;</td><td>Tallest requirement in the park</td></tr>
+          <tr><td>Bombs Away</td><td class="h">48&Prime;</td><td>&mdash;</td></tr>
+          <tr><td>Riptide Racer</td><td class="h">48&Prime;</td><td>&mdash;</td></tr>
+          <tr><td>Alien Invasion</td><td class="h">48&Prime;</td><td>&mdash;</td></tr>
+          <tr><td>Bootlegger's Run</td><td class="h">48&Prime;</td><td>2&ndash;4 riders per raft</td></tr>
+          <tr><td>Mammoth River</td><td class="h">48&Prime;</td><td>36&Prime;&ndash;48&Prime; with an adult; 3&ndash;5 riders</td></tr>
+          <tr><td>Hollywood Stunt Rider</td><td class="h">48&Prime;</td><td>36&Prime;&ndash;48&Prime; with an adult; 700 lb per raft</td></tr>
+          <tr><td>Giant Twister</td><td class="h">42&Prime;</td><td>250 lb maximum</td></tr>
+          <tr><td>Max Trax</td><td class="h">42&Prime;</td><td>250 lb maximum</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel">
+    <p class="label">Bag check</p>
+    <h2>What actually matters today</h2>
+    <ul class="checks">
+      <li>Cash or card in a waterproof pouch</li>
+      <li>Sunscreen, and reapply after the wave pool</li>
+      <li>Water shoes for hot pavement</li>
+      <li>A towel each &mdash; nobody sharing</li>
+      <li>Locker money, decided at the gate</li>
+      <li>One phone designated for photos</li>
+      <li>Refillable bottle</li>
+      <li>Meeting spot: Surf City chairs</li>
+    </ul>
+  </section>
+
+  <section class="panel board">
+    <p class="label">Group chat, but on the page</p>
+    <h2>The board</h2>
+    <p class="intro">Anything that isn't about one specific ride &mdash; who's driving, when we're leaving, who owes whom for parking.</p>
+    <ul class="msgs" data-board="1"></ul>
+    <form class="add" data-board="1">
+      <input type="text" name="text" maxlength="240" placeholder="Say something to the group" autocomplete="off">
+      <button type="submit">Post</button>
+    </form>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <p>Ride details were assembled from the park's published attraction and safety pages. Operating rides and posted requirements change day to day &mdash; the map you get at the gate and the sign at each ride are the real answers.</p>
+  <p>Times are suggestions, not reservations. The route is built to dodge the worst queues, not to be obeyed.</p>
+</footer>
+
+</div>
+
+<script type="application/json" id="board-data">{"hype":{},"notes":{},"board":[]}</script>
+
+<script id="app">
+(function () {
+  "use strict";
+
+  var PAGE = document.getElementById("page");
+  var STATIC_BODY = PAGE.outerHTML;           // captured pristine, before hydration
+  var TITLE = "Splish Splash Speedrun";
+  var NAME_KEY = "ss-speedrun-name";
+  var PENDING_KEY = "ss-speedrun-pending";
+
+  var dataEl = document.getElementById("board-data");
+  var state;
+  try { state = JSON.parse(dataEl.textContent || "{}"); } catch (e) { state = {}; }
+  state.hype = state.hype || {};
+  state.notes = state.notes || {};
+  state.board = state.board || [];
+
+  var api = null;
+  var writable = false;
+  var chip = document.getElementById("status-chip");
+
+  function setChip(stateName, text) {
+    chip.setAttribute("data-state", stateName);
+    chip.textContent = text;
+  }
+
+  function myName() {
+    try { return localStorage.getItem(NAME_KEY) || ""; } catch (e) { return ""; }
+  }
+  function rememberName(n) {
+    try { localStorage.setItem(NAME_KEY, n); } catch (e) {}
+  }
+  var whoField = document.getElementById("who");
+  whoField.value = myName();
+  whoField.addEventListener("input", function () {
+    rememberName(whoField.value.trim().slice(0, 24));
+    paintAll();
+  });
+
+  function askName() {
+    var n = whoField.value.trim().slice(0, 24);
+    if (n) { rememberName(n); return n; }
+    whoField.classList.add("nudge");
+    whoField.focus();
+    setTimeout(function () { whoField.classList.remove("nudge"); }, 1600);
+    return "";
+  }
+
+  function clock(ts) {
+    var d = new Date(ts);
+    var h = d.getHours();
+    var m = String(d.getMinutes()).padStart(2, "0");
+    var ap = h >= 12 ? "pm" : "am";
+    h = h % 12 || 12;
+    return h + ":" + m + ap;
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+
+  /* ---------- rendering ---------- */
+
+  document.querySelectorAll(".nerve").forEach(function (el) {
+    var n = parseInt(el.getAttribute("data-nerve"), 10) || 0;
+    var out = "";
+    for (var i = 1; i <= 5; i++) out += '<i class="' + (i <= n ? "on" : "") + '"></i>';
+    el.innerHTML = out;
+    el.setAttribute("title", n + " out of 5");
+  });
+
+  document.querySelectorAll(".card[data-ride]").forEach(function (card) {
+    var id = card.getAttribute("data-ride");
+    var bar = document.createElement("div");
+    bar.className = "bar";
+    bar.innerHTML =
+      '<button type="button" class="act" data-act="hype" aria-pressed="false">I’m in <span class="n">0</span></button>' +
+      '<button type="button" class="act" data-act="notes" aria-expanded="false">Notes <span class="n">0</span></button>';
+    var riders = document.createElement("div");
+    riders.className = "riders";
+    var thread = document.createElement("div");
+    thread.className = "thread";
+    thread.hidden = true;
+    thread.innerHTML =
+      '<ul class="msgs"></ul>' +
+      '<form class="add"><input type="text" name="text" maxlength="240" placeholder="Note for the crew" autocomplete="off"><button type="submit">Post</button></form>';
+    card.append(bar, riders, thread);
+    paintRide(card, id);
+  });
+
+  function paintRide(card, id) {
+    var voters = state.hype[id] || [];
+    var notes = state.notes[id] || [];
+    var me = myName();
+    var hypeBtn = card.querySelector('[data-act="hype"]');
+    hypeBtn.querySelector(".n").textContent = voters.length;
+    hypeBtn.setAttribute("aria-pressed", me && voters.indexOf(me) > -1 ? "true" : "false");
+    card.querySelector('[data-act="notes"] .n').textContent = notes.length;
+    card.querySelector(".riders").innerHTML = voters
+      .map(function (v) { return '<span class="rider">' + esc(v) + "</span>"; })
+      .join("");
+    paintMsgs(card.querySelector(".thread .msgs"), notes, "No notes yet.");
+  }
+
+  function paintMsgs(ul, list, emptyText) {
+    if (!list.length) {
+      ul.innerHTML = '<li class="empty">' + emptyText + "</li>";
+      return;
+    }
+    ul.innerHTML = list
+      .map(function (m) {
+        return "<li><span class=\"who\">" + esc(m.who) + "</span>" +
+          '<span class="when">' + clock(m.ts) + "</span><br>" + esc(m.text) + "</li>";
+      })
+      .join("");
+  }
+
+  function paintBoard() {
+    paintMsgs(document.querySelector('.msgs[data-board="1"]'), state.board, "Nothing on the board yet.");
+  }
+
+  function paintAll() {
+    document.querySelectorAll(".card[data-ride]").forEach(function (card) {
+      paintRide(card, card.getAttribute("data-ride"));
+    });
+    paintBoard();
+  }
+
+  paintBoard();
+
+  /* ---------- ops ---------- */
+
+  function apply(op) {
+    if (op.kind === "hype") {
+      var v = state.hype[op.ride] || [];
+      var i = v.indexOf(op.who);
+      if (i > -1) v.splice(i, 1); else v.push(op.who);
+      state.hype[op.ride] = v;
+    } else if (op.kind === "note") {
+      var list = state.notes[op.ride] || [];
+      list.push({ who: op.who, text: op.text, ts: op.ts });
+      state.notes[op.ride] = list.slice(-40);
+    } else if (op.kind === "board") {
+      state.board.push({ who: op.who, text: op.text, ts: op.ts });
+      state.board = state.board.slice(-60);
+    }
+  }
+
+  function buildDoc() {
+    var css = document.getElementById("app-css").textContent;
+    var js = document.getElementById("app").textContent;
+    var json = JSON.stringify(state).replace(/</g, "\\u003c");
+    return '<!doctype html><html lang="en"><head><meta charset="utf-8">' +
+      '<meta name="viewport" content="width=device-width, initial-scale=1">' +
+      "<title>" + TITLE + "</title>" +
+      '<style id="app-css">' + css + "</style></head><body>" +
+      STATIC_BODY +
+      '<script type="application/json" id="board-data">' + json + "<\/script>" +
+      '<script id="app">' + js + "<\/script></body></html>";
+  }
+
+  function goReadOnly(why) {
+    writable = false;
+    setChip("read", why);
+    document.querySelectorAll(".add input, .add button, [data-act='hype']").forEach(function (el) {
+      el.disabled = true;
+    });
+    whoField.disabled = true;
+    document.querySelectorAll(".add input").forEach(function (el) {
+      el.placeholder = "Read-only view — use the comment button instead";
+    });
+  }
+
+  function save(op) {
+    if (!api) return;
+    setChip("live", "Saving…");
+    api.publish(buildDoc()).then(
+      function () { setChip("live", "Saved for the group"); },
+      function (err) {
+        var code = (err && err.code) || "upstream_error";
+        if (code === "conflict") {
+          try { sessionStorage.setItem(PENDING_KEY, JSON.stringify(op)); } catch (e) {}
+          setChip("live", "Someone else posted — merging…");
+        } else if (code === "not_writer" || code === "not_granted" ||
+                   code === "not_declared" || code === "capability_disabled" ||
+                   code === "capability_removed" || code === "consent_required") {
+          goReadOnly("Read-only view — comment instead");
+        } else if (code === "rate_limited") {
+          setChip("read", "Too fast — wait a moment");
+        } else {
+          setChip("read", "Didn’t save — try again");
+        }
+      }
+    );
+  }
+
+  function commit(op) {
+    apply(op);
+    paintAll();
+    save(op);
+  }
+
+  /* ---------- interaction ---------- */
+
+  document.addEventListener("click", function (ev) {
+    var btn = ev.target.closest("button.act");
+    if (!btn) return;
+    var card = btn.closest(".card");
+    var act = btn.getAttribute("data-act");
+
+    if (act === "notes") {
+      var thread = card.querySelector(".thread");
+      thread.hidden = !thread.hidden;
+      btn.setAttribute("aria-expanded", String(!thread.hidden));
+      if (!thread.hidden) card.querySelector(".thread input").focus();
+      return;
+    }
+
+    if (act === "hype") {
+      if (!writable) return;
+      var who = askName();
+      if (!who) return;
+      commit({ kind: "hype", ride: card.getAttribute("data-ride"), who: who });
+    }
+  });
+
+  document.addEventListener("submit", function (ev) {
+    var form = ev.target.closest("form.add");
+    if (!form) return;
+    ev.preventDefault();
+    if (!writable) return;
+    var input = form.querySelector("input");
+    var text = input.value.trim();
+    if (!text) return;
+    var who = askName();
+    if (!who) return;
+    input.value = "";
+    if (form.getAttribute("data-board")) {
+      commit({ kind: "board", who: who, text: text, ts: Date.now() });
+    } else {
+      commit({
+        kind: "note",
+        ride: form.closest(".card").getAttribute("data-ride"),
+        who: who, text: text, ts: Date.now()
+      });
+    }
+  });
+
+  /* ---------- capability ---------- */
+
+  function boot(a) {
+    api = a;
+    writable = true;
+    setChip("live", "Live for the group");
+    var pending = null;
+    try {
+      var raw = sessionStorage.getItem(PENDING_KEY);
+      if (raw) { pending = JSON.parse(raw); sessionStorage.removeItem(PENDING_KEY); }
+    } catch (e) {}
+    if (pending) commit(pending);
+  }
+
+  if (window.claude && typeof window.claude.use === "function") {
+    setChip("checking", "Connecting…");
+    window.claude.use("artifact").then(
+      function (a) { if (a) boot(a); else goReadOnly("Read-only view — comment instead"); },
+      function () { goReadOnly("Offline — comment instead"); }
+    );
+  } else {
+    goReadOnly("Preview — open the link to post");
+  }
+})();
+</script>
