@@ -219,7 +219,9 @@ main { padding-block: clamp(2rem, 4vw, 3.4rem) 1rem; }
 }
 .stop--flare .card { border-left-color: var(--flare); }
 
-.card-head { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; }
+.card-head { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem .7rem; }
+.card-head h3 { flex: 1 1 100%; }
+@media (min-width: 46rem) { .card-head h3 { flex: 0 1 auto; } }
 .card h3 { font-size: var(--h3); line-height: 1.15; font-weight: 700; }
 .chip {
   border-radius: 999px;
@@ -233,11 +235,13 @@ main { padding-block: clamp(2rem, 4vw, 3.4rem) 1rem; }
   font-size: .74rem;
   white-space: nowrap;
 }
-.chip--thrill { background: color-mix(in srgb, var(--flare) 16%, transparent); color: var(--flare); }
-.chip--crew   { background: color-mix(in srgb, var(--pool) 18%, transparent); color: var(--pool-dk); }
-.chip--chill  { background: color-mix(in srgb, var(--sun) 26%, transparent); color: #7A5400; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .chip--chill { color: var(--sun); } }
-:root[data-theme="dark"] .chip--chill { color: var(--sun); }
+.chip--intense  { background: color-mix(in srgb, var(--flare) 16%, transparent); color: var(--flare); }
+.chip--moderate { background: color-mix(in srgb, var(--pool) 18%, transparent); color: var(--pool-dk); }
+.chip--soft     { background: color-mix(in srgb, var(--sun) 26%, transparent); color: #7A5400; }
+.chip--crew     { background: color-mix(in srgb, var(--pool) 18%, transparent); color: var(--pool-dk); }
+.chip--pass     { background: transparent; border: 1px dashed var(--line); color: var(--mist); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .chip--soft { color: var(--sun); } }
+:root[data-theme="dark"] .chip--soft { color: var(--sun); }
 
 .why { margin-top: .55rem; max-width: 62ch; }
 .why em { font-style: italic; color: var(--mist); }
@@ -254,10 +258,6 @@ main { padding-block: clamp(2rem, 4vw, 3.4rem) 1rem; }
   font-size: .76rem; color: var(--mist);
 }
 .specs .v { font-weight: 600; font-variant-numeric: tabular-nums; }
-
-.nerve { display: inline-flex; gap: 3px; transform: translateY(1px); }
-.nerve i { width: 9px; height: 14px; border-radius: 2px; background: var(--line); display: block; }
-.nerve i.on { background: var(--flare); }
 
 /* ---------- crew bar ---------- */
 .bar { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .9rem; }
@@ -350,6 +350,10 @@ thead th {
   border-bottom: 2px solid var(--deep);
 }
 td.h { font-variant-numeric: tabular-nums; font-weight: 700; }
+tbody td:nth-child(2) {
+  font-family: 'Barlow Condensed', system-ui, sans-serif;
+  text-transform: uppercase; letter-spacing: .08em; font-size: .84rem; color: var(--mist);
+}
 tbody tr:hover { background: var(--tile-2); }
 
 .checks { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .4rem 1.4rem; }
@@ -383,14 +387,14 @@ footer a { color: var(--pool-dk); }
 
 <header class="hero">
   <div class="wrap">
-    <p class="label">Sunday · August 23 · Calverton, Long Island</p>
+    <p class="label">Sunday · August 23 · 2549 Splish Splash Drive, Calverton</p>
     <h1>Splish Splash <em>Speedrun</em></h1>
-    <p class="lede">Every ride in the park, put in the order we should actually do them &mdash; headliners while the lines are short, rafts once everyone's warmed up, waves when the sun is at its worst. <b>Tap "I'm in" on the ones you want</b> and leave notes so we're not relitigating the plan in the parking lot.</p>
+    <p class="lede">All 23 attractions, put in the order we should actually do them &mdash; headliners while the lines are short, rafts once everyone's warmed up, waves when the sun is at its worst. <b>Tap "I'm in" on the ones you want</b> and leave notes so we're not relitigating the plan in the parking lot.</p>
     <div class="tallies">
-      <div class="tally"><b>22</b><span class="label">Attractions</span></div>
+      <div class="tally"><b>23</b><span class="label">Attractions</span></div>
       <div class="tally"><b>8</b><span class="label">Timed blocks</span></div>
       <div class="tally"><b>2</b><span class="label">Wave pools</span></div>
-      <div class="tally"><b>54"</b><span class="label">Tallest requirement</span></div>
+      <div class="tally"><b>48&Prime;</b><span class="label">Tallest minimum</span></div>
     </div>
   </div>
 </header>
@@ -409,20 +413,20 @@ footer a { color: var(--pool-dk); }
   <section class="block">
     <div class="block-head">
       <p class="clock">10:00</p>
-      <h2>Gates open: burn the big three first</h2>
-      <p>These three eat the longest lines by noon and all three are 48&Prime;-and-up, so do them while the park is still filling in. Walk right, not left &mdash; most people drift toward the wave pool first.</p>
+      <h2>Gates open: burn the headliners</h2>
+      <p>These three build the longest queues by noon. Bootlegger's Run and Riptide Racer only need 42&Prime;, but Bombs Away is a hard 48&Prime; &mdash; sort that out before anyone climbs fifty feet of stairs.</p>
     </div>
     <ol class="stops">
 
       <li class="stop stop--flare">
         <div class="lane"><span class="num">01</span><span class="flume"></span></div>
         <div class="card" data-ride="bootleggers">
-          <div class="card-head"><h3>Bootlegger's Run</h3><span class="chip chip--thrill">Water coaster</span></div>
-          <p class="why">New York's only hydromagnetic water coaster: a four-person inline raft that gets blasted <em>uphill</em> between drops, the biggest of them from nearly five stories. It's the single best ride in the park and the line only gets worse &mdash; this is stop one, no debate.</p>
+          <div class="card-head"><h3>Bootlegger's Run</h3><span class="chip chip--intense">Intense</span><span class="chip">4-person raft</span><span class="chip chip--pass">H2Go</span></div>
+          <p class="why">A roller coaster without rails: hydromagnetic tech shoves a four-person raft <em>uphill</em> between the drops and sweeping turns. Best ride in the park, worst line by lunchtime &mdash; this is stop one, no debate.</p>
           <ul class="specs">
-            <li><span class="k">Height</span><span class="v">48&Prime;</span></li>
-            <li><span class="k">Crew</span><span class="v">2&ndash;4 per raft</span></li>
-            <li><span class="k">Nerve</span><span class="nerve" data-nerve="4"></span></li>
+            <li><span class="k">Height</span><span class="v">42&Prime;</span></li>
+            <li><span class="k">42&ndash;48&Prime;</span><span class="v">Adult on the raft</span></li>
+            <li><span class="k">Weight</span><span class="v">700 lb per raft</span></li>
           </ul>
         </div>
       </li>
@@ -430,25 +434,25 @@ footer a { color: var(--pool-dk); }
       <li class="stop stop--flare">
         <div class="lane"><span class="num">02</span><span class="flume"></span></div>
         <div class="card" data-ride="bombs-away">
-          <div class="card-head"><h3>Bombs Away</h3><span class="chip chip--thrill">Drop capsule</span></div>
-          <p class="why">You stand in a capsule 50 feet up, the floor opens, and you're gone &mdash; roughly 26 feet per second down 300 feet of slide, racing whoever's dumb enough to stand in the capsule next to you. <em>Best photo op of the day, if someone stays at the bottom.</em></p>
+          <div class="card-head"><h3>Bombs Away</h3><span class="chip chip--intense">Intense</span><span class="chip">Drop capsule</span></div>
+          <p class="why">Two AquaLaunch capsules, fifty feet up, right above Riptide Racer. You get a countdown, the floor disappears, and you free-fall at 26 feet per second down 300 feet of slide. The whole thing lasts about eleven seconds.</p>
           <ul class="specs">
             <li><span class="k">Height</span><span class="v">48&Prime;</span></li>
-            <li><span class="k">Format</span><span class="v">Side-by-side racer</span></li>
-            <li><span class="k">Nerve</span><span class="nerve" data-nerve="5"></span></li>
+            <li><span class="k">Weight</span><span class="v">300 lb</span></li>
+            <li><span class="k">Duration</span><span class="v">~11 sec</span></li>
           </ul>
         </div>
       </li>
 
-      <li class="stop stop--flare">
+      <li class="stop">
         <div class="lane"><span class="num">03</span><span class="flume"></span></div>
         <div class="card" data-ride="riptide-racer">
-          <div class="card-head"><h3>Riptide Racer</h3><span class="chip chip--thrill">Mat racer</span></div>
-          <p class="why">Four lanes, head-first, face down on a mat. The only ride here where the whole group settles something at once, so pick your bragging rights before you climb the stairs.</p>
+          <div class="card-head"><h3>Riptide Racer</h3><span class="chip chip--moderate">Moderate</span><span class="chip">Side-by-side racer</span><span class="chip chip--pass">Speedy Pass</span></div>
+          <p class="why">A carnival game blown up to waterslide scale &mdash; race the person next to you, settle it in one run. It's directly below Bombs Away, so do them back to back while we're already at that tower.</p>
           <ul class="specs">
-            <li><span class="k">Height</span><span class="v">48&Prime;</span></li>
-            <li><span class="k">Lanes</span><span class="v">4 abreast</span></li>
-            <li><span class="k">Nerve</span><span class="nerve" data-nerve="3"></span></li>
+            <li><span class="k">Height</span><span class="v">42&Prime;</span></li>
+            <li><span class="k">Weight</span><span class="v">300 lb</span></li>
+            <li><span class="k">Format</span><span class="v">Race a friend</span></li>
           </ul>
         </div>
       </li>
@@ -459,45 +463,45 @@ footer a { color: var(--pool-dk); }
     <div class="block-head">
       <p class="clock">11:30</p>
       <h2>The dark block</h2>
-      <p>Three enclosed rides in a row. If anyone in the group hates the pitch-black tubes, this is the stretch to sit out &mdash; send them to the Lazy River and regroup at noon.</p>
+      <p>Three enclosed rides in a row, all 48&Prime; and up. If anyone hates pitch-black tubes, this is the stretch to sit out &mdash; send them to Soak City and regroup at 12:45.</p>
     </div>
     <ol class="stops">
 
-      <li class="stop">
+      <li class="stop stop--flare">
         <div class="lane"><span class="num">04</span><span class="flume"></span></div>
         <div class="card" data-ride="von-dark">
-          <div class="card-head"><h3>Dr. Von Dark's Tunnel of Terror</h3><span class="chip chip--thrill">Dark funnel</span></div>
-          <p class="why">Pitch-dark tube into a 40-foot drop, then a wall you scale sideways before gravity takes it back. You cannot see any of it coming, which is the entire point.</p>
-          <ul class="specs">
-            <li><span class="k">Height</span><span class="v">Posted at ride</span></li>
-            <li><span class="k">Lights</span><span class="v">None</span></li>
-            <li><span class="k">Nerve</span><span class="nerve" data-nerve="5"></span></li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="stop">
-        <div class="lane"><span class="num">05</span><span class="flume"></span></div>
-        <div class="card" data-ride="alien-invasion">
-          <div class="card-head"><h3>Alien Invasion</h3><span class="chip chip--thrill">Tornado funnel</span></div>
-          <p class="why">Dark tube feeding a giant funnel &mdash; you oscillate up one wall, hang for a beat, and drop out the bottom. Heavier rafts swing higher, so load up.</p>
+          <div class="card-head"><h3>Dr. Von Dark's Tunnel of Terror</h3><span class="chip chip--intense">Intense</span><span class="chip">2-person raft</span><span class="chip chip--pass">H2Go</span></div>
+          <p class="why">One of only three slides like it in the country. You drop through a waterfall to start, then spin a full 360 in total darkness before a 40-foot drop you never see coming. Take a partner &mdash; it's a two-person raft.</p>
           <ul class="specs">
             <li><span class="k">Height</span><span class="v">48&Prime;</span></li>
-            <li><span class="k">Ride</span><span class="v">Shared tube</span></li>
-            <li><span class="k">Nerve</span><span class="nerve" data-nerve="4"></span></li>
+            <li><span class="k">Weight</span><span class="v">400 lb combined</span></li>
+            <li><span class="k">Drop</span><span class="v">40 ft</span></li>
           </ul>
         </div>
       </li>
 
-      <li class="stop">
-        <div class="lane"><span class="num">06</span><span class="flume"></span></div>
-        <div class="card" data-ride="hyperlight">
-          <div class="card-head"><h3>Hyperlight</h3><span class="chip chip--thrill">Light &amp; sound</span></div>
-          <p class="why">The old Abyss, rebuilt as a fully enclosed tube with synced light and music &mdash; the water moves with the sound. Ride it single if you want the effects, double if you want to yell about them.</p>
+      <li class="stop stop--flare">
+        <div class="lane"><span class="num">05</span><span class="flume"></span></div>
+        <div class="card" data-ride="alien-invasion">
+          <div class="card-head"><h3>Alien Invasion</h3><span class="chip chip--intense">Intense</span><span class="chip">Family raft funnel</span><span class="chip chip--pass">H2Go</span></div>
+          <p class="why">The one ride with no raft to carry &mdash; a conveyor belt hauls it up for you. Quick drop through the dark, then you spin freely in the funnel with no idea which pass drops you out the bottom. Nothing else in the park feels like it.</p>
           <ul class="specs">
-            <li><span class="k">Height</span><span class="v">Posted at ride</span></li>
-            <li><span class="k">Ride</span><span class="v">Single or double tube</span></li>
-            <li><span class="k">Nerve</span><span class="nerve" data-nerve="3"></span></li>
+            <li><span class="k">Height</span><span class="v">48&Prime;</span></li>
+            <li><span class="k">Weight</span><span class="v">700 lb combined</span></li>
+            <li><span class="k">Perk</span><span class="v">No raft to carry</span></li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="stop stop--flare">
+        <div class="lane"><span class="num">06</span><span class="flume"></span></div>
+        <div class="card" data-ride="dragons-den">
+          <div class="card-head"><h3>Dragon's Den</h3><span class="chip chip--intense">Intense</span><span class="chip">Enclosed tube</span><span class="chip chip--pass">H2Go</span></div>
+          <p class="why">Catapults you through twisting darkness into a mist-shrouded bowl, circling past the dragon before it spits you out. The third dark ride in a row, and the one people underrate.</p>
+          <ul class="specs">
+            <li><span class="k">Height</span><span class="v">48&Prime;</span></li>
+            <li><span class="k">Weight</span><span class="v">400 lb combined</span></li>
+            <li><span class="k">Lights</span><span class="v">None</span></li>
           </ul>
         </div>
       </li>
@@ -508,18 +512,18 @@ footer a { color: var(--pool-dk); }
     <div class="block-head">
       <p class="clock">12:45</p>
       <h2>Food, then float</h2>
-      <p>Eat before the 1 o'clock crush, then do one full loop of the Lazy River to digest. This is the regroup point &mdash; anyone who wandered off finds us here.</p>
+      <p>Eat before the one o'clock crush, then take one full lap of the river to digest. This is the regroup point &mdash; anyone who wandered off finds us here.</p>
     </div>
     <ol class="stops">
       <li class="stop">
         <div class="lane"><span class="num">07</span><span class="flume"></span></div>
         <div class="card" data-ride="lazy-river">
-          <div class="card-head"><h3>Lazy River</h3><span class="chip chip--chill">Float</span></div>
-          <p class="why">Tube loop with fountains and a wave stretch. Grab tubes as a block so nobody gets separated, and treat one lap as the official lunch recovery.</p>
+          <div class="card-head"><h3>Lazy River</h3><span class="chip chip--soft">Soft</span><span class="chip">Tube float</span><span class="chip chip--pass">H2Go</span></div>
+          <p class="why">Gentle current, landscaped the whole way, spraying fountains you can't dodge. Grab tubes as a block so nobody gets separated, and treat one lap as the official lunch recovery.</p>
           <ul class="specs">
-            <li><span class="k">Height</span><span class="v">Posted at ride</span></li>
+            <li><span class="k">Height</span><span class="v">None posted</span></li>
+            <li><span class="k">Kids</span><span class="v">Adult companion</span></li>
             <li><span class="k">Lap</span><span class="v">One, minimum</span></li>
-            <li><span class="k">Nerve</span><span class="nerve" data-nerve="1"></span></li>
           </ul>
         </div>
       </li>
@@ -530,45 +534,45 @@ footer a { color: var(--pool-dk); }
     <div class="block-head">
       <p class="clock">13:30</p>
       <h2>The dares</h2>
-      <p>The three rides you have to talk yourself into. Cliff Diver has the tallest height requirement in the park at 54&Prime; &mdash; check that before anyone climbs eight stories of stairs.</p>
+      <p>Three body slides, no raft between you and the chute, and a 250-pound limit on all of them. Shortest rides of the day and the ones you'll argue about on the drive home.</p>
     </div>
     <ol class="stops">
 
       <li class="stop stop--flare">
         <div class="lane"><span class="num">08</span><span class="flume"></span></div>
-        <div class="card" data-ride="cliff-diver">
-          <div class="card-head"><h3>Cliff Diver</h3><span class="chip chip--thrill">Vertical drop</span></div>
-          <p class="why">Eight stories, straight down, no tube between you and the slide. The walk up is the hard part; the ride itself is over in about three seconds.</p>
-          <ul class="specs">
-            <li><span class="k">Height</span><span class="v">54&Prime;</span></li>
-            <li><span class="k">Drop</span><span class="v">8 stories</span></li>
-            <li><span class="k">Nerve</span><span class="nerve" data-nerve="5"></span></li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="stop stop--flare">
-        <div class="lane"><span class="num">09</span><span class="flume"></span></div>
         <div class="card" data-ride="shotgun-falls">
-          <div class="card-head"><h3>Shotgun Falls</h3><span class="chip chip--thrill">Free fall</span></div>
-          <p class="why">A free-fall drop slide that dumps you into a ten-foot-deep pool. Cross your ankles, cross your arms, and be ready to swim on landing.</p>
+          <div class="card-head"><h3>Shotgun Falls</h3><span class="chip chip--intense">Intense</span><span class="chip">Free fall</span></div>
+          <p class="why">A five-foot vertical drop straight into a ten-foot-deep pool. Over in seconds, and the landing is the part nobody warns you about &mdash; be ready to swim.</p>
           <ul class="specs">
-            <li><span class="k">Height</span><span class="v">Posted at ride</span></li>
+            <li><span class="k">Height</span><span class="v">48&Prime;</span></li>
+            <li><span class="k">Weight</span><span class="v">250 lb</span></li>
             <li><span class="k">Landing</span><span class="v">10 ft deep</span></li>
-            <li><span class="k">Nerve</span><span class="nerve" data-nerve="5"></span></li>
           </ul>
         </div>
       </li>
 
       <li class="stop">
-        <div class="lane"><span class="num">10</span><span class="flume"></span></div>
+        <div class="lane"><span class="num">09</span><span class="flume"></span></div>
         <div class="card" data-ride="max-trax">
-          <div class="card-head"><h3>Max Trax</h3><span class="chip chip--thrill">Speed slide</span></div>
-          <p class="why">Two speed slides, and the choice matters: 50 feet straight down, or the double hump that throws you off the mat for a second on the second bump. Take the hump.</p>
+          <div class="card-head"><h3>Max Trax</h3><span class="chip chip--moderate">Moderate</span><span class="chip">Speed slides</span></div>
+          <p class="why">Two slides and the choice matters: a fifty-foot vertical plunge, or the double hump that gives you airtime on the second bump. <em>Take the hump.</em></p>
           <ul class="specs">
             <li><span class="k">Height</span><span class="v">42&Prime;</span></li>
-            <li><span class="k">Weight</span><span class="v">250 lb max</span></li>
-            <li><span class="k">Nerve</span><span class="nerve" data-nerve="4"></span></li>
+            <li><span class="k">Weight</span><span class="v">250 lb</span></li>
+            <li><span class="k">Drop</span><span class="v">50 ft</span></li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="stop stop--flare">
+        <div class="lane"><span class="num">10</span><span class="flume"></span></div>
+        <div class="card" data-ride="barrier-reef">
+          <div class="card-head"><h3>Barrier Reef</h3><span class="chip chip--intense">Intense</span><span class="chip">Dark body slide</span></div>
+          <p class="why">Plunge and twist through dark reef tunnels &mdash; and there's a shark waiting at the end. Rated intense but only needs 42&Prime;, so it's the one the shorter half of the group can still do here.</p>
+          <ul class="specs">
+            <li><span class="k">Height</span><span class="v">42&Prime;</span></li>
+            <li><span class="k">Weight</span><span class="v">250 lb</span></li>
+            <li><span class="k">Lights</span><span class="v">None</span></li>
           </ul>
         </div>
       </li>
@@ -579,19 +583,19 @@ footer a { color: var(--pool-dk); }
     <div class="block-head">
       <p class="clock">14:30</p>
       <h2>Crew rides &mdash; everybody in one boat</h2>
-      <p>Three raft rides you actually ride together, and the only block where the whole group ends up in the same photo. Mammoth River needs three to five people, so don't split up here.</p>
+      <p>Three raft rides you actually ride together, and the only block where we all end up in the same photo. Mammoth River takes a thousand pounds a raft, so nobody sits this one out.</p>
     </div>
     <ol class="stops">
 
       <li class="stop">
         <div class="lane"><span class="num">11</span><span class="flume"></span></div>
         <div class="card" data-ride="mammoth-river">
-          <div class="card-head"><h3>Mammoth River</h3><span class="chip chip--crew">Family raft</span></div>
-          <p class="why">The big open raft &mdash; tame by this park's standards, which makes it the one everyone will do twice. Needs three to five riders, so it's the natural group ride.</p>
+          <div class="card-head"><h3>Mammoth River</h3><span class="chip chip--moderate">Moderate</span><span class="chip">Family raft</span></div>
+          <p class="why">The long one &mdash; a winding river run with gentle thrills, built for a full raft of people yelling at each other. Tame by this park's standards, which is exactly why everyone will do it twice.</p>
           <ul class="specs">
             <li><span class="k">Height</span><span class="v">48&Prime;</span></li>
-            <li><span class="k">Under 48&Prime;</span><span class="v">36&Prime;+ with an adult</span></li>
-            <li><span class="k">Nerve</span><span class="nerve" data-nerve="2"></span></li>
+            <li><span class="k">36&ndash;48&Prime;</span><span class="v">Adult, holding posture</span></li>
+            <li><span class="k">Weight</span><span class="v">1000 lb combined</span></li>
           </ul>
         </div>
       </li>
@@ -599,12 +603,12 @@ footer a { color: var(--pool-dk); }
       <li class="stop">
         <div class="lane"><span class="num">12</span><span class="flume"></span></div>
         <div class="card" data-ride="hollywood-stunt-rider">
-          <div class="card-head"><h3>Hollywood Stunt Rider</h3><span class="chip chip--crew">Dark raft</span></div>
-          <p class="why">Family raft in total darkness &mdash; every twist and drop is a surprise until the light at the end of the tunnel. Combined raft weight caps at 700 lb, so mind who you load in with.</p>
+          <div class="card-head"><h3>Hollywood Stunt Rider</h3><span class="chip chip--moderate">Moderate</span><span class="chip">Dark family raft</span><span class="chip chip--pass">H2Go</span></div>
+          <p class="why">A minute of total darkness on a family raft &mdash; you hear the water and feel the drops with no warning of either, until the light at the end of the tunnel. The park's most popular ride for a reason.</p>
           <ul class="specs">
             <li><span class="k">Height</span><span class="v">48&Prime;</span></li>
-            <li><span class="k">Raft</span><span class="v">700 lb combined</span></li>
-            <li><span class="k">Nerve</span><span class="nerve" data-nerve="3"></span></li>
+            <li><span class="k">36&ndash;48&Prime;</span><span class="v">Adult, holding posture</span></li>
+            <li><span class="k">Weight</span><span class="v">700 lb combined</span></li>
           </ul>
         </div>
       </li>
@@ -612,12 +616,12 @@ footer a { color: var(--pool-dk); }
       <li class="stop">
         <div class="lane"><span class="num">13</span><span class="flume"></span></div>
         <div class="card" data-ride="dinosaur-falls">
-          <div class="card-head"><h3>Dinosaur Falls</h3><span class="chip chip--crew">Tube slides</span></div>
-          <p class="why">Three pipeline slides, single or double tube. Take a double and race the other pair &mdash; the lanes run different lengths, so the winner is genuinely in doubt.</p>
+          <div class="card-head"><h3>Dinosaur Falls</h3><span class="chip chip--moderate">Moderate</span><span class="chip">Themed raft</span><span class="chip chip--pass">H2Go</span></div>
+          <p class="why">Rafts through twisting rapids with dinosaurs roaring overhead the whole way down. The most theatrical ride here and the easiest sell to anyone who's had enough of the dark tubes.</p>
           <ul class="specs">
-            <li><span class="k">Height</span><span class="v">Posted at ride</span></li>
-            <li><span class="k">Slides</span><span class="v">3 lanes</span></li>
-            <li><span class="k">Nerve</span><span class="nerve" data-nerve="2"></span></li>
+            <li><span class="k">Height</span><span class="v">42&Prime;</span></li>
+            <li><span class="k">Weight</span><span class="v">250 lb solo</span></li>
+            <li><span class="k">Raft</span><span class="v">400 lb combined</span></li>
           </ul>
         </div>
       </li>
@@ -627,46 +631,33 @@ footer a { color: var(--pool-dk); }
   <section class="block">
     <div class="block-head">
       <p class="clock">15:30</p>
-      <h2>Treetops and tubes</h2>
-      <p>The shaded stretch. Lines here move fast because they're body slides &mdash; good place to pick up ride count if the day's been heavy on stairs.</p>
+      <h2>Treetops and light show</h2>
+      <p>The shaded stretch, both rides 42&Prime;. Lines here move faster than the towers &mdash; good place to pick up ride count if the day's been heavy on stairs.</p>
     </div>
     <ol class="stops">
 
       <li class="stop">
         <div class="lane"><span class="num">14</span><span class="flume"></span></div>
         <div class="card" data-ride="giant-twister">
-          <div class="card-head"><h3>Giant Twister</h3><span class="chip chip--thrill">Body slides</span></div>
-          <p class="why">Three twisting body slides that wind out high through the treetops &mdash; the most scenic 30 seconds in the park, if you keep your eyes open.</p>
+          <div class="card-head"><h3>Giant Twister</h3><span class="chip chip--moderate">Moderate</span><span class="chip">Body slides</span><span class="chip chip--pass">H2Go</span></div>
+          <p class="why">Three twisting body slides winding high through the treetops, side by side to the splash pool &mdash; so it's another race, and the most scenic thirty seconds in the park if you keep your eyes open.</p>
           <ul class="specs">
             <li><span class="k">Height</span><span class="v">42&Prime;</span></li>
-            <li><span class="k">Weight</span><span class="v">250 lb max</span></li>
-            <li><span class="k">Nerve</span><span class="nerve" data-nerve="3"></span></li>
+            <li><span class="k">Weight</span><span class="v">250 lb</span></li>
+            <li><span class="k">Lanes</span><span class="v">3, race them</span></li>
           </ul>
         </div>
       </li>
 
       <li class="stop">
         <div class="lane"><span class="num">15</span><span class="flume"></span></div>
-        <div class="card" data-ride="barrier-reef">
-          <div class="card-head"><h3>Barrier Reef</h3><span class="chip chip--thrill">Enclosed speed</span></div>
-          <p class="why">Two enclosed high-speed body slides, dark the whole way down. Quick queue, fast turnaround &mdash; easy to knock out both back to back.</p>
+        <div class="card" data-ride="hyperlight">
+          <div class="card-head"><h3>Hyperlight</h3><span class="chip chip--moderate">Moderate</span><span class="chip">Light &amp; sound tube</span><span class="chip chip--pass">H2Go</span></div>
+          <p class="why">The rebuilt Long Island favourite: an enclosed tube where the lights and the music pulse along with you the whole way down. Ride it single for the effects, double for the yelling.</p>
           <ul class="specs">
-            <li><span class="k">Height</span><span class="v">Posted at ride</span></li>
-            <li><span class="k">Slides</span><span class="v">2 tubes</span></li>
-            <li><span class="k">Nerve</span><span class="nerve" data-nerve="3"></span></li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="stop">
-        <div class="lane"><span class="num">16</span><span class="flume"></span></div>
-        <div class="card" data-ride="dragons-den">
-          <div class="card-head"><h3>Dragon's Den</h3><span class="chip chip--thrill">Thrill slide</span></div>
-          <p class="why">The park's classic enclosed thrill slide and usually the quietest of this bunch late in the day. Worth a lap while the racers are still backed up.</p>
-          <ul class="specs">
-            <li><span class="k">Height</span><span class="v">Posted at ride</span></li>
-            <li><span class="k">Queue</span><span class="v">Usually short</span></li>
-            <li><span class="k">Nerve</span><span class="nerve" data-nerve="3"></span></li>
+            <li><span class="k">Height</span><span class="v">42&Prime;</span></li>
+            <li><span class="k">Weight</span><span class="v">250 lb solo</span></li>
+            <li><span class="k">Double</span><span class="v">400 lb combined</span></li>
           </ul>
         </div>
       </li>
@@ -677,32 +668,32 @@ footer a { color: var(--pool-dk); }
     <div class="block-head">
       <p class="clock">16:15</p>
       <h2>Waves</h2>
-      <p>Two zero-entry wave pools, and they're not interchangeable. Kahuna Bay is the one with the four-foot sets; Surf City is the older, calmer pool and the better place to actually talk to each other.</p>
+      <p>Two wave pools, not interchangeable. Kahuna Bay has the four-foot sets; Surf City is the classic and the better place to actually hear each other. Anyone under 48&Prime; has to wear a lifejacket in both.</p>
     </div>
     <ol class="stops">
 
       <li class="stop">
-        <div class="lane"><span class="num">17</span><span class="flume"></span></div>
+        <div class="lane"><span class="num">16</span><span class="flume"></span></div>
         <div class="card" data-ride="kahuna-bay">
-          <div class="card-head"><h3>Kahuna Bay Wavepool</h3><span class="chip chip--chill">Wave pool</span></div>
-          <p class="why">Four-foot waves, the newer of the two pools. Swim out past the shallow crowd before a set starts or you'll spend the cycle getting rolled into other people.</p>
+          <div class="card-head"><h3>Kahuna Bay Wavepool</h3><span class="chip chip--moderate">Moderate</span><span class="chip">Wave pool</span></div>
+          <p class="why">Spectacular four-foot waves that keep on coming. Swim out past the shallow crowd before a set starts, or you'll spend the whole cycle getting rolled into strangers.</p>
           <ul class="specs">
             <li><span class="k">Waves</span><span class="v">4 ft</span></li>
-            <li><span class="k">Entry</span><span class="v">Zero-entry</span></li>
-            <li><span class="k">Nerve</span><span class="nerve" data-nerve="2"></span></li>
+            <li><span class="k">Alone</span><span class="v">42&Prime; minimum</span></li>
+            <li><span class="k">Under 48&Prime;</span><span class="v">Lifejacket required</span></li>
           </ul>
         </div>
       </li>
 
       <li class="stop">
-        <div class="lane"><span class="num">18</span><span class="flume"></span></div>
+        <div class="lane"><span class="num">17</span><span class="flume"></span></div>
         <div class="card" data-ride="surf-city">
-          <div class="card-head"><h3>Surf City</h3><span class="chip chip--chill">Wave pool</span></div>
-          <p class="why">The original 1995 wave pool &mdash; calmer sets, more room, and the spot to park chairs if we want a base for the last hour.</p>
+          <div class="card-head"><h3>Surf City</h3><span class="chip chip--moderate">Moderate</span><span class="chip">Wave pool</span></div>
+          <p class="why">The classic pool &mdash; rolling breakers, more room, and the spot to park chairs if we want a base for the last hour.</p>
           <ul class="specs">
-            <li><span class="k">Waves</span><span class="v">Gentler sets</span></li>
-            <li><span class="k">Entry</span><span class="v">Zero-entry</span></li>
-            <li><span class="k">Nerve</span><span class="nerve" data-nerve="1"></span></li>
+            <li><span class="k">Height</span><span class="v">None posted</span></li>
+            <li><span class="k">Under 48&Prime;</span><span class="v">Lifejacket required</span></li>
+            <li><span class="k">Best for</span><span class="v">Base camp</span></li>
           </ul>
         </div>
       </li>
@@ -711,16 +702,30 @@ footer a { color: var(--pool-dk); }
 
   <section class="block">
     <div class="block-head">
-      <p class="clock">17:15</p>
-      <h2>Last call: re-ride the winner</h2>
-      <p>Whatever tops the "I'm in" count below is what we close on &mdash; queues are shortest in the last hour, so it's the cheapest re-ride of the day. Check the board before we split up.</p>
+      <p class="clock">17:00</p>
+      <h2>Last call</h2>
+      <p>Queues are shortest in the final hour, so the re-ride is the cheapest of the day. Whatever tops the "I'm in" count wins &mdash; check the board before we split up.</p>
     </div>
     <ol class="stops">
+
+      <li class="stop">
+        <div class="lane"><span class="num">18</span><span class="flume"></span></div>
+        <div class="card" data-ride="soak-city">
+          <div class="card-head"><h3>Soak City</h3><span class="chip chip--soft">Soft</span><span class="chip">Cool-down</span></div>
+          <p class="why">The quiet corner &mdash; no height limits, nothing to climb, nowhere to be. Where whoever's done finds a chair while the rest of us get one last run in.</p>
+          <ul class="specs">
+            <li><span class="k">Height</span><span class="v">None posted</span></li>
+            <li><span class="k">Effort</span><span class="v">Zero</span></li>
+            <li><span class="k">Good for</span><span class="v">Regrouping</span></li>
+          </ul>
+        </div>
+      </li>
+
       <li class="stop stop--flare">
         <div class="lane"><span class="num">19</span></div>
         <div class="card" data-ride="last-call">
           <div class="card-head"><h3>Group's pick</h3><span class="chip chip--crew">Vote decides</span></div>
-          <p class="why">Vote here for whichever ride you want one more crack at. Highest count wins and we all go, no negotiating at 5:20 with wet phones.</p>
+          <p class="why">Vote here for whichever ride you want one more crack at. Highest count wins and we all go &mdash; no negotiating at 5:20 with wet phones.</p>
           <ul class="specs">
             <li><span class="k">Decided by</span><span class="v">Whoever votes</span></li>
             <li><span class="k">Deadline</span><span class="v">17:00</span></li>
@@ -733,32 +738,47 @@ footer a { color: var(--pool-dk); }
   <section class="panel">
     <p class="label">If anyone brings kids</p>
     <h2>The shallow end of the park</h2>
-    <p class="intro">Four kid-scaled areas, all clustered away from the thrill towers. Any of them works as a base camp if the group needs to split for an hour.</p>
+    <p class="intro">Five kid-scaled areas, all capped at 54&Prime; and all requiring an adult along. Any of them works as a base camp if the group needs to split for an hour.</p>
     <ul class="mini">
-      <li><h4>Stingray Bay</h4><p>The newest addition &mdash; a water playground with more than fifteen ways to get soaked, between the sprayers and the pint-sized slides.</p></li>
-      <li><h4>Kiddie Cove</h4><p>Full-size slides shrunk down to kid scale, so they get the same ride the rest of us are queueing an hour for.</p></li>
-      <li><h4>Octopus Pool</h4><p>Inside Kiddie Cove: a giant octopus with tentacles to swing off. Shade and seating right there for whoever's on duty.</p></li>
-      <li><h4>Monsoon Lagoon</h4><p>Shipwreck pool with a slide and a pile of pirate-themed water cannons. Loud, chaotic, and the hardest one to pull them away from.</p></li>
+      <li><h4>Stingray Bay</h4><p>The all-new kids zone: kid-sized slides, interactive play features, silly sprayers around every corner and a dump bucket overhead.</p></li>
+      <li><h4>Pirates Cove</h4><p>An interactive pirate ship with ropes, slides and water cannons &mdash; parents climb aboard too. The hardest one to pull them away from.</p></li>
+      <li><h4>Kiddie Slides</h4><p>Three shrunk-down slides in Kiddie Cove, one of which a parent can ride alongside a very small guest.</p></li>
+      <li><h4>Octopus Pool</h4><p>Swing off the tentacles of a giant octopus, then cool down in the fountains. Swings hold 50 lb, so it's for the little ones only.</p></li>
+      <li><h4>Yellow Submarine</h4><p>A wading pool built around a bright yellow sub you slide down the back of, under a constant falling spray.</p></li>
     </ul>
   </section>
 
   <section class="panel">
     <p class="label">Before we go</p>
-    <h2>Heights, in one place</h2>
-    <p class="intro">The posted requirements we could confirm ahead of time. Measure at the gate rather than argue at the top of eight flights of stairs &mdash; and treat the sign at the ride as the final word.</p>
+    <h2>Every limit, in one place</h2>
+    <p class="intro">Straight from the park's posted restrictions. Measure at the gate rather than argue at the top of the stairs &mdash; and treat the sign at the ride as the final word.</p>
     <div class="tablewrap">
       <table>
-        <thead><tr><th scope="col">Ride</th><th scope="col">Minimum</th><th scope="col">Fine print</th></tr></thead>
+        <thead><tr><th scope="col">Attraction</th><th scope="col">Rating</th><th scope="col">Minimum</th><th scope="col">Weight &amp; fine print</th></tr></thead>
         <tbody>
-          <tr><td>Cliff Diver</td><td class="h">54&Prime;</td><td>Tallest requirement in the park</td></tr>
-          <tr><td>Bombs Away</td><td class="h">48&Prime;</td><td>&mdash;</td></tr>
-          <tr><td>Riptide Racer</td><td class="h">48&Prime;</td><td>&mdash;</td></tr>
-          <tr><td>Alien Invasion</td><td class="h">48&Prime;</td><td>&mdash;</td></tr>
-          <tr><td>Bootlegger's Run</td><td class="h">48&Prime;</td><td>2&ndash;4 riders per raft</td></tr>
-          <tr><td>Mammoth River</td><td class="h">48&Prime;</td><td>36&Prime;&ndash;48&Prime; with an adult; 3&ndash;5 riders</td></tr>
-          <tr><td>Hollywood Stunt Rider</td><td class="h">48&Prime;</td><td>36&Prime;&ndash;48&Prime; with an adult; 700 lb per raft</td></tr>
-          <tr><td>Giant Twister</td><td class="h">42&Prime;</td><td>250 lb maximum</td></tr>
-          <tr><td>Max Trax</td><td class="h">42&Prime;</td><td>250 lb maximum</td></tr>
+          <tr><td>Alien Invasion</td><td>Intense</td><td class="h">48&Prime;</td><td>700 lb combined</td></tr>
+          <tr><td>Bombs Away</td><td>Intense</td><td class="h">48&Prime;</td><td>300 lb</td></tr>
+          <tr><td>Dr. Von Dark's Tunnel of Terror</td><td>Intense</td><td class="h">48&Prime;</td><td>400 lb combined</td></tr>
+          <tr><td>Dragon's Den</td><td>Intense</td><td class="h">48&Prime;</td><td>400 lb combined</td></tr>
+          <tr><td>Shotgun Falls</td><td>Intense</td><td class="h">48&Prime;</td><td>250 lb</td></tr>
+          <tr><td>Hollywood Stunt Rider</td><td>Moderate</td><td class="h">48&Prime;</td><td>700 lb combined; 36&ndash;48&Prime; with an adult</td></tr>
+          <tr><td>Mammoth River</td><td>Moderate</td><td class="h">48&Prime;</td><td>1000 lb combined; 36&ndash;48&Prime; with an adult</td></tr>
+          <tr><td>Barrier Reef</td><td>Intense</td><td class="h">42&Prime;</td><td>250 lb</td></tr>
+          <tr><td>Bootlegger's Run</td><td>Intense</td><td class="h">42&Prime;</td><td>700 lb per raft; 42&ndash;48&Prime; with an adult</td></tr>
+          <tr><td>Dinosaur Falls</td><td>Moderate</td><td class="h">42&Prime;</td><td>250 lb solo, 400 lb combined</td></tr>
+          <tr><td>Giant Twister</td><td>Moderate</td><td class="h">42&Prime;</td><td>250 lb</td></tr>
+          <tr><td>Hyperlight</td><td>Moderate</td><td class="h">42&Prime;</td><td>250 lb solo, 400 lb combined</td></tr>
+          <tr><td>Max Trax</td><td>Moderate</td><td class="h">42&Prime;</td><td>250 lb</td></tr>
+          <tr><td>Riptide Racer</td><td>Moderate</td><td class="h">42&Prime;</td><td>300 lb</td></tr>
+          <tr><td>Kahuna Bay Wavepool</td><td>Moderate</td><td class="h">&mdash;</td><td>42&Prime; to swim unaccompanied; lifejacket under 48&Prime;</td></tr>
+          <tr><td>Surf City</td><td>Moderate</td><td class="h">&mdash;</td><td>Lifejacket under 48&Prime;</td></tr>
+          <tr><td>Lazy River</td><td>Soft</td><td class="h">&mdash;</td><td>Adult companion</td></tr>
+          <tr><td>Soak City</td><td>Soft</td><td class="h">&mdash;</td><td>No posted limits</td></tr>
+          <tr><td>Kiddie Slides</td><td>Mild</td><td class="h">&mdash;</td><td>Maximum 54&Prime;; adult companion</td></tr>
+          <tr><td>Octopus Pool</td><td>Soft</td><td class="h">&mdash;</td><td>Maximum 54&Prime;; swings hold 50 lb</td></tr>
+          <tr><td>Pirates Cove</td><td>Soft</td><td class="h">&mdash;</td><td>Maximum 54&Prime;; adult companion</td></tr>
+          <tr><td>Stingray Bay</td><td>Soft</td><td class="h">&mdash;</td><td>Maximum 54&Prime;; adult companion</td></tr>
+          <tr><td>Yellow Submarine</td><td>Soft</td><td class="h">&mdash;</td><td>Maximum 54&Prime;; adult companion</td></tr>
         </tbody>
       </table>
     </div>
@@ -777,6 +797,7 @@ footer a { color: var(--pool-dk); }
       <li>Refillable bottle</li>
       <li>Meeting spot: Surf City chairs</li>
     </ul>
+    <p class="intro" style="margin-top:1.2rem;margin-bottom:0">If the queues turn brutal, the H2Go pass covers nine of these rides &mdash; Bootlegger's Run, Alien Invasion, Dr. Von Dark's, Dragon's Den, Dinosaur Falls, Giant Twister, Hollywood Stunt Rider, Hyperlight and the Lazy River &mdash; and Riptide Racer takes the Speedy Pass. Worth pricing at the gate before we commit to the schedule.</p>
   </section>
 
   <section class="panel board">
@@ -793,7 +814,7 @@ footer a { color: var(--pool-dk); }
 </main>
 
 <footer class="wrap">
-  <p>Ride details were assembled from the park's published attraction and safety pages. Operating rides and posted requirements change day to day &mdash; the map you get at the gate and the sign at each ride are the real answers.</p>
+  <p>Ride names, thrill ratings, heights and weight limits are taken from the park's own attraction listings. Operating rides change day to day &mdash; the map at the gate and the sign at each ride are the real answers.</p>
   <p>Times are suggestions, not reservations. The route is built to dodge the worst queues, not to be obeyed.</p>
 </footer>
 
@@ -865,14 +886,6 @@ footer a { color: var(--pool-dk); }
   }
 
   /* ---------- rendering ---------- */
-
-  document.querySelectorAll(".nerve").forEach(function (el) {
-    var n = parseInt(el.getAttribute("data-nerve"), 10) || 0;
-    var out = "";
-    for (var i = 1; i <= 5; i++) out += '<i class="' + (i <= n ? "on" : "") + '"></i>';
-    el.innerHTML = out;
-    el.setAttribute("title", n + " out of 5");
-  });
 
   document.querySelectorAll(".card[data-ride]").forEach(function (card) {
     var id = card.getAttribute("data-ride");
